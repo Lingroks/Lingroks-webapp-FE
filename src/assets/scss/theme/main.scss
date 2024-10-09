@@ -1,0 +1,4 @@
+@mixin themable($theme-name) {
+  .#{$theme-name} {
+  }
+}

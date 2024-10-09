@@ -1,0 +1,365 @@
+* {
+  font-family: 'Poppins', 'Basis Grotesque', 'Poppins', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-smooth: always;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+  line-height: 1.43;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+option {
+  font-weight: normal;
+  display: block;
+  white-space: nowrap;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}
+
+body {
+  font-family: 'Poppins', 'Basis Grotesque', 'Poppins', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-variant-numeric: slashed-zero;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  color: #484848;
+  background-color: #fff;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  line-break: strict;
+  direction: ltr;
+  unicode-bidi: isolate;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-style: normal;
+  font-size: 14px;
+  overflow: auto;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-style: inherit;
+  font-variant: inherit;
+  font-weight: inherit;
+  font-stretch: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  vertical-align: baseline;
+  line-height: 1;
+  letter-spacing: normal;
+  overflow-x: hidden;
+  height: 100%;
+  &.hide-overflow {
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+    }
+  }
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2em;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+h3 {
+  font-size: clamp(1.8rem, 1.8rem, 3.5rem);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: inherit;
+  text-align: left;
+}
+h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: inherit;
+  text-align: left;
+  letter-spacing: 0.68px;
+}
+h5 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: inherit;
+  text-align: left;
+  letter-spacing: -1.31923px;
+}
+h6 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+small {
+  font-size: 85%;
+}
+
+button:focus {
+  outline: none;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+.pointer {
+  cursor: pointer;
+}
+
+input.input,
+textarea.input {
+  background: #ffffff;
+  border: 1px solid #d5d8db;
+  outline: 1px rgb(34, 34, 34);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 100%;
+  &.error {
+    border-color: #c13515;
+    outline: #c13515;
+  }
+}
+
+select.input {
+  border: 1px solid #d5d8db;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  &.error {
+    border-color: #c13515;
+    outline: #c13515;
+  }
+}
+
+.btn {
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 12px 1rem;
+  width: 100%;
+  color: $primary-blue;
+  &.btn-primary {
+    background-color: #222222;
+    color: #ffffff;
+    border-radius: 8px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+  &.btn-primary-outline {
+    background-color: transparent;
+    border: 1px solid $primary-blue;
+    color: $primary-blue;
+  }
+}
+
+.error {
+  &:not(input):not(select):not(textarea) {
+    color: #721c24;
+    border-radius: 3px;
+    font-size: 16px;
+    line-height: 1.5em;
+    align-items: flex-start;
+    :nth-child(2) {
+      margin-left: 10px;
+      margin-top: -5px;
+    }
+  }
+}
+.success {
+  &:not(input):not(select):not(textarea) {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 18px 18px 18px 24px;
+    border-radius: 3px;
+    font-size: 16px;
+    line-height: 1.5em;
+  }
+}
+
+select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: inherit;
+  border-radius: inherit;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  -webkit-appearance: none;
+  background-position: calc(100% - 12px);
+  min-height: 44.58px;
+  width: 100%;
+  border: none;
+  outline: none;
+  margin: 0px;
+  padding: 1rem 0.7rem;
+  background-color: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  appearance: none;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-position: calc(100% - 12px);
+  &:focus {
+    box-shadow: none;
+    border: 1px solid $primary-blue;
+    outline: $primary-blue;
+  }
+}
+select::-ms-expand {
+  display: none;
+}
+select:hover {
+  border-color: #888;
+}
+select:focus {
+  border-color: #aaa;
+  // box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222;
+  outline: none;
+}
+select option {
+  font-weight: normal;
+}
+[dir='rtl'] select,
+:root:lang(ar) select,
+:root:lang(iw) select {
+  background-position: left 0.7em top 50%, 0 0;
+  padding: 0.6em 0.8em 0.5em 1.4em;
+}
+
+/* Disabled styles */
+select:disabled,
+select[disabled='disabled'],
+select[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+select:disabled:hover,
+select[aria-disabled='true'] {
+  border-color: #aaa;
+}
+
+button {
+  &[disabled='disabled'],
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed !important;
+  }
+}
+
+input:disabled,
+input[type='radio']:disabled,
+input[type='radio']:disabled:hover {
+  cursor: not-allowed;
+}
+
+input[type='radio'] {
+  appearance: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(176, 176, 176);
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  border-radius: 50%;
+  vertical-align: top;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 22px;
+  width: 22px;
+  margin: 0px;
+  display: block;
+  flex: 0 0 auto;
+  transition: 0.3s all ease-in-out;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+input[type='radio']:checked {
+  color: rgb(34, 34, 34);
+  font-size: 16px;
+  line-height: 20px;
+  appearance: none;
+  border-style: solid;
+  overflow: hidden;
+  border-radius: 50%;
+  vertical-align: top;
+  outline: none;
+  border-color: $black;
+  border-width: 7px;
+  background: white;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 22px;
+  width: 22px;
+  margin: 0px;
+  display: block;
+  flex: 0 0 auto;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button,
+input[type='number'] {
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield !important;
+}
