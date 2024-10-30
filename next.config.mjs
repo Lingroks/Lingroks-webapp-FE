@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 const nextConfig = {
   experimental: {
-    appDir: true,
   },
   webpack: (config) => {
     // Aliases
