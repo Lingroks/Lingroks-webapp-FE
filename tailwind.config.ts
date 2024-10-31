@@ -1,3 +1,4 @@
+import { input } from "framer-motion/client";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -16,8 +17,13 @@ const config: Config = {
         'sans-bold': ['var(--font-source-sans-bold)'],
       },
       colors: {
-        background: "var(--background)",
+        mainBlue: "#5732E9",
         foreground: "var(--foreground)",
+        textGrey: "#646464",
+        secondaryGrey: "#969696",
+        secondaryBlue: "#3C1BA1",
+        inputGrey: "#F4F4F4",
+        deepGrey: "#3F3F3F",
       },
     },
   },
