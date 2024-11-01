@@ -23,22 +23,22 @@ export default function Signup() {
                     Create a free account 
                 </h1>
                 <p className='text-textGrey text-[16px] font-inter-regular mb-4 leading-normal'>
-                    Start translating your documents
+                    Start translating your contents
                 </p>
-                <div className='flex justify-between items-center w-full gap-3 mb-4'>
+                <div className='flex justify-between flex-col items-center w-full gap-3 mb-4 sm:flex-row sm:gap-2'>
                     <AuthButton 
-                        icon=<FcGoogle />
+                        icon='/google.svg'
                         text='Continue with Google' 
                         className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"/>
                     <AuthButton 
-                        icon=<SiMicrosoft />
+                        icon='/microsoft.svg'
                         text='Continue with Microsoft' 
-                        className="bg-black shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-white w-full"/>
+                        className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"/>
                 </div>
                 <div className='flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full'>
-                    <div className='h-[1px] bg-secondaryGrey w-[45%]'></div>
+                    <div className='h-[.5px] bg-secondaryGrey w-[45%]'></div>
                     <span className='block text-base text-secondaryGrey font-inter-medium'>Or</span>
-                    <div className='h-[1px] bg-secondaryGrey w-[45%]'></div>
+                    <div className='h-[.5px] bg-secondaryGrey w-[45%]'></div>
                 </div>
                 <form className='flex flex-col items-start justify-start w-full'>
                     <div className='flex items-center justify-between w-full gap-3'>
@@ -85,7 +85,7 @@ export default function Signup() {
                         value={password}
                         required={true}
                         minLength={8}
-                        forgotPassword={true}
+                        forgotPassword={false}
                         onChange={(e) => setPassword(e.target.value)}
                         className='mb-6' 
                         />

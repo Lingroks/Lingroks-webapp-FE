@@ -16,6 +16,14 @@ const config: Config = {
         'sans-light': ['var(--font-source-sans-light)'],
         'sans-bold': ['var(--font-source-sans-bold)'],
       },
+      screens: {
+        'xs': '375px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
       colors: {
         mainBlue: "#5732E9",
         foreground: "var(--foreground)",

@@ -24,7 +24,7 @@ export default function Header() {
                            Login
                         </button>
                         <Link href="/auth/login">
-                            <button type="button" className='cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-lg outline-none py-[14px] px-6 transition-all border-none bg-mainBlue text-white'>
+                            <button type="button" className='cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[14px] px-6 transition-all border-none bg-mainBlue text-white'>
                                Start for free
                             </button>
                         </Link>
