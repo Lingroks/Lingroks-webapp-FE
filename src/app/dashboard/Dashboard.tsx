@@ -1,6 +1,6 @@
 // src/app/dashboard/Dashboard.tsx
 import React from 'react';
-import './Dashboard.module.scss'; // Import if you create a style file
+import './Dashboard.module.scss';
 
 const Dashboard = () => {
   return (
