@@ -1,0 +1,73 @@
+// DashboardHeader.module.scss
+.header {
+
+    .searchBar {
+        flex-grow: 1;
+        margin: 0 20px;
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+
+            &:focus {
+                border-color: #0056b3;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.25);
+            }
+        }
+    }
+
+    .userProfile {
+        position: relative;
+
+        .profileButton {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+        }
+
+        .dropdownMenu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+            margin-top: 5px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    a {
+                        display: block;
+                        padding: 10px 15px;
+                        text-decoration: none;
+                        color: #333;
+                        font-size: 16px;
+
+                        &:hover {
+                            background-color: #f8f9fa;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

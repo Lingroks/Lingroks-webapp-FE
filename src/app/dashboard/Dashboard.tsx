@@ -1,15 +1,12 @@
-// src/app/dashboard/Dashboard.tsx
-import React from 'react';
-import './Dashboard.module.scss';
-import Link from 'next/link';
-import Image from 'next/image';
+// Example: Importing and using in Dashboard.tsx
+import DashboardHeader from "../../components/header/DasboardHeader";
 
 const Dashboard = () => {
-  return (
-    <div className="dashboard">
-      <h1>Welcome to the Dashboard</h1>
-    </div>
-  );
+    return (
+        <div>
+            <DashboardHeader />
+        </div>
+    );
 }
 
 export default Dashboard;
