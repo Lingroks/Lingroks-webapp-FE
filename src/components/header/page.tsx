@@ -20,10 +20,12 @@ export default function Header() {
                 </nav>
                 <div>
                     <div className='flex gap-4 items-center justify-center'>
+                    <Link href="/auth/login">
                         <button type="button">
                            Login
                         </button>
-                        <Link href="/auth/login">
+                        </Link>
+                        <Link href="/auth/signup">
                             <button type="button" className='cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[14px] px-6 transition-all border-none bg-mainBlue text-white'>
                                Start for free
                             </button>
