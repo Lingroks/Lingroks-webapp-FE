@@ -16,13 +16,7 @@ const Header = () => {
         {/* Logo */}
         <div className={styles.logo}>
           <Link href="/">
-            <Image
-              src="/Lingroks.svg"
-              alt="Logo"
-              width={105}
-              height={100}
-              className=""
-            />
+            <img src="/Lingroks.svg" alt="Logo" width={105} className="" />
           </Link>
         </div>
 
@@ -49,10 +43,10 @@ const Header = () => {
           {dropdownOpen && (
             <div className={styles.user__dropdown}>
               <ul>
-                <li>Personal Info</li>
-                <li>Security Changes</li>
-                <li>Payment</li>
-                <li>Terms and Privacy</li>
+                <li className={styles.listitem}>Personal Info</li>
+                <li className={styles.listitem}>Security Changes</li>
+                <li className={styles.listitem}>Payment</li>
+                <li className={styles.listitem}>Terms and Privacy</li>
                 <li className={styles.logout}>Log Out</li>
               </ul>
             </div>
