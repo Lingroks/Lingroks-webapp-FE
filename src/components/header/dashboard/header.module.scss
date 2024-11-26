@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px;
+  padding: 12px;
 }
 
 .search {
   display: block;
-  @include breakpoint-down(xs) {
+  @include breakpoint-down(sm) {
     display: none;
   }
   .search__input {
@@ -48,7 +48,7 @@
   border-radius: 30px;
   //   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10;
-  padding: 12px;
+  padding: 20px;
 
   ul {
     list-style: none;
@@ -56,7 +56,7 @@
     padding: 0;
 
     .listitem {
-      padding: 8px 12px;
+      padding: 12px 0px;
       cursor: pointer;
       font-family: 'Inter';
       font-size: 14px;
@@ -71,7 +71,7 @@
 }
 
 .logout {
-  padding: 8px 12px;
+  padding: 12px 0px;
   cursor: pointer;
   font-family: inherit;
   font-size: 14px;
@@ -81,8 +81,12 @@
 
 .mobile-search {
   display: none;
-  @include breakpoint-down(xs) {
-    display: block;
+  @include breakpoint-down(sm) {
+    display: flex;
+    justify-content: center;
+    padding: 0 12px; // Padding to prevent overflow
+    width: 100%;
+    box-sizing: border-box;
   }
   .mobile-search__input {
     padding: 12px 24px;
