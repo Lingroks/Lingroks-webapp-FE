@@ -5,6 +5,10 @@
 }
 
 .search {
+    display: block;
+    @include breakpoint-down(xs){
+        display: none;
+    }
   .search__input {
     padding: 12px 24px;
     border: 1px solid #d8d8d8;
@@ -61,3 +65,16 @@
     }
   }
 }
+
+.mobile-search{
+    display: none;
+    @include breakpoint-down(xs){
+        display: block;
+    }
+    .mobile-search__input{
+      padding: 12px 24px;
+      border: 1px solid #d8d8d8;
+      border-radius: 30px;
+      width: 100%;
+    }
+  }
