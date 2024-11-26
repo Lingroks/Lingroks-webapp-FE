@@ -53,7 +53,7 @@ const Header = () => {
                 <li>Security Changes</li>
                 <li>Payment</li>
                 <li>Terms and Privacy</li>
-                <li className="logout">Log Out</li>
+                <li className={styles.logout}>Log Out</li>
               </ul>
             </div>
           )}

@@ -5,10 +5,10 @@
 }
 
 .search {
-    display: block;
-    @include breakpoint-down(xs){
-        display: none;
-    }
+  display: block;
+  @include breakpoint-down(xs) {
+    display: none;
+  }
   .search__input {
     padding: 12px 24px;
     border: 1px solid #d8d8d8;
@@ -39,42 +39,44 @@
   top: 100%;
   right: 0;
   margin-top: 0.5rem;
-  width: 12rem;
+  //   width: 12rem;
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #d8d8d8;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  //   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10;
+//   padding: 12px;
 
   ul {
     list-style: none;
     margin: 0;
-    padding: 0.5rem 0;
+    padding: 0;
 
     li {
-      padding: 0.5rem 1rem;
+      padding: 8px 12px;
       cursor: pointer;
 
       &:hover {
         background-color: #f3f4f6; // Tailwind gray-100
       }
-
-      &.logout {
-        color: #dc2626; // Tailwind red-600
-      }
     }
   }
 }
 
-.mobile-search{
-    display: none;
-    @include breakpoint-down(xs){
-        display: block;
-    }
-    .mobile-search__input{
-      padding: 12px 24px;
-      border: 1px solid #d8d8d8;
-      border-radius: 30px;
-      width: 100%;
-    }
+.logout {
+  color: #E33E38; // Tailwind red-600
+}
+
+.mobile-search {
+  display: none;
+  @include breakpoint-down(xs) {
+    display: block;
   }
+  .mobile-search__input {
+    padding: 12px 24px;
+    border: 1px solid #d8d8d8;
+    border-radius: 30px;
+    width: 100%;
+  }
+}
