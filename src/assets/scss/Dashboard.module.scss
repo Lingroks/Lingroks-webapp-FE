@@ -148,6 +148,10 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  color: #323232;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
 
   &:hover {
     background-color: #d6d6d6;
@@ -160,7 +164,7 @@
     font-weight: 700;
     font-family: inherit;
     border-radius: 30px;
-    padding: 10px;
+    padding: 15px 30px;
 
     &:hover {
       background-color: #0056b3;
@@ -176,6 +180,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    border-radius: 30px;
   }
 
   .dropdown__menu {
@@ -184,7 +189,7 @@
     left: 0;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    // border-radius: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 5px 0;
