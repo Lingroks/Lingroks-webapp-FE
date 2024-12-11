@@ -9,12 +9,7 @@ const Dashboard = () => {
       <div className={style.dashboard__main__content}>
         <div className={style.content__inner}>
           <div className={style.headtext__wrap}>
-            <h3>
-              Hi, John
-              <span className={style.text__newline}>
-                What would you like to do today ?
-              </span>
-            </h3>
+            <h3>Hi, John What would you like to do today ?</h3>
           </div>
         </div>
       </div>
