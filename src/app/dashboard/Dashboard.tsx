@@ -45,7 +45,7 @@ const Dashboard = () => {
             {/* Textarea */}
             <textarea
               className={style.chat__textarea}
-              placeholder="Type your message..."
+              placeholder="Enter your text or link here"
             ></textarea>
 
             {/* Buttons */}
