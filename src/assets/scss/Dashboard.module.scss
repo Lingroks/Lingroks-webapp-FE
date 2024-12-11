@@ -154,8 +154,13 @@
   }
 
   &.submit__button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #5732E9;
+    color: #F4F4F4;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    border-radius: 30px;
+    padding: 10px;
 
     &:hover {
       background-color: #0056b3;
@@ -167,13 +172,13 @@
 .dropdown {
   position: relative;
 
-  .dropdown-button {
+  .dropdown__button {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 
-  .dropdown-menu {
+  .dropdown__menu {
     position: absolute;
     top: 40px;
     left: 0;
@@ -186,7 +191,7 @@
     margin: 0;
     z-index: 1000;
 
-    .dropdown-item {
+    .dropdown__item {
       display: flex;
       align-items: center;
       padding: 8px 10px;
