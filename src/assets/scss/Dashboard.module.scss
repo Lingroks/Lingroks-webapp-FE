@@ -111,9 +111,9 @@
 .chat__input__container {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
+  border: 1px solid #d8d8d8;
+  border-radius: 32px;
+  padding: 20px 24px;
   width: 100%;
   margin: 0 auto;
 }
@@ -123,10 +123,12 @@
   border: none;
   outline: none;
   min-height: 100px;
-  padding: 10px;
+  //   padding: 10px;
   resize: none;
   outline: none;
   font-size: 16px;
+  font-weight: 500;
+  color: #646464;
 }
 
 .chat__buttons {
@@ -157,6 +159,43 @@
 
     &:hover {
       background-color: #0056b3;
+    }
+  }
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+
+  .dropdown-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    z-index: 1000;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      cursor: pointer;
+      gap: 5px;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
     }
   }
 }
