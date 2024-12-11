@@ -158,8 +158,8 @@
   }
 
   &.submit__button {
-    background-color: #5732E9;
-    color: #F4F4F4;
+    background-color: #5732e9;
+    color: #f4f4f4;
     font-size: 16px;
     font-weight: 700;
     font-family: inherit;
@@ -208,4 +208,13 @@
       }
     }
   }
+}
+
+.arrow__icon {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.arrow__icon.open {
+  transform: rotate(180deg);
 }
