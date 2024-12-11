@@ -14,6 +14,27 @@ const Dashboard = () => {
               What would you like to do today ?
             </h3>
           </div>
+
+          {/* <div className={style.input__container}>
+            <div className={style.input__container}></div>
+          </div> */}
+
+          <div className={style.chat__input__container}>
+            {/* Textarea */}
+            <textarea
+              className={style.chat__textarea}
+              placeholder="Type your message..."
+            ></textarea>
+
+            {/* Buttons */}
+            <div className={style.chat__buttons}>
+              <div className={style.left__buttons}>
+                <button className={style.chat__button}>Button 1</button>
+                <button className={style.chat__button}>Button 2</button>
+              </div>
+              <button className={style.chat__button__submit__button}>Submit</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
