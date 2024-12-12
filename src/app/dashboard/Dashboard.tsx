@@ -140,6 +140,10 @@ const Dashboard = () => {
 
           {/* your history */}
 
+          <div className="history--wrapper">
+            
+          </div>
+
           <div className={style.cards__container}>
             {cardData.map((card, index) => (
               <div key={index} className={style.card}>
