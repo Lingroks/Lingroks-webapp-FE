@@ -5,8 +5,6 @@ import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
-import { SiMicrosoft } from "react-icons/si";
-import { FcGoogle } from "react-icons/fc";
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 
 
