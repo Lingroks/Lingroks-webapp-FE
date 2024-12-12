@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AuthMainBtn(
     {
-    text, 
+    text = 'string', 
     type = 'button',
     className = '',
 }) {
