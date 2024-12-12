@@ -37,7 +37,7 @@ const Dashboard = () => {
     },
     {
       headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
+      bottomText: 'Summary',
     },
     {
       headText: 'Lorem ipsum dolor sit amet consectetur.',
@@ -45,7 +45,7 @@ const Dashboard = () => {
     },
     {
       headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
+      bottomText: 'Insight',
     },
     {
       headText: 'Lorem ipsum dolor sit amet consectetur.',
