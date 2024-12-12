@@ -152,6 +152,9 @@
   font-size: 16px;
   font-weight: 600;
   font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   &:hover {
     background-color: #d6d6d6;
@@ -188,9 +191,9 @@
     top: 40px;
     left: 0;
     background-color: #fff;
-    border: 1px solid #ddd;
-    // border-radius: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+    
     list-style: none;
     padding: 5px 0;
     margin: 0;
@@ -211,10 +214,10 @@
 }
 
 .arrow__icon {
-  margin-left: 8px;
+//   margin-left: 8px;
   transition: transform 0.3s ease;
 }
 
-.arrow__icon.open {
-  transform: rotate(180deg);
-}
+// .arrow__icon.open {
+//   transform: rotate(180deg);
+// }
