@@ -1,6 +1,10 @@
 import React from 'react';
 
-const AuthInstruction = ({text}) => {
+interface AuthInstructionProps {
+  text: string,
+}
+
+const AuthInstruction: React.FC<AuthInstructionProps> = ({text}) => {
   return (
     <div className='flex items-center justify-start'>
       <span>

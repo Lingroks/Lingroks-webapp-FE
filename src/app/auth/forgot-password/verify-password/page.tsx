@@ -6,10 +6,17 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 
-const VerifyPassword = () => {
+interface OtpChangeEvent {
+    target: {
+        value: string;
+    };
+}
+const VerifyPassword: React.FC = () => {
     const [otp, setOtp] = useState(["", "", "", ""]);
 
-    const handleOtpChange = (newOtp) => {
+
+    const handleOtpChange = (event: OtpChangeEvent) => {
+        const newOtp = event.target.value;
         setOtp(newOtp.split(''));
     };
 
@@ -34,7 +41,7 @@ const VerifyPassword = () => {
                         onChange={handleOtpChange}
                     />
                     <p className='text-center mt-6 mb-6 text-[1rem] text-secondaryGrey'>
-                        Didn't receive the code? <a href='#' className='text-secondaryBlue underline'>Click to resend</a>
+                        Didn&apos;t receive the code? <a href='#' className='text-secondaryBlue underline'>Click to resend</a>
                     </p>
                     <AuthMainBtn 
                     text='Continue'

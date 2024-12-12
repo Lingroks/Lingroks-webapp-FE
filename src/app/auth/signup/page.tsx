@@ -8,8 +8,6 @@ import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
-import { SiMicrosoft } from "react-icons/si";
-import { FcGoogle } from "react-icons/fc";
 
 export default function Signup() {
     const [email, setEmail] = useState('');
@@ -84,7 +82,6 @@ export default function Signup() {
                         id='password'
                         value={password}
                         required={true}
-                        minLength={8}
                         forgotPassword={false}
                         onChange={(e) => setPassword(e.target.value)}
                         className='mb-6' 
