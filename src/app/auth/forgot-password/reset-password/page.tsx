@@ -1,13 +1,10 @@
-'use client'
-// import { useState } from 'react';
 import AuthInputBox from '@/components/input/AuthInputBox';
-// import exp from 'constants';
 import React from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 
-const ResetPassword = () => {
+const ResetPassword: React.FC = () => {
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
     return(
@@ -33,9 +30,8 @@ const ResetPassword = () => {
                       value={password}
                       id='password'
                       required={true}
-                      minLength={8}
                       forgotPassword={false}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setPassword(e.target.value); }}
                       className='mb-6 text-secondaryGrey'
                     />
                    <AuthInputBox 
@@ -46,7 +42,6 @@ const ResetPassword = () => {
                         value={confirmPassword}
                         required={true}
                         forgotPassword={false}
-                        minLength={8}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         className='mb-6' 
                     />

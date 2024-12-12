@@ -2,22 +2,20 @@
 
 import React from 'react';
 import Link from 'next/link';
-import styles from './_input.module.scss'
 
-export default function AuthInputBox({
-    label = '',
-    type = ' ',
-    placeholder = '',
-    value = '',
-    id = '',
-    required = true,
-    minLength = 0,
-    forgotPassword,
-    onChange = () => {
-        console.log('Input Changed');
-     },
-     className = '',
-}) {
+interface AuthInputBoxProps {
+    label: string,
+    type: string,
+    placeholder: string,
+    value: string,
+    id: string,
+    required: boolean,
+    forgotPassword: boolean,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    className: string,
+}
+
+ const AuthInputBox: React.FC<AuthInputBoxProps> = ({label, type, placeholder, value, id, required, forgotPassword=false, onChange, className}) => {
     return (
         <>
             <div className={`${className} w-full flex items-start justify-start flex-col`}>
@@ -35,10 +33,11 @@ export default function AuthInputBox({
                     value={value}
                     id={id}
                     required={required}
-                    minLength={minLength}
                     onChange={onChange}
                     className={'w-full bg-inputGrey border-gray-300 focus:border-gray-500 focus:outline-none focus:bg-inputGrey  px-[24px] rounded-[60px] py-[8px] shadow-none'} />
             </div>
         </>
     )
 }
+
+export default AuthInputBox
