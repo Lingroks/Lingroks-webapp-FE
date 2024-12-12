@@ -64,10 +64,6 @@ const Dashboard = () => {
             </h3>
           </div>
 
-          {/* <div className={style.input__container}>
-            <div className={style.input__container}></div>
-          </div> */}
-
           <div className={style.chat__input__container}>
             {/* Textarea */}
             <textarea
