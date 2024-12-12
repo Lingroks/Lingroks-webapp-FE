@@ -25,6 +25,17 @@ const Dashboard = () => {
     { text: 'ENG', icon: <EnglandFlagIcon /> },
     { text: 'ENG', icon: <UsaFlagIcon /> },
   ];
+
+  const cardData = [
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+    { headText: 'Lorem ipsum dolor sit amet consectetur.', bottomText: 'Translate' },
+
+
+  ];
   return (
     <div>
       <DashboardHeader />
@@ -128,6 +139,15 @@ const Dashboard = () => {
           </div>
 
           {/* your history */}
+
+          <div className={style.cards__container}>
+            {cardData.map((card, index) => (
+              <div key={index} className={style.card}>
+                <h3 className={style.card__head}>{card.headText}</h3>
+                <p className={style.card__bottom}>{card.bottomText}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -136,54 +156,61 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-
-
 // SVG Icons
 const TranslateIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M11 5H9V3H7v2H5v2h2v2h2V7h2V5zm8 8l-4 8H9l4-8H9l4-8h6l-4 8h4z" />
-    </svg>
-  );
-  
-  const AudioIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 3v18l-6-6H3V9h3l6-6zm7 10h-2v-2h2v2zm0-4h-2V7h2v2zm0 8h-2v-2h2v2z" />
-    </svg>
-  );
-  
-  const SummaryIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M3 3h18v2H3V3zm0 4h10v2H3V7zm0 4h18v2H3v-2zm0 4h10v2H3v-2zm0 4h18v2H3v-2z" />
-    </svg>
-  );
-  
-  const InsightIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
-      <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 2a10 10 0 0 1 10 10h-2a8 8 0 1 0-8 8v-2a6 6 0 1 1 6-6h-2a4 4 0 1 0-4 4v6h4v2H8v-2h4v-6a6 6 0 1 1 6-6h2a10 10 0 0 1-10 10V2z" />
-    </svg>
-  );
-  
-  const EnglandFlagIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-      <rect width="24" height="24" fill="#fff" />
-      <path d="M0 10h24v4H0z" fill="#D7141A" />
-      <path d="M10 0h4v24h-4z" fill="#D7141A" />
-    </svg>
-  );
-  
-  const UsaFlagIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-      <rect width="24" height="24" fill="#fff" />
-      <path d="M0 3h24v3H0zm0 6h24v3H0zm0 6h24v3H0zm0 6h24v3H0z" fill="#B22234" />
-      <rect width="10" height="12" fill="#3C3B6E" />
-      <circle cx="2" cy="2" r="1" fill="#fff" />
-      <circle cx="4" cy="2" r="1" fill="#fff" />
-      <circle cx="2" cy="4" r="1" fill="#fff" />
-      <circle cx="4" cy="4" r="1" fill="#fff" />
-    </svg>
-  );
-  
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M11 5H9V3H7v2H5v2h2v2h2V7h2V5zm8 8l-4 8H9l4-8H9l4-8h6l-4 8h4z" />
+  </svg>
+);
+
+const AudioIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 3v18l-6-6H3V9h3l6-6zm7 10h-2v-2h2v2zm0-4h-2V7h2v2zm0 8h-2v-2h2v2z" />
+  </svg>
+);
+
+const SummaryIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M3 3h18v2H3V3zm0 4h10v2H3V7zm0 4h18v2H3v-2zm0 4h10v2H3v-2zm0 4h18v2H3v-2z" />
+  </svg>
+);
+
+const InsightIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4A4A4A">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 2a10 10 0 0 1 10 10h-2a8 8 0 1 0-8 8v-2a6 6 0 1 1 6-6h-2a4 4 0 1 0-4 4v6h4v2H8v-2h4v-6a6 6 0 1 1 6-6h2a10 10 0 0 1-10 10V2z" />
+  </svg>
+);
+
+const EnglandFlagIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <rect width="24" height="24" fill="#fff" />
+    <path d="M0 10h24v4H0z" fill="#D7141A" />
+    <path d="M10 0h4v24h-4z" fill="#D7141A" />
+  </svg>
+);
+
+const UsaFlagIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <rect width="24" height="24" fill="#fff" />
+    <path d="M0 3h24v3H0zm0 6h24v3H0zm0 6h24v3H0zm0 6h24v3H0z" fill="#B22234" />
+    <rect width="10" height="12" fill="#3C3B6E" />
+    <circle cx="2" cy="2" r="1" fill="#fff" />
+    <circle cx="4" cy="2" r="1" fill="#fff" />
+    <circle cx="2" cy="4" r="1" fill="#fff" />
+    <circle cx="4" cy="4" r="1" fill="#fff" />
+  </svg>
+);
