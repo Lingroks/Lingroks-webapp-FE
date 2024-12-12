@@ -28,6 +28,10 @@ const nextConfig = {
       @import "@assets/scss/_breakpoint.scss";
     `,
   },
+  
+  images: {
+    domains: ['images.pexels.com'],
+  },
 };
 
 export default nextConfig;
