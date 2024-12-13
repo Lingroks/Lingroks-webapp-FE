@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import AuthInputBox from '@/components/input/AuthInputBox';
-=======
 'use client'
-// import { useState } from 'react';
 import AuthInputBox from '@/components/input/AuthInputBox';
-// import exp from 'constants';
->>>>>>> e8ada90874fa8fa86c9f439fdeb9ec36010d4a33
 import React from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';

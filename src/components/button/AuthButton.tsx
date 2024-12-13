@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function AuthButton({icon, text = '', className = '', alt = ''}) {
+interface AuthButtonProps {
+  icon: string;
+  text?: string;
+  className?: string;
+  alt?: string;
+}
+
+const AuthButton: React.FC<AuthButtonProps> = ({icon, text = '', className = '', alt = ''}) => {
   return(
     <button className={`${className} py-2 px-4 rounded-[60px]`}>
         <div className='flex items-center justify-center'>
@@ -10,3 +17,5 @@ export default function AuthButton({icon, text = '', className = '', alt = ''}) 
     </button>
   )
 }
+
+export default AuthButton;
