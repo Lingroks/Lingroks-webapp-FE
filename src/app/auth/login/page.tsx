@@ -8,7 +8,7 @@ import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 
 
-export default function Login() {
+const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     return(
@@ -55,7 +55,6 @@ export default function Login() {
                         id='password'
                         value={password}
                         required={true}
-                        minLength={8}
                         forgotPassword={true}
                         onChange={(e) => setPassword(e.target.value)}
                         className='mb-6' 
@@ -67,7 +66,7 @@ export default function Login() {
                         className='w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2'
                         />
                         <p className='text-center text-black font-inter-regular leading-3'>
-                            Don't have an account? 
+                            Don&apos;t have an account? 
                             <Link href="/auth/signup" className='text-mainBlue ml-1'>
                                 Sign up
                             </Link>
@@ -79,3 +78,5 @@ export default function Login() {
         </>
     )
 }
+
+export default Login

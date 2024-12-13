@@ -7,7 +7,7 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInput from '@/components/input/AuthInputBox';
 import ForgotPasswordPic from './ForgotPasswordPic';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
     const [email, setEmail] = useState('');
     return(
         <AuthLayout>
@@ -31,7 +31,8 @@ const ForgotPassword = () => {
                     value={email}
                     required={true}
                     className='mb-4'
-                    onChange={(e) => setEmail(e.target.value)}
+                    forgotPassword
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
                 <AuthMainBtn 
                     text='Send 4-digit code'

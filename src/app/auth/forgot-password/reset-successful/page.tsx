@@ -5,7 +5,7 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 
 
-const ResetSuccessful = () => {
+const ResetSuccessful: React.FC = () => {
     return(
         <AuthLayout>
             <div className='w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5'>
