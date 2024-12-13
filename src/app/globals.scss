@@ -1,6 +1,4 @@
-/* @import "assets/scss/main.scss"; */
-/* src/styles/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -16,5 +14,11 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    background-color: red;
   }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: red;
 }
