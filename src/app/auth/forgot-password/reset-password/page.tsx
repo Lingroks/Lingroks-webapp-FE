@@ -1,3 +1,4 @@
+'use client'
 import AuthInputBox from '@/components/input/AuthInputBox';
 import React from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
