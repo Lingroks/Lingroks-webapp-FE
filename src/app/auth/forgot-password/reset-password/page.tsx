@@ -49,7 +49,7 @@ const ResetPassword: React.FC = () => {
                     <div className='w-full '>
                        <AuthMainBtn
                         text='Set new password'
-                        type="submit" 
+                      
                         className='w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2'
                         />
                     </div>
