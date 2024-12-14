@@ -1,12 +1,17 @@
 import React from "react";
 
 
-export default function AuthMainBtn(
-    {
+interface AuthMainBtnProps {
+    text?: string;
+    type?: 'submit' | 'reset' | 'button';
+    className?: string;
+}
+
+export default function AuthMainBtn({
     text = 'string', 
-    type = 'button',
+    type = 'submit',
     className = '',
-}) {
+}: AuthMainBtnProps) {
     return(
         <button
         type={type}

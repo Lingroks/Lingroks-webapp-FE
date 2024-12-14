@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function Header() {
     return(
         <header className='w-full'>
-            <div className='max-w-[1100px] flex items-center justify-start mx-auto my-0 px-6 py-2 cursor-pointer'>
+            <div className='max-w-[1100px] flex items-center justify-start mx-auto my-0 px-4 py-2 cursor-pointer'>
                 <Link href="/">
                     <Image
                     src="/Lingroks.svg" 

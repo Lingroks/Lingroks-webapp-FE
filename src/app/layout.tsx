@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "../app/globals.scss";
 import "../assets/scss/main.scss";
+import "../assets/scss/style.css"
 
 export const metadata: Metadata = {
   title: "Lingroks - Your All-in-One Language Tool",

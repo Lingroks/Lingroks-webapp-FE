@@ -31,7 +31,7 @@ const ForgotPassword: React.FC = () => {
                     value={email}
                     required={true}
                     className='mb-4'
-                    forgotPassword
+                    forgotPassword={false}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
                 <AuthMainBtn 

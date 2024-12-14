@@ -17,7 +17,7 @@ export default function Home() {
       />
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
-        <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col'>
+        <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
           <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
             Powerful Tools for Your Content
           </h2>
@@ -26,12 +26,12 @@ export default function Home() {
       </section>
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
-          <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col'>
+          <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
             <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
               How Lingroks Can Work For You
             </h2>
             <div className='w-full mt-4'>
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-3 gap-8 max-xs:grid-cols-1 max-sm:grid-cols-2">
                 <FeatureCard 
                   alt='student'
                   imgSrc='https://images.pexels.com/photos/5965857/pexels-photo-5965857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
-        <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col">
+        <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
            <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
              Choose a plan that works for you
            </h2>
@@ -99,7 +99,7 @@ export default function Home() {
       </section>
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
-        <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col'>
+        <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
           <h3 className='text-center max-w-[650px] text-[#323232] text-3xl'>
             Get started with our free plan today and see the difference.
           </h3>
@@ -111,7 +111,7 @@ export default function Home() {
         </div>
       </section>
       <footer className='mt-7 w-full bg-[#f4f4f4]'>
-        <div className='max-w-[1100px] my-0 mx-auto px-6 py-4'>
+        <div className='max-w-[1100px] my-0 mx-auto px-4 py-4'>
           <div className="flex justify-between items-start mb-2">
             <Link href="/">
               <Image
