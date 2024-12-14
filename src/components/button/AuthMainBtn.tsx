@@ -9,12 +9,10 @@ interface AuthMainBtnProps {
 
 export default function AuthMainBtn({
     text = 'string', 
-    type = 'submit',
     className = '',
 }: AuthMainBtnProps) {
     return(
         <button
-        type={type}
         className={`${className} rounded-[60px]`}>
             {text}
         </button>
