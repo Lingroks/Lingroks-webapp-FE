@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import "../app/globals.css";
 import "../assets/scss/main.scss";
+import { Inter } from 'next/font/google';
+
+// Configure the Inter font
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',          
+});
 
 export const metadata: Metadata = {
   title: "Lingroks - Your All-in-One Language Tool",
@@ -13,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}> {/* Apply the font globally */}
       <body>
         {children}
       </body>
