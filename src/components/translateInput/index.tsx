@@ -26,32 +26,6 @@ const Dashboard = () => {
     { text: 'ENG', icon: <UsaFlagIcon /> },
   ];
 
-  const cardData = [
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Summary',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Insight',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-  ];
   return (
     <div>
       <div className={style.chat__input__container}>
