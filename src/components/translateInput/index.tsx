@@ -1,6 +1,5 @@
 // Example: Importing and using in Dashboard.tsx
 import React, { useState } from 'react';
-import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/Dashboard.module.scss';
 
 const Dashboard = () => {
