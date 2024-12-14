@@ -1,8 +1,12 @@
+// @import '../../../assets/scss/main.scss' as *;
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .search {
@@ -45,6 +49,7 @@
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #d8d8d8;
+  font-family: 'Inter';
   border-radius: 30px;
   //   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -77,6 +82,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #e33e38;
+  width: 105px;
 }
 
 .mobile-search {

@@ -1,10 +1,12 @@
-@import '../../assets/scss/font';
 
 .dashboard__main__content {
   max-width: 670px;
   width: 100%;
   margin: 0 auto;
   margin-top: 20px;
+  @include breakpoint-up(1500){
+    background: red;
+  }
   .content__inner {
     .headtext__wrap {
       h3 {
