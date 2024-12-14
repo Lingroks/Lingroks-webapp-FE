@@ -16,7 +16,13 @@ const Header = () => {
         {/* Logo */}
         <div className={styles.logo}>
           <Link href="/">
-            <Image src="/Lingroks.svg" alt="Logo" layout="fill" className="" />
+            <Image
+              src="/Lingroks.svg"
+              alt="Logo"
+              width={105}
+              height={30}
+              className=""
+            />
           </Link>
         </div>
 
@@ -32,11 +38,23 @@ const Header = () => {
         {/* User Section */}
         <div className={styles.user} onClick={toggleDropdown}>
           <div className={styles.user__icon}>
-            <Image src="/user.svg" alt="Logo" layout="intrinsic" className="" />
+            <Image
+              src="/user.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+              className=""
+            />
           </div>
           <span className={styles.user__name}>Username</span>
           <div className={styles.user__icon}>
-            <Image src="/down.svg" alt="down" layout="intrinsic" className="" />
+            <Image
+              src="/down.svg"
+              alt="down"
+              width={10}
+              height={10}
+              className=""
+            />
           </div>
 
           {/* Dropdown */}
