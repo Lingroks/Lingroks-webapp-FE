@@ -1,6 +1,6 @@
 // Example: Importing and using in Dashboard.tsx
 import React, { useState } from 'react';
-import style from '../../assets/scss/Dashboard.module.scss';
+import style from '../../assets/scss/tsInput.module.scss';
 
 const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2

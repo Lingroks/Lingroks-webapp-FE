@@ -2,6 +2,7 @@
 import React from 'react';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/Dashboard.module.scss';
+import TranslateInput from '../../components/translateInput/index';
 
 const Dashboard = () => {
   const cardData = [
@@ -42,91 +43,7 @@ const Dashboard = () => {
             </h3>
           </div>
 
-          <div className={style.chat__input__container}>
-            {/* Textarea */}
-            <textarea
-              className={style.chat__textarea}
-              placeholder="Enter your text or link here"
-            ></textarea>
-
-            {/* Buttons */}
-            <div className={style.chat__buttons}>
-              <div className={style.left__buttons}>
-                {/* Dropdown Button 1 */}
-                <div className={style.dropdown}>
-                  <button
-                    className={`${style.chat__button} ${style.dropdown__button}`}
-                    onClick={() => setDropdownOpen1(!dropdownOpen1)}
-                  >
-                    <span className={style.dropdown__icon}>
-                      {
-                        button1Options.find(
-                          (option) => option.text === selectedOption1
-                        )?.icon
-                      }
-                    </span>
-                    {selectedOption1}
-                  </button>
-                  {dropdownOpen1 && (
-                    <ul className={style.dropdown__menu}>
-                      {button1Options.map((option) => (
-                        <li
-                          key={option.text}
-                          className={style.dropdown__item}
-                          onClick={() => {
-                            setSelectedOption1(option.text);
-                            setDropdownOpen1(false);
-                          }}
-                        >
-                          <span className={style.dropdown__icon}>
-                            {option.icon}
-                          </span>
-                          {option.text}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-
-                {/* Dropdown Button 2 */}
-                <div className={style.dropdown}>
-                  <button
-                    className={`${style.chat__button} ${style.dropdown__button}`}
-                    onClick={() => setDropdownOpen2(!dropdownOpen2)}
-                  >
-                    <span className={style.dropdown__icon}>
-                      {selectedOption2.icon}
-                    </span>
-                    {selectedOption2.text}
-                  </button>
-                  {dropdownOpen2 && (
-                    <ul className={style.dropdown__menu}>
-                      {button2Options.map((option) => (
-                        <li
-                          key={option.text}
-                          className={style.dropdown__item}
-                          onClick={() => {
-                            setSelectedOption2(option);
-                            setDropdownOpen2(false);
-                          }}
-                        >
-                          <span className={style.dropdown__icon}>
-                            {option.icon}
-                          </span>
-                          {option.text}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-              <button
-                className={`${style.chat__button} ${style.submit__button}`}
-              >
-                Proceed
-              </button>
-            </div>
-          </div>
+          <TranslateInput />
 
           {/* your history */}
 
@@ -148,4 +65,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
