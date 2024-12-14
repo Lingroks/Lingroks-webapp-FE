@@ -1,0 +1,122 @@
+.chat__input__container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d8d8d8;
+    border-radius: 32px;
+    padding: 20px 24px;
+  //   width: 100%;
+    margin: 0 auto;
+  }
+  
+  .chat__textarea {
+    //   width: 100%;
+    border: none;
+    outline: none;
+    min-height: 60px;
+    //   padding: 10px;
+    resize: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #646464;
+  }
+  
+  .chat__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  
+    .left__buttons {
+      display: flex;
+      gap: 10px;
+    }
+  }
+  
+  .chat__button {
+    padding: 10px 15px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #323232;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  
+    &:hover {
+      background-color: #d6d6d6;
+    }
+  
+    &.submit__button {
+      background-color: #5732e9;
+      color: #f4f4f4;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      border-radius: 30px;
+      padding: 15px 30px;
+      cursor: pointer;
+      // &:hover {
+      //   background-color: #0056b3;
+      // }
+    }
+  }
+  
+  /* Dropdown Styles */
+  .dropdown {
+    position: relative;
+  
+    ul {
+      padding: 0;
+    }
+    .dropdown__button {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 30px;
+    }
+  
+    .dropdown__icon {
+      margin-right: 10px;
+    }
+    .dropdown__menu {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      background-color: #fff;
+      border: 0.5px solid #d8d8d8;
+      border-radius: 10px;
+      list-style: none;
+      padding: 5px 20px 5px 0px;
+      margin: 0;
+      z-index: 1000;
+      cursor: pointer;
+  
+      .dropdown__item {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        cursor: point;
+        color: #323232;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 500;
+  
+        //   &:hover {
+        //     background-color: #f0f0f0;
+        //   }
+      }
+    }
+  }
+  
+  .arrow__icon {
+    //   margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  // .arrow__icon.open {
+  //   transform: rotate(180deg);
+  // }
