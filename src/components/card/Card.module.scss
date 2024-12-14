@@ -1,0 +1,19 @@
+//price card
+.price__card{
+    width: 45%;
+    @include breakpoint-custom-down(620) {
+        width: 100%;
+    }
+}
+
+//feature card
+.usecase__card {
+    position: relative;
+    max-width: 300px;
+    min-height: 300px;
+    cursor: pointer;
+    overflow: hidden;
+    @include breakpoint-custom-down(768) {
+        max-width: 100%;
+    }
+}

@@ -1,4 +1,3 @@
-// app/page.tsx.
 import Header from '@/components/header/page';
 import Hero from '@/components/hero/index';
 import FeaturesTabbedPanel from '@/components/tabbed-panel/FeaturesTabbedPanel';
@@ -6,7 +5,8 @@ import Link from 'next/link';
 import FeatureCard from '@/components/card/FeatureCard';
 import PriceCard from '@/components/card/PriceCard';
 import Image from 'next/image';
-import { FaDiscord, FaTwitter, FaTiktok, FaFacebook } from 'react-icons/fa';
+import style from './page.module.scss';
+import MainFooter from '@/components/footer/MainFooter'; 
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
         <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
-          <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
+          <h2 className={style.features__title}>
             Powerful Tools for Your Content
           </h2>
           <FeaturesTabbedPanel />
@@ -27,11 +27,11 @@ export default function Home() {
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
           <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
-            <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
+            <h2 className={style.usecase__title}>
               How Lingroks Can Work For You
             </h2>
             <div className='w-full mt-4'>
-              <div className="grid grid-cols-3 gap-8 max-xs:grid-cols-1 max-sm:grid-cols-2">
+              <div className={style.usecase__grid}>
                 <FeatureCard 
                   alt='student'
                   imgSrc='https://images.pexels.com/photos/5965857/pexels-photo-5965857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
@@ -75,10 +75,10 @@ export default function Home() {
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
         <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
-           <h2 className='text-[#323232] text-3xl max-w-[400px] text-center'>
+           <h2 className={style.pricing__title}>
              Choose a plan that works for you
            </h2>
-           <div className="flex items-baseline justify-between w-full">
+           <div className={style.pricing__card_container}>
             <PriceCard 
               title='For Individuals'
               priceType='Basic'
@@ -110,81 +110,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      <footer className='mt-7 w-full bg-[#f4f4f4]'>
-        <div className='max-w-[1100px] my-0 mx-auto px-4 py-4'>
-          <div className="flex justify-between items-start mb-2">
-            <Link href="/">
-              <Image
-              src="/Lingroks.svg" 
-              alt="Logo"
-              width={105}
-              height={100} 
-              className=''/>
-            </Link>
-            <div className="flex w-[30%] justify-between items-center">
-              <ul className='flex flex-col items-start justify-start'>
-                <span className='text-[#1e1e1e] font-semibold text-lg mb-2'>
-                  Links
-                </span>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Features
-                  </Link>
-                </li>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Use cases
-                  </Link>
-                </li>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Pricing
-                  </Link>
-                </li>
-              </ul>
-              <ul className='flex flex-col items-start justify-start'>
-                <span className='text-[#1e1e1e] font-semibold text-lg mb-2'>
-                  Company
-                </span>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Contact
-                  </Link>
-                </li>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Privacy
-                  </Link>
-                </li>
-                <li className='mb-2'>
-                  <Link href='/' className='text-[.945rem] text-[#646464]'>
-                      Terms
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex justify-between">
-             <p className='text-[#646464] text-[.945rem]'>
-                © 2025 Lingroks. All rights reserved. Powered by <Link href='/' className='text-mainBlue font-semibold'>NextBuildr</Link>
-             </p>
-             <div className="flex items-center gap-2">
-                <Link href='/' className='text-[#646464]'>
-                  <FaDiscord />
-                </Link>
-                <Link href='/' className='text-[#646464]'>
-                  <FaTwitter />
-                </Link>
-                <Link href='/' className='text-[#646464]'>
-                  <FaTiktok />
-                </Link>
-                <Link href='/' className='text-[#646464]'>
-                  <FaFacebook />
-                </Link>
-             </div>
-          </div>
-        </div>
-      </footer>
+      <MainFooter />
     </>
   );
 }

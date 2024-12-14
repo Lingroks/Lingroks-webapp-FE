@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
+import style from './TabbedPanel.module.scss';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
@@ -37,21 +38,20 @@ const FeaturesTabbedPanel: React.FC = () => {
     }
     return (
         <div className='w-full border-[#d8d8d8] border border-solid rounded-2xl h-[420px]'>
-            <div className="flex items-center justify-between w-full h-full">
-                <div className='border-r border-[#d8d8d8] px-4 h-full flex justify-center items-center flex-col'>
+            <div className={style.featured__tab_wrapper}>
+                <div className={style.featured__tab_sidebar}>
                     {FeaturesAssets.map((_, index) => (
                         <div 
                         onClick={() => displayVideo(index)}
                         key={index}
-                        className='flex my-5 cursor-pointer p-2 rounded-[12px] items-center justify-start text-[#323232] w-full'
-                        >
+                        className={style.sidebar__inner_element}>
                             <Image 
                             src={FeaturesAssets[index].icon} 
                             alt=""
                             width={16}
                             height={16}
                             />
-                            <span className='ml-1 font-semibold text-base'>
+                            <span className={style.sidebar__inner_text}>
                                 {FeaturesAssets[index].text}
                             </span>
                         </div>

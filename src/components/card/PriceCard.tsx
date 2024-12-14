@@ -1,5 +1,6 @@
 import React from 'react'
 import { IoCheckmark } from "react-icons/io5";
+import style from './Card.module.scss'
 
 interface PriceCardProps {
     title: string,
@@ -52,7 +53,7 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
     const selectedLimit = variant === 'basic' ? FeatureList.basicLimit : FeatureList.proLimit;
     const selectedLanguages = variant === 'basic' ? FeatureList.basicLanguages : FeatureList.proLanguages;
     return(
-        <div className={`w-[45%] rounded-3xl ${variant === 'basic' ? "bg-[#fff] shadow-[0_2px_4px_rgb(0,0,0,0.2)]" : "bg-[#5732E9]"}`}>
+        <div className={`${style.price__card} w-[45%] rounded-3xl ${variant === 'basic' ? "bg-[#fff] shadow-[0_2px_4px_rgb(0,0,0,0.2)]" : "bg-[#5732E9]"}`}>
             <div className='p-8'>
                  <div className="flex items-start justify-between w-full">
                     <div className="topPart-con">
