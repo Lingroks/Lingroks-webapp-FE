@@ -4,16 +4,15 @@ import FeaturesTabbedPanel from '@/components/tabbed-panel/FeaturesTabbedPanel';
 import Link from 'next/link';
 import FeatureCard from '@/components/card/FeatureCard';
 import PriceCard from '@/components/card/PriceCard';
-import Image from 'next/image';
 import style from './page.module.scss';
 import MainFooter from '@/components/footer/MainFooter'; 
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <>
       <Header />
       <Hero 
-      title='Transform texts or URLs into summaries, translations, and insights—effortlessly and instantly.'
+      title='One AI-powered platform for translating content into any language'
       />
       <div className="h-[140px] w-full"></div>
       <section className='w-full'>
@@ -24,7 +23,7 @@ export default function Home() {
           <FeaturesTabbedPanel />
         </div>
       </section>
-      <div className="h-[140px] w-full"></div>
+      <div className={style.space}></div>
       <section className='w-full'>
           <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
             <h2 className={style.usecase__title}>
@@ -72,7 +71,7 @@ export default function Home() {
             </div>
           </div>
       </section>
-      <div className="h-[140px] w-full"></div>
+      <div className={style.space}></div>
       <section className='w-full'>
         <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
            <h2 className={style.pricing__title}>
@@ -97,10 +96,10 @@ export default function Home() {
            </div>
         </div>
       </section>
-      <div className="h-[140px] w-full"></div>
+      <div className={style.space}></div>
       <section className='w-full'>
         <div className='max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4'>
-          <h3 className='text-center max-w-[650px] text-[#323232] text-3xl'>
+          <h3 className={style.cta__title}>
             Get started with our free plan today and see the difference.
           </h3>
           <Link href="/auth/signup">
@@ -114,3 +113,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

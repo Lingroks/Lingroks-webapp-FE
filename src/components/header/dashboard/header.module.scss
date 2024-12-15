@@ -1,8 +1,12 @@
+// @import '../../../assets/scss/main.scss' as *;
+//dashboard header
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .search {
@@ -45,6 +49,7 @@
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #d8d8d8;
+  font-family: 'Inter';
   border-radius: 30px;
   //   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -77,6 +82,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #e33e38;
+  width: 105px;
 }
 
 .mobile-search {
@@ -94,4 +100,88 @@
     border-radius: 30px;
     width: 100%;
   }
+}
+
+
+
+//main header
+.main__header {
+  background-color: #ffffff;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main__header_active {
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.main__header_wrapper {
+  width: 100%;
+  max-width: $max-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+  @include breakpoint-custom-down(768) {
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+  }
+}
+
+.hamburger__menu {
+  display: none;
+  @include breakpoint-custom-down(768) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .line {
+    width: 24px;
+    height: 2px;
+    background-color: #323232;
+    border-radius: 10px;
+  }
+}
+
+.hamburger__menu_active {
+  .line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
+
+.mobile__menu_container {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1000;
+    border-top: 1px solid #d8d8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1rem;
+    position: absolute;
+    top: 100%;
 }

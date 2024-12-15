@@ -1,16 +1,15 @@
 @import 'assets/scss/mixins';
 @import 'assets/scss/breakpoint';
 
-.text {
-  color: red;
-  @include breakpoint-custom-up(900) {
-    color: green;
-  }
+.space {
+  width: 100%;
+  height: clamp(5rem, 3.636rem + 6.82vw, 8.75rem);
 }
 
 //features style
 .features__title, .usecase__title, .pricing__title {
-  font-size: 2.2rem;
+  font-size: clamp(1.758rem, 1.579rem + 0.89vw, 2.25rem);
+  line-height: 1.1;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
   color: #323232;
@@ -26,6 +25,7 @@
   margin-top: 40px;
   @include breakpoint-custom-down(768) {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 0;
   }
   @include breakpoint-custom-down(500) {
     grid-template-columns: repeat(1, 1fr);
@@ -44,4 +44,12 @@
     flex-direction: column;
     gap: 1rem;
   }
+}
+
+//cta 
+.cta__title {
+  font-size: clamp(1.758rem, 1.579rem + 0.89vw, 2.25rem);
+  color: #323232;
+  max-width: 650px;
+  text-align: center;
 }

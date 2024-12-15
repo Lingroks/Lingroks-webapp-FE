@@ -24,7 +24,7 @@
     @include breakpoint-custom-down(768) {
         border-right-width: 0;
         border-bottom-width: 1px;
-        padding: 1rem 0;
+        padding: 1rem;
         flex-direction: row;
         justify-content: space-between;
         align-items: baseline;
@@ -42,6 +42,7 @@
         justify-content: flex-start;
         color: #323232;
         width: 100%;
+        font-weight: 600;
         font-size: 1rem;
         @include breakpoint-custom-down(768) {
             margin: 0;
@@ -57,5 +58,17 @@
                 text-align: center;
             }
         }
+
+        .sidebar__inner_icon {
+            @include breakpoint-custom-down(768) {
+                width: 1.2rem;
+                height: 1.2rem;
+                margin-bottom: .25rem;
+            }
+        }
     }
+}
+
+.featured__tab_sidebar_active {
+    background-color: #EDE9FD;
 }

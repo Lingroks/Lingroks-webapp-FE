@@ -1,12 +1,20 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-// import Logo from '/Lingroks.svg';
+import style from './dashboard/header.module.scss';
+import { motion } from 'framer-motion';
+import MobileMenu from '../mobile-menu/index';
 
 export default function Header() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
     return(
-        <header className='w-full'>
-            <div className='max-w-[1100px] flex items-center justify-start mx-auto my-0 px-4 py-2 cursor-pointer'>
+        <header className={style.main__header}>
+            <div className={style.main__header_wrapper}>
                 <Link href="/">
                     <Image
                     src="/Lingroks.svg" 
@@ -36,19 +44,36 @@ export default function Header() {
                 </nav>
                 <div>
                     <div className='flex gap-4 items-center justify-center'>
-                    <Link href="/auth/login" className='max-md:hidden'>
-                        <button type="button" className='bg-[#f4f4f4] text-[#323232] cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[8px] px-6 transition-all border-none'>
-                           Login
-                        </button>
-                    </Link>
-                    <Link href="/auth/signup" className='max-md:hidden'>
-                        <button type="button" className='cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[8px] px-6 transition-all border-none bg-mainBlue text-white'>
+                        <Link href="/auth/login" className='max-md:hidden'>
+                            <button type="button" className='bg-[#f4f4f4] text-[#323232] cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[8px] px-6 transition-all border-none'>
+                            Login
+                            </button>
+                        </Link>
+                        <Link href="/auth/signup" className='max-md:hidden'>
+                            <button type="button" className='cursor-pointer inline-block m-0 relative text-center w-auto touch-manipulation text-base font-inter-regular rounded-[60px] outline-none py-[8px] px-6 transition-all border-none bg-mainBlue text-white'>
                             Sign Up
-                        </button>
-                    </Link>
+                            </button>
+                        </Link>
+                        <div 
+                        onClick={toggleMobileMenu}
+                        className={style.hamburger__menu}>
+                            <div className={style.line}></div>
+                            <div className={style.line}></div>
+                            <div className={style.line}></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: isMobileMenuOpen ? 0 : '-100%' }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                className={style.mobile__menu_container}>
+                    <MobileMenu 
+                    menu={isMobileMenuOpen}
+                    onToggle={toggleMobileMenu}
+                    />
+            </motion.div>
         </header>
     )
 }

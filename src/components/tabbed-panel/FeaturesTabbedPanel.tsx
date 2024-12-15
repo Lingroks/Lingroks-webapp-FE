@@ -2,31 +2,32 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './TabbedPanel.module.scss';
+import ReactPlayer from 'react-player';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
     const FeaturesAssets = [
         {
             index: 0,
-            videoSrc: '/video--1.png',
-            text: 'Translate Text',
+            videoSrc: 'https://youtu.be/ZK-rNEhJIDs?si=KiFHUoBPqjpP2Dwe',
+            text: 'Text',
             icon: '/text.svg'
         },
         {
             index: 1,
-            videoSrc: '/video-1.png',
+            videoSrc: 'https://youtu.be/mtPqxJBMXCQ?si=mYGuW70MGgcSRv2E',
             text: 'Audio',
             icon: '/audio.svg'
         },
         {
             index: 2,
-            videoSrc: '/video--3.png',
+            videoSrc: 'https://youtu.be/mZlzS9i9i2Y?si=HM2QbBwtgAIlKe8W',
             text: 'Summary',
             icon: '/summary.svg'
         },
         {
             index: 3,
-            videoSrc: '/video--4.png',
+            videoSrc: 'https://youtu.be/HzAHRtJiiGk?si=DUxE68rabSNNUCai',
             text: 'Insights',
             icon: '/insight.svg'
         }
@@ -44,12 +45,13 @@ const FeaturesTabbedPanel: React.FC = () => {
                         <div 
                         onClick={() => displayVideo(index)}
                         key={index}
-                        className={style.sidebar__inner_element}>
+                        className={`${style.sidebar__inner_element} ${currentIndex === index ? style.featured__tab_sidebar_active : ''}`}>
                             <Image 
                             src={FeaturesAssets[index].icon} 
                             alt=""
                             width={16}
                             height={16}
+                            className={style.sidebar__inner_icon}
                             />
                             <span className={style.sidebar__inner_text}>
                                 {FeaturesAssets[index].text}
@@ -58,14 +60,14 @@ const FeaturesTabbedPanel: React.FC = () => {
                     ))}
                 </div>
                 <div className='flex-1 w-full h-full'>
-                    <Image
-                    src={FeaturesAssets[currentIndex].videoSrc} 
-                    width={100}
-                    height={100}
-                    objectFit="cover"
-                    alt=''
-                    className='rounded-[12px] w-full h-full p-4'
-                    unoptimized={true}
+                    {/* We'll make a demo video for each of the features and upload on youtube...then we will refrence them here...I only keep these videos here as placeholders */}
+                    <ReactPlayer
+                        url={FeaturesAssets[currentIndex].videoSrc}
+                        controls
+                        width='100%'
+                        height='100%'
+                        autoPlay={false}
+                        className='rounded-[12px] p-4'
                     />
                 </div>
             </div>
