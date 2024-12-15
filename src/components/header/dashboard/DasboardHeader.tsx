@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './header.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,7 +16,13 @@ const Header = () => {
         {/* Logo */}
         <div className={styles.logo}>
           <Link href="/">
-            <img src="/Lingroks.svg" alt="Logo" width={105} className="" />
+            <Image
+              src="/Lingroks.svg"
+              alt="Logo"
+              width={105}
+              height={30}
+              className=""
+            />
           </Link>
         </div>
 
@@ -31,11 +38,23 @@ const Header = () => {
         {/* User Section */}
         <div className={styles.user} onClick={toggleDropdown}>
           <div className={styles.user__icon}>
-            <img src="/user.svg" alt="Logo" className="" />
+            <Image
+              src="/user.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+              className=""
+            />
           </div>
           <span className={styles.user__name}>Username</span>
           <div className={styles.user__icon}>
-            <img src="/down.svg" alt="down" className="" />
+            <Image
+              src="/down.svg"
+              alt="down"
+              width={10}
+              height={10}
+              className=""
+            />
           </div>
 
           {/* Dropdown */}

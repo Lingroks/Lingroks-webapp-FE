@@ -6,8 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const nextConfig = {
-  experimental: {
-  },
+  experimental: {},
   webpack: (config) => {
     // Aliases
     config.resolve.alias['@components'] = path.resolve(
@@ -26,9 +25,11 @@ const nextConfig = {
       @import "@assets/scss/_variables.scss";
       @import "@assets/scss/_mixins.scss";
       @import "@assets/scss/_breakpoint.scss";
+      @import "@assets/scss/_font.scss";
+      
     `,
   },
-  
+
   images: {
     domains: ['images.pexels.com'],
   },

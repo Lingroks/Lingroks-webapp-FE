@@ -2,7 +2,7 @@
 // @tailwind components;
 // @tailwind utilities;
 
-@import 'font';
+// @import 'font';
 @import 'variables';
 @import 'breakpoint';
 @import 'reset';
@@ -10,8 +10,6 @@
 @import 'base';
 @import 'cursor';
 
-
-// body{
-//     background-color: red;
-//     font-family: "Inter";
-// }
+body {
+  font-family: "Inter";
+}
