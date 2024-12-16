@@ -62,7 +62,7 @@ const Login: React.FC = () => {
                     <div className='w-full '>
                        <AuthMainBtn
                         text='Login'
-                        type="submit" 
+                         
                         className='w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2'
                         />
                         <p className='text-center text-black font-inter-regular leading-3'>
