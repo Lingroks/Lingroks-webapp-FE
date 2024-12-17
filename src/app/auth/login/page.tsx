@@ -15,7 +15,7 @@ const Login: React.FC = () => {
         <> 
            <AuthLayout>
               <div className='w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5'>
-                <h1 className='text-black text-[2rem] font-inter-medium mb-1'>
+                <h1 className='text-black text-[2rem] font-inter-medium mb-1 text-center'>
                     Welcome Back 
                 </h1>
                 <p className='text-textGrey text-[16px] font-inter-regular mb-4 leading-normal'>

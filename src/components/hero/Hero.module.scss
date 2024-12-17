@@ -1,0 +1,19 @@
+.hero {
+    width: 100%;
+    padding-top: clamp(7rem, 6.273rem + 3.64vw, 9rem);
+}
+
+
+.hero__title {
+    text-align: center;
+    font-size: clamp(2.35rem, 1.932rem + 2.09vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 600;
+    color: #323232;
+}
+
+.hero__input {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 1rem;
+}

@@ -1,4 +1,3 @@
-// app/page.tsx.
 import Header from '@/components/header/page';
 import Hero from '@/components/hero/index';
 import FeaturesTabbedPanel from '@/components/tabbed-panel/FeaturesTabbedPanel';
@@ -9,7 +8,7 @@ import Image from 'next/image';
 import { FaDiscord, FaTwitter, FaTiktok, FaFacebook } from 'react-icons/fa';
 import style from './page.module.scss';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <>
       <div className={style.main}>
@@ -30,13 +29,13 @@ export default function Home() {
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
               How Lingroks Can Work For You
             </h2>
-            <div className="w-full mt-4">
-              <div className="grid grid-cols-3 gap-8">
-                <FeatureCard
-                  alt="student"
-                  imgSrc="https://images.pexels.com/photos/5965857/pexels-photo-5965857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  title="Students"
-                  subtitle="Summarize research papers and textbooks to save time."
+            <div className='w-full mt-4'>
+              <div className={style.usecase__grid}>
+                <FeatureCard 
+                  alt='student'
+                  imgSrc='https://images.pexels.com/photos/5965857/pexels-photo-5965857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+                  title='Students'
+                  subtitle='Summarize research papers and textbooks to save time.'
                 />
                 <FeatureCard
                   alt="researcher"
@@ -196,3 +195,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
