@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
@@ -51,73 +51,73 @@ export default function Signup() {
                         onChange={(e) => setFirstName(e.target.value)}
                         className='mb-6 text-secondaryGrey w-[45%]'/>
 
-                        <AuthInputBox 
-                        label='Last Name'
-                        type='text'
-                        placeholder='Your last name'
-                        value={lastName}
-                        id='lastName'
-                        required={true}
-                        forgotPassword={false}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className='mb-6 text-secondaryGrey w-[45%]'
-                        />
-                    </div>
-                    <div className='flex flex-col items-start justify-start w-full'>
-                        <AuthInputBox 
-                        label='Email Address'
-                        type='email'
-                        placeholder='Your email address'
-                        value={email}
-                        id='email'
-                        required={true}
-                        forgotPassword={false}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className='mb-6 text-secondaryGrey'
-                        />
-                        <AuthInputBox 
-                        label='Password'
-                        type='password'
-                        placeholder='Your password'
-                        id='password'
-                        value={password}
-                        required={true}
-                        forgotPassword={false}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className='mb-6' 
-                        />
-                    </div>
-                    <div className='flex flex-col w-full'>
-                        <div className='flex flex-wrap gap-2 mb-2'>
-                            <AuthInstruction 
-                            text='At least one uppercase letter'
-                            />
-                            <AuthInstruction 
-                            text='Minimum of 8 characters'
-                            />
-                            <AuthInstruction 
-                            text='At least one number'
-                            />
-                        </div>
-                        <p className='text-secondaryGrey text-[.9rem] mb-3'>
-                            By clicking on create account, you are agreeing to our <Link href='/terms' className='text-mainBlue'>Terms of Service</Link> and <Link href='/privacy' className='text-mainBlue'>Privacy Policy</Link>
-                        </p>
-                    </div>
-                    <div className='w-full '>
-                       <AuthMainBtn
-                        text='Create Account'
-                        type="submit" 
-                        className='w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2'
-                        />
-                        <p className='text-center text-black font-inter-regular leading-3'>
-                            Already have an account? 
-                            <Link href="/auth/login" className='text-mainBlue ml-1'>
-                                Login
-                            </Link>
-                        </p>
-                    </div>
-                </form>
+            <AuthInputBox
+              label="Last Name"
+              type="text"
+              placeholder="Your last name"
+              value={lastName}
+              id="lastName"
+              required={true}
+              forgotPassword={false}
+              onChange={(e) => setLastName(e.target.value)}
+              className="mb-6 text-secondaryGrey w-[45%]"
+            />
+          </div>
+          <div className="flex flex-col items-start justify-start w-full">
+            <AuthInputBox
+              label="Email Address"
+              type="email"
+              placeholder="Your email address"
+              value={email}
+              id="email"
+              required={true}
+              forgotPassword={false}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mb-6 text-secondaryGrey"
+            />
+            <AuthInputBox
+              label="Password"
+              type="password"
+              placeholder="Your password"
+              id="password"
+              value={password}
+              required={true}
+              forgotPassword={false}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mb-6"
+            />
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex flex-wrap gap-2 mb-2">
+              <AuthInstruction text="At least one uppercase letter" />
+              <AuthInstruction text="Minimum of 8 characters" />
+              <AuthInstruction text="At least one number" />
             </div>
-        </AuthLayout>
-    )
+            <p className="text-secondaryGrey text-[.9rem] mb-3">
+              By clicking on create account, you are agreeing to our{' '}
+              <Link href="/terms" className="text-mainBlue">
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link href="/privacy" className="text-mainBlue">
+                Privacy Policy
+              </Link>
+            </p>
+          </div>
+          <div className="w-full ">
+            <AuthMainBtn
+              text="Create Account"
+              className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+            />
+            <p className="text-center text-black font-inter-regular leading-3">
+              Already have an account?
+              <Link href="/auth/login" className="text-mainBlue ml-1">
+                Login
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </AuthLayout>
+  );
 }
