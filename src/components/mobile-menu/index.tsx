@@ -9,7 +9,7 @@ interface MobileMenuProps {
     onToggle: () => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({menu, onToggle}) => {
+const MobileMenu: React.FC<MobileMenuProps> = () => {
     return (
         <div className={style.mobile__menu}>
                 <nav className={style.mobile__nav}>
