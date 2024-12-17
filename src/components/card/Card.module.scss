@@ -1,0 +1,24 @@
+//price card
+.price__card{
+    width: 45%;
+    @include breakpoint-custom-down(620) {
+        width: 100%;
+    }
+}
+
+//feature card
+.usecase__card {
+    position: relative;
+    max-width: 300px;
+    min-height: 300px;
+    cursor: pointer;
+    overflow: hidden;
+    @include breakpoint-custom-down(768) {
+        max-width: 100%;
+    }
+}
+
+.usecase__card_title {
+    color: #fff;
+    font-size: clamp(1.258rem, 1.185rem + 0.36vw, 1.458rem);
+}

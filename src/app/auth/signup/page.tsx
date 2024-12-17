@@ -10,51 +10,46 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
 
 export default function Signup() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  return (
-    <AuthLayout>
-      <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
-        <h1 className="text-black text-[2rem] font-inter-medium mb-1">
-          Create a free account
-        </h1>
-        <p className="text-textGrey text-[16px] font-inter-regular mb-4 leading-normal">
-          Start translating your contents
-        </p>
-        <div className="flex justify-between flex-col items-center w-full gap-3 mb-4 sm:flex-row sm:gap-2">
-          <AuthButton
-            icon="/google.svg"
-            text="Continue with Google"
-            className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"
-          />
-          <AuthButton
-            icon="/microsoft.svg"
-            text="Continue with Microsoft"
-            className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"
-          />
-        </div>
-        <div className="flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full">
-          <div className="h-[.5px] bg-secondaryGrey w-[45%]"></div>
-          <span className="block text-base text-secondaryGrey font-inter-medium">
-            Or
-          </span>
-          <div className="h-[.5px] bg-secondaryGrey w-[45%]"></div>
-        </div>
-        <form className="flex flex-col items-start justify-start w-full">
-          <div className="flex items-center justify-between w-full gap-3">
-            <AuthInputBox
-              label="First Name"
-              type="text"
-              placeholder="Your first name"
-              value={firstName}
-              id="firstName"
-              required={true}
-              forgotPassword={false}
-              onChange={(e) => setFirstName(e.target.value)}
-              className="mb-6 text-secondaryGrey w-[45%]"
-            />
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    return(
+        <AuthLayout>
+            <div className='w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5'>
+                <h1 className='text-black text-[2rem] font-inter-medium mb-1 text-center leading-8'>
+                    Create a free account
+                </h1>
+                <p className='text-textGrey text-[16px] font-inter-regular mb-4 leading-normal'>
+                    Start translating your contents
+                </p>
+                <div className='flex justify-between flex-col items-center w-full gap-3 mb-4 sm:flex-row sm:gap-2'>
+                    <AuthButton 
+                        icon='/google.svg'
+                        text='Continue with Google' 
+                        className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"/>
+                    <AuthButton 
+                        icon='/microsoft.svg'
+                        text='Continue with Microsoft' 
+                        className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"/>
+                </div>
+                <div className='flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full'>
+                    <div className='h-[.5px] bg-secondaryGrey w-[45%]'></div>
+                    <span className='block text-base text-secondaryGrey font-inter-medium'>Or</span>
+                    <div className='h-[.5px] bg-secondaryGrey w-[45%]'></div>
+                </div>
+                <form className='flex flex-col items-start justify-start w-full'>
+                    <div className='flex items-center justify-between w-full gap-3'>
+                        <AuthInputBox 
+                        label='First Name'
+                        type='text'
+                        placeholder='Your first name'
+                        value={firstName}
+                        id='firstName'
+                        required={true}
+                        forgotPassword={false}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className='mb-6 text-secondaryGrey w-[45%]'/>
 
             <AuthInputBox
               label="Last Name"

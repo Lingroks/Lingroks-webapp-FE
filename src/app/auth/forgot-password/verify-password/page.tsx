@@ -6,22 +6,23 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 
-interface OtpChangeEvent {
-    target: {
-        value: string;
-    };
-}
+// const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const newOtp = event.target.value;
+//     setOtp(newOtp.split(''));
+// };
+// Remove the OtpChangeEvent interface as it is no longer needed
 const VerifyPassword: React.FC = () => {
     const [otp, setOtp] = useState(["", "", "", ""]);
 
 
-    const handleOtpChange = (event: OtpChangeEvent) => {
-        const newOtp = event.target.value;
+
+    const handleOtpChange = (value: string) => {
+        const newOtp = value;
         setOtp(newOtp.split(''));
     };
 
     return(
-        <AuthLayout>
+    <AuthLayout>
             <div className='w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5'>
                 <div className='flex items-center justify-center mb-2'>
                     <ForgotPasswordPic 
@@ -37,7 +38,7 @@ const VerifyPassword: React.FC = () => {
                 </p>
                 <form action='' className='flex flex-col items-center justify-start w-full'>
                     <SetOtpInput 
-                        value={otp}
+                        value={otp.join('')}
                         onChange={handleOtpChange}
                     />
                     <p className='text-center mt-6 mb-6 text-[1rem] text-secondaryGrey'>

@@ -1,10 +1,16 @@
 'use client'
 import React, { useRef } from 'react';
 
-const SetOtpInput = ({value, onChange}) => {
-    const inputs = useRef([]);
+interface SetOtpInputProps {
+    value: string;
+    onChange: (value: string) => void;
+}
 
-    const handleChange = (e, index) => {
+const SetOtpInput: React.FC<SetOtpInputProps> = ({ value, onChange }) => {
+    const inputs = useRef<(HTMLInputElement | null)[]>([]);
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
         const digit = e.target.value.replace(/\D/g, '');
 
         if (digit) {
@@ -17,7 +23,8 @@ const SetOtpInput = ({value, onChange}) => {
         }
     }
 
-    const handleKeyDown = (e, index) => {
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number): void => {
         if (e.key === 'Backspace') {
             const newOtp = [...value];
             if (value[index]) {
@@ -29,7 +36,7 @@ const SetOtpInput = ({value, onChange}) => {
         }
     }
 
-    const handlePaste = (e) => {
+    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>): void => {
         e.preventDefault();
         const paste = e.clipboardData.getData('text');
         if (paste.length === 4) {
@@ -49,7 +56,7 @@ const SetOtpInput = ({value, onChange}) => {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={handlePaste}
-                ref={(el) => inputs.current[index] = el}
+                ref={(el) => { inputs.current[index] = el; }}
                 className="w-12 h-12 text-center border rounded-lg"
                 />
             ))} 

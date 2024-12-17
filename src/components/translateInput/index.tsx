@@ -1,4 +1,5 @@
 // Example: Importing and using in Dashboard.tsx
+'use client';
 import React, { useState } from 'react';
 import style from '../../assets/scss/tsInput.module.scss';
 
