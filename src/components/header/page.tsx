@@ -5,6 +5,7 @@ import Image from 'next/image';
 import style from './dashboard/header.module.scss';
 import { motion } from 'framer-motion';
 import MobileMenu from '../mobile-menu/index';
+import { IoCloseOutline } from "react-icons/io5";
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -54,13 +55,20 @@ export default function Header() {
                             Sign Up
                             </button>
                         </Link>
+                        {!isMobileMenuOpen && 
                         <div 
                         onClick={toggleMobileMenu}
                         className={style.hamburger__menu}>
                             <div className={style.line}></div>
                             <div className={style.line}></div>
                             <div className={style.line}></div>
-                        </div>
+                        </div>}
+                        {isMobileMenuOpen &&
+                        <div className={style.close__menu}>
+                            <IoCloseOutline 
+                            onClick={toggleMobileMenu}
+                            className='text-2xl cursor-pointer'/>
+                        </div>}
                     </div>
                 </div>
             </div>
