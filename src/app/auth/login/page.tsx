@@ -18,7 +18,7 @@ const Login: React.FC = () => {
                 <h1 className='text-black text-[2rem] font-inter-medium mb-1 text-center'>
                     Welcome Back 
                 </h1>
-                <p className='text-textGrey text-[16px] font-inter-regular mb-4 leading-normal'>
+                <p className='text-textGrey text-[16px] font-inter-regular mb-4 leading-normal text-center'>
                     Login to your account
                 </p>
                 <div className='flex justify-between flex-col items-center w-full gap-3 mb-4 sm:flex-row sm:gap-2'>

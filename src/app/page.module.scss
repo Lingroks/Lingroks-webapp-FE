@@ -9,3 +9,35 @@ font-family: 'Inter';
     color: green;
   }
 }
+
+.usecase__grid_container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.usecase__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  @include breakpoint-custom-down(768) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoint-custom-down(480) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+//price
+.price__flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+
+  @include breakpoint-custom-down(620) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.7rem;
+  }
+}

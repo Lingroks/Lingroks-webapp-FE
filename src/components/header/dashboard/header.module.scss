@@ -157,17 +157,23 @@
   }
 }
 
-.hamburger__menu_active {
-  .line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
+.close__menu {
+  display: none;
+  @include breakpoint-custom-down(768) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: rgb(87 50 233);
+    // padding: 6px;
+    border-radius: 50%;
+    font-size: 1.3rem;
 
-  .line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 
