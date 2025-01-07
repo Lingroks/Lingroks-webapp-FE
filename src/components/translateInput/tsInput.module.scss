@@ -89,6 +89,16 @@
     }
   }
 
+  .input__cointainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .input__wrapper{
+
+  }
   .chat__button__first{
     padding: 10px 15px;
     // background-color: #e0e0e0;
