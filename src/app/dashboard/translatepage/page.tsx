@@ -41,7 +41,7 @@ const TranslatePage = () => {
               {/* Dropdown Button 1 */}
               <div className={input.dropdown}>
                 <button
-                  className={`${input.chat__button} ${input.dropdown__button}`}
+                  className={`${input.chat__button__first} ${input.dropdown__button}`}
                 >
                   Original
                 </button>
