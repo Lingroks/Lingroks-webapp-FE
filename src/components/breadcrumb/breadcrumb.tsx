@@ -13,7 +13,7 @@ const Breadcrumb = ({ title, date, author }) => {
         <span className={styles.backLink} onClick={() => router.back()}>
           &lt; Back
         </span>
-        <span className={styles.separator}>|</span>
+        {/* <span className={styles.separator}>|</span> */}
         <span className={styles.title}>{title}</span>
       </div>
       <div className={styles.details}>

@@ -5,6 +5,12 @@
   margin: 1rem 0;
 }
 
+.breadcrumbFirstrow {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .backLink {
   color: #5b63f1;
   cursor: pointer;
@@ -23,6 +29,7 @@
   font-weight: 600;
   color: #323232;
   font-family: 'Inter';
+  margin: 0 15px;
 }
 
 .details {
@@ -33,14 +40,14 @@
 }
 
 .author {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   color: #646464;
   font-family: 'Inter';
 }
 
 .date {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   color: #646464;
   font-family: 'Inter';
