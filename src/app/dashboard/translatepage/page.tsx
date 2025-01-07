@@ -18,7 +18,7 @@ const TranslatePage = () => {
         <div className={input.chat__input__container}>
           {/* Textarea */}
           <textarea
-            className={input.chat__textarea}
+            className={input.translated}
             placeholder="Enter your text or link here"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
