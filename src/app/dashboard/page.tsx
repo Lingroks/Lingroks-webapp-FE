@@ -1,3 +1,5 @@
+"use client"
+
 // Example: Importing and using in Dashboard.tsx
 import React from 'react';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
