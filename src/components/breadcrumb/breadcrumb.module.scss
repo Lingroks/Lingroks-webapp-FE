@@ -1,41 +1,47 @@
 .breadcrumbContainer {
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    margin: 1rem 0;
-  }
-  
-  .backLink {
-    color: #5b63f1;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-  }
-  
-  .separator {
-    margin: 0 8px;
-    color: #000;
-    font-size: 14px;
-  }
-  
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .details {
-    display: flex;
-    gap: 10px;
-    font-size: 12px;
-    color: #6c757d;
-  }
-  
-  .author {
-    font-style: italic;
-  }
-  
-  .date {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  margin: 1rem 0;
+}
+
+.backLink {
+  color: #5b63f1;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.separator {
+  margin: 0 8px;
+  color: #000;
+  font-size: 14px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #323232;
+  font-family: 'Inter';
+}
+
+.details {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.author {
+  font-size: 20px;
+  font-weight: 500;
+  color: #646464;
+  font-family: 'Inter';
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 500;
+  color: #646464;
+  font-family: 'Inter';
+}
