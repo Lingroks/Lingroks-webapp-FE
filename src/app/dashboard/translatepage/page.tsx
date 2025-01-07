@@ -10,7 +10,7 @@ const TranslatePage = () => {
       <DashboardHeader />
       <div className={style.translate__main__content}>
         <Breadcrumb
-          title="Home | Loom"
+          title="Home | Loom - 29 October 2024"
           date="29 October 2024"
           author="Einstein Namah"
         />
