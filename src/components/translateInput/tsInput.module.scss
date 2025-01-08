@@ -94,11 +94,14 @@
   flex-direction: row;
   width: 100%;
   gap: 12px;
+  margin-top: 12px;
 }
 
 .input__wrapper {
+  width: 90%;
+
   input {
-    width: 80%;
+    width: 100%;
     padding: 10px 16px;
     border: 1px solid #d8d8d8;
     border-radius: 30px;
@@ -112,7 +115,7 @@
 }
 .input__retrybutton {
   background: #d2c8f933;
-  padding: 10px;
+  padding: 10px 24px;
   border-radius: 30px;
   color: #646464;
   font-size: 14px;

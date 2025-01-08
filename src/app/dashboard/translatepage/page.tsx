@@ -11,7 +11,7 @@ const TranslatePage = () => {
       <div className={style.translate__main__content}>
         <Breadcrumb
           title="Home | Loom - 29 October 2024"
-          date="29 October 2024"
+          date="4 days ago"
           author="Einstein Namah"
         />
 
