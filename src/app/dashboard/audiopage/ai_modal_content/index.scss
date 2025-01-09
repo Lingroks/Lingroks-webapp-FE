@@ -1,0 +1,53 @@
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: 'Inter';
+
+  
+    h2 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #1b263b;
+    }
+  
+    .close-icon {
+      cursor: pointer;
+      color: #808080;
+      font-size: 1.5rem;
+    }
+  }
+  
+  .voice-list {
+    margin-top: 1rem;
+  }
+  
+  .voice-item {
+    font-family: 'Inter';
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 14px;
+    color: #1b263b;
+    border: 1px solid #f4f4f4;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  
+    &:hover {
+      background: #EDE9FD;
+    }
+  }
+  
+  .close-button{
+    border: none;
+    outline: none;
+    background-color: #F4F4F4;
+    font-size: 14px;
+    color: #E33E38;
+    font-weight: 500;
+    font-family: 'Inter';
+    padding: 8px 4px;
+    border-radius: 8px;
+  }

@@ -1,0 +1,207 @@
+.dashboard__main__content {
+  font-family: 'Inter', serif;
+  max-width: 670px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  margin-top: 40px;
+  @include breakpoint-up(1500) {
+    background: red;
+  }
+  .content__inner {
+    .headtext__wrap {
+      h3 {
+        font-size: 24px;
+        font-family: 'Inter';
+        font-weight: 600;
+        color: #323232;
+        line-height: 29px;
+      }
+    }
+  }
+}
+
+// input styling
+
+.history__container {
+  margin: 30px 0px;
+  width: 100%;
+  max-width: inherit;
+  .head__text {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Inter';
+    color: #323232;
+  }
+}
+
+.cards__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 30px;
+  width: 100%;
+}
+
+.card {
+  width: 25%;
+  border: 1px solid #d8d8d8;
+  border-radius: 20px;
+  padding: 24px 11px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  background-color: #fff;
+  margin-bottom: 15px;
+  //   width: 160px;
+  //   height: 160px;
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    margin-top: 10px;
+  }
+}
+
+.card__head {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.94px;
+  color: #323232;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // margin-bottom: 0.5rem;
+}
+
+.card__bottom {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+  color: #646464;
+}
+
+@media (max-width: 1024px) {
+  //   .cards__container {
+  // grid-template-columns: repeat(2, 1fr);
+  //   }
+
+  .card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  // .cards__container {
+  //   grid-template-columns: 1fr;
+  // }
+  .card {
+    width: 100%;
+  }
+}
+
+/// other pages styling
+// .container_wrapper{
+//   display: flex; /* Use flexbox */
+//   justify-content: center; /* Center horizontally */
+//   align-items: center; /* Center vertically */
+//   min-height: 100vh; /* Ensure full-height centering */
+//   background-color: #f8f9fa;
+// }
+.container {
+  background: white;
+  border-radius: 10px;
+  padding: 24px;
+  width: 373px;
+  // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  margin-top: 30px;
+  font-family: 'Inter';
+}
+.container_main_content {
+  border: 1px solid #d8d8d8;
+  border-radius: 30px;
+  padding: 24px;
+}
+
+.header {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #323232;
+}
+
+.input_group {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  color: #000000;
+  font-weight: 500;
+  line-height: 16.94px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #D8D8D8;
+  border-radius: 30px;
+  color: #323232;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.52px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.button_group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.36px;
+  width: 100%;
+
+}
+
+.button.save {
+  background-color: #5732E9;
+  color: white;
+}
+
+.button.cancel {
+  background-color: #F4F4F4;
+  color: #e53935;
+  
+}
+
+.back_link {
+  color: #5732E9;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+  display: inline-block;
+}

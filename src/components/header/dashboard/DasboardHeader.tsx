@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import styles from './header.module.scss';
 import Link from 'next/link';
@@ -61,9 +63,14 @@ const Header = () => {
           {dropdownOpen && (
             <div className={styles.user__dropdown}>
               <ul>
-                <li className={styles.listitem}>Personal Info</li>
-                <li className={styles.listitem}>Security Changes</li>
-                <li className={styles.listitem}>Payment</li>
+                <Link href="/dashboard/personalinfo">
+                  <li className={styles.listitem}>Personal Info</li>
+                </Link>
+                <Link href="/dashboard/securitychanges">
+                  <li className={styles.listitem}>Security Changes</li>
+                </Link>
+
+                {/* <li className={styles.listitem}>Payment</li> */}
                 <li className={styles.listitem}>Terms and Privacy</li>
                 <li className={styles.logout}>Log Out</li>
               </ul>
