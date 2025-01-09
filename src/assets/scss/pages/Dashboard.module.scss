@@ -113,20 +113,25 @@
 
 
 /// other pages styling
-.container_wrapper{
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  min-height: 100vh; /* Ensure full-height centering */
-  background-color: #f8f9fa; 
-}
+// .container_wrapper{
+//   display: flex; /* Use flexbox */
+//   justify-content: center; /* Center horizontally */
+//   align-items: center; /* Center vertically */
+//   min-height: 100vh; /* Ensure full-height centering */
+//   background-color: #f8f9fa; 
+// }
 .container {
   background: white;
   border-radius: 10px;
   padding: 20px;
   width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  
+  // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.container_main_content{
+  border: 1px solid #D8D8D8;
+  border-radius: 30px;
 }
 
 .header {

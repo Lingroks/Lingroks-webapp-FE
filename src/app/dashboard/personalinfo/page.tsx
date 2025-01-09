@@ -16,24 +16,26 @@ const PersonalInfo = () => {
             {' '}
             <a className={style.back_link}>&lt; Back</a>
           </Link>
-          <div className={style.header}>Personal Info</div>
-          <div className={style.row}>
-            <div className={style.input_group}>
-              <label className={style.label}>First Name</label>
-              <input type="text" className={style.input} placeholder="John" />
+          <div className={style.container_main_content}>
+            <div className={style.header}>Personal Info</div>
+            <div className={style.row}>
+              <div className={style.input_group}>
+                <label className={style.label}>First Name</label>
+                <input type="text" className={style.input} placeholder="John" />
+              </div>
+              <div className={style.input_group}>
+                <label className={style.label}>Last Name</label>
+                <input type="text" className={style.input} placeholder="Doe" />
+              </div>
             </div>
             <div className={style.input_group}>
-              <label className={style.label}>Last Name</label>
-              <input type="text" className={style.input} placeholder="Doe" />
+              <label className={style.label}>Email Address</label>
+              <input
+                type="email"
+                className={style.input}
+                placeholder="johndoe@gmail.com"
+              />
             </div>
-          </div>
-          <div className={style.input_group}>
-            <label className={style.label}>Email Address</label>
-            <input
-              type="email"
-              className={style.input}
-              placeholder="johndoe@gmail.com"
-            />
           </div>
         </div>
       </div>
