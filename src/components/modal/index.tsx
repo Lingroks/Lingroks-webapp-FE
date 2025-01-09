@@ -45,7 +45,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         ref={modalRef}
         style={{
           backgroundColor: "white",
-          borderRadius: "8px",
+          borderRadius: "30px",
           padding: "24px",
           maxWidth: "500px",
           width: "100%",
