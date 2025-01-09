@@ -36,15 +36,13 @@
 }
 
 .cards__container {
-  //   display: grid;
-  //   grid-template-columns: repeat(3, 1fr);
-  //   gap: 0.8rem 5rem;
-  // margin-top: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 20px;
+  gap: 30px;
+  width: 100%;
 }
 
 .card {
