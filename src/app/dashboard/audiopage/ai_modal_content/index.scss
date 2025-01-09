@@ -1,0 +1,39 @@
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  
+    h2 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #1b263b;
+    }
+  
+    .close-icon {
+      cursor: pointer;
+      color: #808080;
+      font-size: 1.5rem;
+    }
+  }
+  
+  .voice-list {
+    margin-top: 1rem;
+  }
+  
+  .voice-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #1b263b;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+  

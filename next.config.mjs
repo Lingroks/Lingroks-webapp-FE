@@ -16,6 +16,14 @@ const nextConfig = {
     config.resolve.alias['@assets'] = path.resolve(__dirname, 'src/assets');
     config.resolve.alias['@utils'] = path.resolve(__dirname, 'src/utils');
 
+    config.module.rules.push({
+      test: /\.(mp3|wav|ogg)$/,
+      type: 'asset/resource', // Use 'asset/resource' to handle audio files
+      generator: {
+        filename: 'static/media/[hash][ext][query]', // Define where to store the audio files
+      },
+    });
+
     return config;
   },
 

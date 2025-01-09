@@ -11,7 +11,7 @@ const AudioPage = () => {
       <div className={style.translate__main__content}>
         <Breadcrumb
           title="Home | Loom"
-          date="29 October 2024"
+          date="2 days ago"
           author="Einstein Namah"
         />
 
@@ -32,14 +32,14 @@ const AudioPage = () => {
 
           <div className={input.input__cointainer}>
             <div className={input.input__wrapper}>
-              <input type="email" name="" id="" />
+              <input type="email" name="" id="" value="johndoe@gmail.com" />
             </div>
             <div>
               <button className={input.input__retrybutton}>retry</button>
             </div>
           </div>
 
-          {/* Buttons */}
+          {/* Bu  ttons */}
           <div className={input.chat__buttons}>
             <div className={input.left__buttons}>
               {/* Dropdown Button 1 */}
@@ -56,7 +56,7 @@ const AudioPage = () => {
                 <button
                   className={`${input.chat__button} ${input.dropdown__button}`}
                 >
-                  Translated
+                  Summary
                 </button>
               </div>
             </div>

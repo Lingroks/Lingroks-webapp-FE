@@ -1,10 +1,20 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
-import style from '../../../assets/scss/pages/translate.module.scss';
-import input from '../../../components/translateInput/tsInput.module.scss';
+import style from '@/assets/scss/pages/translate.module.scss';
+import input from '@/components/translateInput/tsInput.module.scss';
+import Audioplayer from '@/components/audioplayer/index';
+import track1 from '../../../assets/tracks/clarinet-multiphonic-6e-97517-65496.mp3'
+import Modal from '../../../components/modal'
+import ModalContent from './ai_modal_content/index'
 
 const AudioPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <DashboardHeader />
@@ -35,6 +45,8 @@ const AudioPage = () => {
             rerum eaque!
           </textarea>
 
+          <Audioplayer track={track1}  openModal={openModal}/>
+
           {/* Buttons */}
           <div className={input.chat__buttons}>
             <div className={input.left__buttons}>
@@ -62,6 +74,10 @@ const AudioPage = () => {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalContent onClose={closeModal} />
+      </Modal>
     </>
   );
 };
