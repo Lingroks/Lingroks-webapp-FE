@@ -10,26 +10,41 @@ const PersonalInfo = () => {
   return (
     <div>
       <DashboardHeader />
-      <div className="container">
-      <Link href="/"> <a className="back-link">&lt; Back</a></Link>
-      <div className="header">Security Changes</div>
-      <div className="input_group">
-        <label className="label">Old Password</label>
-        <input type="password" className="input" placeholder="johndoe@gmail.com" />
+      <div className={style.container}>
+        <Link href="/">
+          {' '}
+          <a className={style.back_link}>&lt; Back</a>
+        </Link>
+        <div className={style.header}>Security Changes</div>
+        <div className={style.input_group}>
+          <label className={style.label}>Old Password</label>
+          <input
+            type="password"
+            className={style.input}
+            placeholder="johndoe@gmail.com"
+          />
+        </div>
+        <div className={style.input_group}>
+          <label className={style.label}>New Password</label>
+          <input
+            type="password"
+            className={style.input}
+            placeholder="johndoe@gmail.com"
+          />
+        </div>
+        <div className={style.input_group}>
+          <label className={style.label}>Confirm New Password</label>
+          <input
+            type="password"
+            className={style.input}
+            placeholder="johndoe@gmail.com"
+          />
+        </div>
+        <div className={style.button_group}>
+          <button className={`${style.button} ${style.save}`}>Save</button>
+          <button className={`${style.button} ${style.cancel}`}>Cancel</button>
+        </div>
       </div>
-      <div className="input_group">
-        <label className="label">New Password</label>
-        <input type="password" className="input" placeholder="johndoe@gmail.com" />
-      </div>
-      <div className="input_group">
-        <label className="label">Confirm New Password</label>
-        <input type="password" className="input" placeholder="johndoe@gmail.com" />
-      </div>
-      <div className="button-group">
-        <button className="button save">Save</button>
-        <button className="button cancel">Cancel</button>
-      </div>
-    </div>
     </div>
   );
 };
