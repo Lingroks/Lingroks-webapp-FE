@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    font-family: 'Inter';
+
   
     h2 {
       font-size: 1.25rem;
@@ -22,6 +24,7 @@
   }
   
   .voice-item {
+    font-family: 'Inter';
     display: flex;
     align-items: center;
     padding: 0.5rem;
@@ -37,10 +40,14 @@
     }
   }
   
-  .button{
+  .close-button{
     border: none;
     outline: none;
     background-color: #F4F4F4;
     font-size: 14px;
     color: #E33E38;
+    font-weight: 500;
+    font-family: 'Inter';
+    padding: 8px 4px;
+    border-radius: 8px;
   }
