@@ -12,7 +12,7 @@ const PersonalInfo = () => {
       <DashboardHeader />
       <div className={style.container_wrapper}>
         <div className={style.container}>
-          <Link href="/">
+          <Link href="/dashboard">
             {' '}
             <a className={style.back_link}>&lt; Back</a>
           </Link>

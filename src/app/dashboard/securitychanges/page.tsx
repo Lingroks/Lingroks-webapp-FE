@@ -3,7 +3,7 @@
 // Example: Importing and using in Dashboard.tsx
 import React from 'react';
 import DashboardHeader from '@/components/header/dashboard/DasboardHeader';
-import style from '../../assets/scss/pages/Dashboard.module.scss';
+import style from '@/assets/scss/pages/Dashboard.module.scss';
 import Link from 'next/link';
 
 const SecurityChanges = () => {
@@ -11,7 +11,7 @@ const SecurityChanges = () => {
     <div>
       <DashboardHeader />
       <div className={style.container}>
-        <Link href="/">
+        <Link href="/dashboard">
           {' '}
           <a className={style.back_link}>&lt; Back</a>
         </Link>
