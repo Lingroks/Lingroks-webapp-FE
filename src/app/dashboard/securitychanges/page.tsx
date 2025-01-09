@@ -6,7 +6,7 @@ import DashboardHeader from '@/components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import Link from 'next/link';
 
-const PersonalInfo = () => {
+const SecurityChanges = () => {
   return (
     <div>
       <DashboardHeader />
@@ -49,4 +49,4 @@ const PersonalInfo = () => {
   );
 };
 
-export default PersonalInfo;
+export default SecurityChanges;
