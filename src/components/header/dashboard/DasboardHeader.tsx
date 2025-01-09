@@ -66,7 +66,10 @@ const Header = () => {
                 <Link href="/personalinfo">
                   <li className={styles.listitem}>Personal Info</li>
                 </Link>
-                <li className={styles.listitem}>Security Changes</li>
+                <Link href="/securitychanges">
+                  <li className={styles.listitem}>Security Changes</li>
+                </Link>
+
                 {/* <li className={styles.listitem}>Payment</li> */}
                 <li className={styles.listitem}>Terms and Privacy</li>
                 <li className={styles.logout}>Log Out</li>
