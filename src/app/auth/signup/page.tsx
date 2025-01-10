@@ -32,7 +32,7 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await registerUser({ email, password,firstName,lastName });
+      await registerUser({ email, password, firstName, lastName });
       toast.success('Signup successful!');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Signup failed!');
@@ -119,9 +119,18 @@ export default function Signup() {
           </div>
           <div className="flex flex-col w-full">
             <div className="flex flex-wrap gap-2 mb-2">
-              <AuthInstruction text="At least one uppercase letter" />
-              <AuthInstruction text="Minimum of 8 characters" />
-              <AuthInstruction text="At least one number" />
+              <AuthInstruction
+                text="At least one uppercase letter"
+                checked={passwordCriteria.hasUppercase}
+              />
+              <AuthInstruction
+                text="Minimum of 8 characters"
+                checked={passwordCriteria.isLongEnough}
+              />
+              <AuthInstruction
+                text="At least one number"
+                checked={passwordCriteria.hasNumber}
+              />
             </div>
             <p className="text-secondaryGrey text-[.9rem] mb-3">
               By clicking on create account, you are agreeing to our{' '}

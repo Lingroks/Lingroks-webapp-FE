@@ -15,6 +15,7 @@ const AuthInstruction: React.FC<AuthInstructionProps> = ({
         <input
           type="checkbox"
           defaultChecked={checked}
+          readOnly
           className="appearance-none h-5 w-5 border-2 border-[#646464] rounded-md transition-colors checked:border-[#5732E9] checked:bg-[#5732E9]"
         />
       </label>
