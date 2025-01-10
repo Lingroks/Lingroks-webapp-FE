@@ -63,10 +63,10 @@ const Header = () => {
           {dropdownOpen && (
             <div className={styles.user__dropdown}>
               <ul>
-                <Link href="/dashboard/personalinfo">
+                <Link href="/dashboard/personal-info">
                   <li className={styles.listitem}>Personal Info</li>
                 </Link>
-                <Link href="/dashboard/securitychanges">
+                <Link href="/dashboard/security-changes">
                   <li className={styles.listitem}>Security Changes</li>
                 </Link>
 
