@@ -8,12 +8,37 @@ import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
+import { registerUser } from '../../../services/authService';
+import { validatePassword } from '../../../utils/passwordValidation';
+import { toast } from 'react-toastify';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    hasUppercase: false,
+    hasNumber: false,
+    isLongEnough: false,
+  });
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordCriteria(validatePassword(newPassword));
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await registerUser({ email, password,firstName,lastName });
+      toast.success('Signup successful!');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Signup failed!');
+    }
+  };
+
   return (
     <AuthLayout>
       <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
@@ -113,6 +138,7 @@ export default function Signup() {
             <AuthMainBtn
               text="Create Account"
               className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+              onClick={handleSignup}
             />
             <p className="text-center text-black font-inter-regular leading-3">
               Already have an account?
