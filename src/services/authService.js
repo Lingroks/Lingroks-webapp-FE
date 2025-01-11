@@ -14,11 +14,7 @@ const displayToast = (type, message) => {
   }
 };
 
-const setLoadingState = (state) => {
-  isLoading = state;
-};
-
-export const registerUser = async (firstName, lastName, email, password) => {
+export const registerUser = async (firstName, lastName, email, password,navigate) => {
   if (!firstName || !lastName || !email || !password) {
     toast.error('Please fill out all fields');
     return;
@@ -54,8 +50,8 @@ export const registerUser = async (firstName, lastName, email, password) => {
 
     const data = await response.json();
     console.log('Response:', data);
-
     displayToast('success', 'User registered successfully!');
+    navigate('/auth/login');
   } catch (error) {
     displayToast(
       'error',

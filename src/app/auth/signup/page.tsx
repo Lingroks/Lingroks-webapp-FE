@@ -8,9 +8,10 @@ import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
-import { registerUser, getLoadingState } from '../../../services/authService';
+import { registerUser } from '../../../services/authService';
 import { validatePassword } from '../../../utils/passwordValidation';
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
@@ -24,6 +25,7 @@ export default function Signup() {
     hasNumber: false,
     isLongEnough: false,
   });
+  const router = useRouter(); 
 
   const handlePasswordChange = (e) => {
     console.log('nnnnnnnn');
@@ -46,14 +48,11 @@ export default function Signup() {
     console.log('Before setLoading:', loading); // Debug log
     if (loading) return; // Prevent double submissions
     setLoading(true);
-
     try {
-      await registerUser(firstName, lastName, email, password);
-      console.log('User registered successfully');
+      await registerUser(firstName, lastName, email, password,router.push);
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {
-      console.log('Finally block executed');
       setLoading(false);
     }
   };
