@@ -21,12 +21,11 @@ const AuthInstruction: React.FC<AuthInstructionProps> = ({
           // disabled
           id="checked-checkbox"
           checked={checked}
-          // className={`w-4 h-4 border-2 rounded-full transition-colors duration-300 ${
-          //   checked
-          //     ? 'bg-[#5732E9] border-[#5732E9]'
-          //     : 'bg-[#F5F5F5] border-[#646464]'
-          // }`}
-          className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          className={`w-4 h-4 border-2 rounded-full transition-colors duration-300 ${
+            checked
+              ? 'bg-[#5732E9] border-[#5732E9]'
+              : 'bg-[#F5F5F5] border-[#646464]'
+          }`}
         />
       </label>
       <p className="text-[.9rem] text-deepGrey ml-2">{text}</p>

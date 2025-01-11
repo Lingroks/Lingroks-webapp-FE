@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
-import { registerUser, getLoadingState   } from '../../../services/authService';
+import { registerUser, getLoadingState } from '../../../services/authService';
 import { validatePassword } from '../../../utils/passwordValidation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,35 +25,28 @@ export default function Signup() {
     isLongEnough: false,
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLoading(getLoadingState());
-    }, 100); // Polling the loading state every 100ms
-    return () => clearInterval(interval);
-  }, []);
-
-  // const validatePassword = (password: string) => {
-  //   return {
-  //     hasUppercase: /[A-Z]/.test(password),
-  //     hasNumber: /\d/.test(password),
-  //     isLongEnough: password.length >= 8,
-  //   };
-  // };
-
   const handlePasswordChange = (e) => {
-    console.log('nnnnnnnn')
+    console.log('nnnnnnnn');
     const newPassword = e.target.value;
     setPassword(newPassword);
     setPasswordCriteria(validatePassword(newPassword));
   };
 
+  const isFormValid =
+    email &&
+    firstName &&
+    lastName &&
+    passwordCriteria.hasUppercase &&
+    passwordCriteria.hasNumber &&
+    passwordCriteria.isLongEnough;
+
   const handleSignup = async (e) => {
     e.preventDefault();
-  
+
     console.log('Before setLoading:', loading); // Debug log
     if (loading) return; // Prevent double submissions
-    // setLoading(true);
-  
+    setLoading(true);
+
     try {
       await registerUser(firstName, lastName, email, password);
       console.log('User registered successfully');
@@ -61,7 +54,7 @@ export default function Signup() {
       console.error('Registration failed:', error);
     } finally {
       console.log('Finally block executed');
-      // setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -157,7 +150,6 @@ export default function Signup() {
                 text="At least one number"
                 checked={passwordCriteria.hasNumber}
               />
-              
             </div>
             <p className="text-secondaryGrey text-[.9rem] mb-3">
               By clicking on create account, you are agreeing to our{' '}
@@ -173,9 +165,13 @@ export default function Signup() {
           <div className="w-full ">
             <AuthMainBtn
               text={loading ? '...' : 'Create Account'}
-              className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+              className={`w-full border-none rounded-[60px] py-2 px-4 mb-2 ${
+                isFormValid && !loading
+                  ? 'bg-secondaryBlue text-white'
+                  : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+              }`}
               onClick={handleSignup}
-              disabled={loading}
+              disabled={!isFormValid || loading}
             />
             <p className="text-center text-black font-inter-regular leading-3">
               Already have an account?

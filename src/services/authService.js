@@ -14,20 +14,6 @@ const displayToast = (type, message) => {
   }
 };
 
-// Password validation criteria
-export const validatePassword = (password) => {
-  const criteria = {
-    hasUppercase: /[A-Z]/.test(password),
-    hasNumber: /[0-9]/.test(password),
-    minLength: password.length >= 8,
-  };
-  return criteria;
-};
-
-let isLoading = false;
-
-export const getLoadingState = () => isLoading;
-
 const setLoadingState = (state) => {
   isLoading = state;
 };
@@ -46,7 +32,6 @@ export const registerUser = async (firstName, lastName, email, password) => {
   });
 
   try {
-    setLoadingState(true);
     const payload = {
       firstName,
       lastName,
@@ -77,8 +62,6 @@ export const registerUser = async (firstName, lastName, email, password) => {
       error.response?.data?.message || 'Registration failed!'
     );
     throw error;
-  } finally {
-    setLoadingState(false);
   }
 };
 
