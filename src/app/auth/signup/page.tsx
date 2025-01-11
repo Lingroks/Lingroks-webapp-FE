@@ -11,7 +11,7 @@ import AuthInstruction from './AuthInstruction';
 import { registerUser } from '../../../services/authService';
 import { validatePassword } from '../../../utils/passwordValidation';
 import { ToastContainer, toast } from 'react-toastify';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {

@@ -61,14 +61,45 @@ export const registerUser = async (firstName, lastName, email, password,navigate
   }
 };
 
-// Login user
-export const loginUser = async (email, password) => {
-  const response = await axiosInstance.post('/users/tokens', {
-    email,
-    password,
-  });
-  return response.data; // Return the response data for the caller
-};
+// Login User
+export const loginUser = async (email, password, navigate) => {
+    if (!email || !password) {
+      toast.error('Please fill out all fields');
+      return;
+    }
+  
+    try {
+      const payload = {
+        email,
+        password: password.trim(),
+      };
+  
+      const response = await fetch(`${BASE_URL}/users/tokens`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log('Login successful:', data);
+  
+      // Save token or session (if needed)
+      localStorage.setItem('authToken', data.token);
+  
+      // Navigate to dashboard after successful login
+      navigate('/dashboard');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Login failed!');
+      throw error;
+    }
+  };
 
 // Verify user OTP
 export const verifyOTP = async (email, otp) => {
