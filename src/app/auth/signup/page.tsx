@@ -1,29 +1,47 @@
 'use client';
 
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
-import { registerUser } from '../../../services/authService';
+import { registerUser, getLoadingState   } from '../../../services/authService';
 import { validatePassword } from '../../../utils/passwordValidation';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [loading, setLoading] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState({
     hasUppercase: false,
     hasNumber: false,
     isLongEnough: false,
   });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoading(getLoadingState());
+    }, 100); // Polling the loading state every 100ms
+    return () => clearInterval(interval);
+  }, []);
+
+  // const validatePassword = (password: string) => {
+  //   return {
+  //     hasUppercase: /[A-Z]/.test(password),
+  //     hasNumber: /\d/.test(password),
+  //     isLongEnough: password.length >= 8,
+  //   };
+  // };
+
   const handlePasswordChange = (e) => {
+    console.log('nnnnnnnn')
     const newPassword = e.target.value;
     setPassword(newPassword);
     setPasswordCriteria(validatePassword(newPassword));
@@ -31,11 +49,19 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+  
+    console.log('Before setLoading:', loading); // Debug log
+    if (loading) return; // Prevent double submissions
+    // setLoading(true);
+  
     try {
-      await registerUser({ email, password, firstName, lastName });
-      toast.success('Signup successful!');
+      await registerUser(firstName, lastName, email, password);
+      console.log('User registered successfully');
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Signup failed!');
+      console.error('Registration failed:', error);
+    } finally {
+      console.log('Finally block executed');
+      // setLoading(false); 
     }
   };
 
@@ -113,8 +139,8 @@ export default function Signup() {
               value={password}
               required={true}
               forgotPassword={false}
-              onChange={(e) => setPassword(e.target.value)}
               className="mb-6"
+              onChange={handlePasswordChange}
             />
           </div>
           <div className="flex flex-col w-full">
@@ -131,6 +157,7 @@ export default function Signup() {
                 text="At least one number"
                 checked={passwordCriteria.hasNumber}
               />
+              
             </div>
             <p className="text-secondaryGrey text-[.9rem] mb-3">
               By clicking on create account, you are agreeing to our{' '}
@@ -145,9 +172,10 @@ export default function Signup() {
           </div>
           <div className="w-full ">
             <AuthMainBtn
-              text="Create Account"
+              text={loading ? '...' : 'Create Account'}
               className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
               onClick={handleSignup}
+              disabled={loading}
             />
             <p className="text-center text-black font-inter-regular leading-3">
               Already have an account?
@@ -158,6 +186,9 @@ export default function Signup() {
           </div>
         </form>
       </div>
+      <ToastContainer
+        toastClassName="text-sm font-inter-regular" // Custom toast class
+      />
     </AuthLayout>
   );
 }
