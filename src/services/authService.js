@@ -126,20 +126,65 @@ export const loginUser = async (email, password, navigate) => {
 
 // Request password reset
 export const requestPasswordReset = async (email) => {
-  const response = await axiosInstance.post('/users/request-pwd-reset', {
-    email,
-  });
-  return response.data;
+  if (!email) {
+    toast.error('Please provide an email address');
+    return;
+  }
+
+  try {
+    const payload = { email };
+    // const response = await axiosInstance.post(`${BASE_URL}/request-pwd-reset`, payload);
+    const response = await fetch(`${BASE_URL}/request-pwd-reset`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (response.data.success) {
+      displayToast('success', response.data.message);
+    } else {
+      displayToast('error', 'Failed to send password reset token');
+    }
+  } catch (error) {
+    displayToast('error', error.response?.data?.message || 'Failed to request password reset');
+    throw error;
+  }
 };
 
-// Reset password
-export const resetPassword = async (email, otp, password) => {
-  const response = await axiosInstance.post('/users/reset-pwd', {
-    email,
-    otp,
-    password,
-  });
-  return response.data;
+// Reset password with OTP
+export const resetPassword = async (email, password, otp) => {
+  if (!email || !password || !otp) {
+    toast.error('Please fill out all fields');
+    return;
+  }
+
+  try {
+    const payload = {
+      email,
+      password,
+      otp,
+    };
+
+    // const response = await axiosInstance.post(`${BASE_URL}/reset-pwd`, payload);
+    const response = await fetch(`${BASE_URL}/reset-pwd`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (response.data.success) {
+      displayToast('success', response.data.message);
+    } else {
+      displayToast('error', 'Failed to reset password');
+    }
+  } catch (error) {
+    displayToast('error', error.response?.data?.message || 'Password reset failed');
+    throw error;
+  }
 };
 
 // Example protected route usage
