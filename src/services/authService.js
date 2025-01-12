@@ -193,6 +193,15 @@ export const resetPassword = async (email, password, otp) => {
   }
 };
 
+// Logout User
+export const logoutUser = (navigate) => {
+  // Clear the authentication token from localStorage (or sessionStorage if you are using that)
+  localStorage.removeItem('authToken');
+  displayToast('success', 'Successfully logged out');
+  // Redirect to the login page (or home page)
+  navigate('/auth/login');
+};
+
 // Example protected route usage
 export const accessProtectedRoute = async () => {
   const response = await axiosInstance.post('/users/protected');

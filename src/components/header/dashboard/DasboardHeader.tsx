@@ -4,12 +4,19 @@ import { useState } from 'react';
 import styles from './header.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
+import { logoutUser } from '../../../services/authService';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const router = useRouter();
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    logoutUser(router.push);
   };
 
   return (
@@ -72,7 +79,9 @@ const Header = () => {
 
                 {/* <li className={styles.listitem}>Payment</li> */}
                 <li className={styles.listitem}>Terms and Privacy</li>
-                <li className={styles.logout}>Log Out</li>
+                <li onClick={handleLogout} className={styles.logout}>
+                  Log Out
+                </li>
               </ul>
             </div>
           )}
