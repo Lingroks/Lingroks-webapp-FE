@@ -181,6 +181,7 @@ export const resetPassword = async (email, password, otp) => {
     });
     if (response.data.success) {
       displayToast('success', response.data.message);
+      navigate('/reset-successful');
     } else {
       displayToast('error', 'Failed to reset password');
     }
