@@ -14,7 +14,13 @@ const displayToast = (type, message) => {
   }
 };
 
-export const registerUser = async (firstName, lastName, email, password,navigate) => {
+export const registerUser = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  navigate
+) => {
   if (!firstName || !lastName || !email || !password) {
     toast.error('Please fill out all fields');
     return;
@@ -45,13 +51,35 @@ export const registerUser = async (firstName, lastName, email, password,navigate
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorData = await response.json();
+      toast.error(errorData.message || 'Registration failed!');
+      return;
     }
 
     const data = await response.json();
     console.log('Response:', data);
+
+    // Trigger OTP sending and navigate to verification page
+    const otpResponse = await fetch(`${BASE_URL}/users/verify-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!otpResponse.ok) {
+      const errorData = await otpResponse.json();
+      toast.error(errorData.message || 'Failed to send OTP!');
+      // Navigate to login instead of verify page
+      navigate('/auth/login');
+      return;
+    }
+
     displayToast('success', 'User registered successfully!');
-    navigate('/auth/login');
+    // navigate('/auth/login');
+    navigate(`/auth/verify-email`, { state: { email } });
   } catch (error) {
     displayToast(
       'error',
@@ -63,43 +91,43 @@ export const registerUser = async (firstName, lastName, email, password,navigate
 
 // Login User
 export const loginUser = async (email, password, navigate) => {
-    if (!email || !password) {
-      toast.error('Please fill out all fields');
-      return;
+  if (!email || !password) {
+    toast.error('Please fill out all fields');
+    return;
+  }
+
+  try {
+    const payload = {
+      email,
+      password: password.trim(),
+    };
+
+    const response = await fetch(`${BASE_URL}/users/tokens`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  
-    try {
-      const payload = {
-        email,
-        password: password.trim(),
-      };
-  
-      const response = await fetch(`${BASE_URL}/users/tokens`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      console.log('Login successful:', data);
-  
-      // Save token or session (if needed)
-      localStorage.setItem('authToken', data.token);
-  
-      // Navigate to dashboard after successful login
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed!');
-      throw error;
-    }
-  };
+
+    const data = await response.json();
+    console.log('Login successful:', data);
+
+    // Save token or session (if needed)
+    localStorage.setItem('authToken', data.token);
+
+    // Navigate to dashboard after successful login
+    navigate('/dashboard');
+  } catch (error) {
+    toast.error(error.response?.data?.message || 'Login failed!');
+    throw error;
+  }
+};
 
 // Verify user OTP
 export const verifyOTP = async (email, otp) => {
