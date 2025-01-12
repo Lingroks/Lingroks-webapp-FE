@@ -115,14 +115,14 @@ export const loginUser = async (email, password, navigate) => {
   }
 };
 
-// Verify user OTP
-export const verifyOTP = async (email, otp) => {
-  const response = await axiosInstance.post('/users/verify-email', {
-    email,
-    otp,
-  });
-  return response.data;
-};
+// // Verify user OTP
+// export const verifyOTP = async (email, otp) => {
+//   const response = await axiosInstance.post('/users/verify-email', {
+//     email,
+//     otp,
+//   });
+//   return response.data;
+// };
 
 // Request password reset
 export const requestPasswordReset = async (email) => {

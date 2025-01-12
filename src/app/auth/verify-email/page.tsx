@@ -74,7 +74,7 @@ const VerifyEmail: React.FC = () => {
         <SetOtpInput value={otp} onChange={handleOtpChange} />
         <AuthMainBtn
           text="Verify"
-          className="w-full border-none mb-[20px] bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mt-4"
+          className="w-full border-none mb-4 bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mt-4"
           onClick={handleVerifyOtp}
         />
         <button
