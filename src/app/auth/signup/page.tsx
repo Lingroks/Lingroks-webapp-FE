@@ -182,7 +182,7 @@ export default function Signup() {
         </form>
       </div>
       <ToastContainer
-        toastClassName="text-sm font-inter-regular" // Custom toast class
+        toastClassName="text-sm font-inter-regular" 
       />
     </AuthLayout>
   );
