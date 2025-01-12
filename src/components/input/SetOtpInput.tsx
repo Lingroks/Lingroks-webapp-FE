@@ -46,7 +46,7 @@ const SetOtpInput: React.FC<SetOtpInputProps> = ({ value, onChange }) => {
 
     return(
         <div className="flex space-x-2">
-            {Array(4).fill('').map((_, index) => (
+            {Array(5).fill('').map((_, index) => (
                 <input
                 key={index}
                 type="text"
