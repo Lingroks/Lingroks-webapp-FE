@@ -60,26 +60,12 @@ export const registerUser = async (
     console.log('Response:', data);
 
     // Trigger OTP sending and navigate to verification page
-    const otpResponse = await fetch(`${BASE_URL}/users/verify-email`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (!otpResponse.ok) {
-      const errorData = await otpResponse.json();
-      toast.error(errorData.message || 'Failed to send OTP!');
-      // Navigate to login instead of verify page
-      navigate('/auth/login');
-      return;
-    }
 
     displayToast('success', 'User registered successfully!');
     // navigate('/auth/login');
-    navigate(`/auth/verify-email`, { state: { email } });
+    // navigate(`/auth/verify-email`, { state: { email } });
+    navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
+
   } catch (error) {
     displayToast(
       'error',
