@@ -56,7 +56,7 @@ const VerifyEmail: React.FC = () => {
       }
 
       toast.success('Email verified successfully!');
-      router.push('/auth/success');
+      router.push('/auth/verify-mail-success');
     } catch (error: any) {
       toast.error(error.message || 'An unexpected error occurred!');
     }

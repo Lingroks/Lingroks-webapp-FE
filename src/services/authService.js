@@ -65,7 +65,6 @@ export const registerUser = async (
     // navigate('/auth/login');
     // navigate(`/auth/verify-email`, { state: { email } });
     navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
-
   } catch (error) {
     displayToast(
       'error',
@@ -125,7 +124,7 @@ export const loginUser = async (email, password, navigate) => {
 // };
 
 // Request password reset
-export const requestPasswordReset = async (email) => {
+export const requestPasswordReset = async (email, navigate) => {
   if (!email) {
     toast.error('Please provide an email address');
     return;
@@ -144,11 +143,15 @@ export const requestPasswordReset = async (email) => {
     });
     if (response.data.success) {
       displayToast('success', response.data.message);
+      navigate('/verify-password');
     } else {
       displayToast('error', 'Failed to send password reset token');
     }
   } catch (error) {
-    displayToast('error', error.response?.data?.message || 'Failed to request password reset');
+    displayToast(
+      'error',
+      error.response?.data?.message || 'Failed to request password reset'
+    );
     throw error;
   }
 };
@@ -182,7 +185,10 @@ export const resetPassword = async (email, password, otp) => {
       displayToast('error', 'Failed to reset password');
     }
   } catch (error) {
-    displayToast('error', error.response?.data?.message || 'Password reset failed');
+    displayToast(
+      'error',
+      error.response?.data?.message || 'Password reset failed'
+    );
     throw error;
   }
 };
