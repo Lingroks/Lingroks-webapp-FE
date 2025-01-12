@@ -1,12 +1,23 @@
 "use client"
 
 // Example: Importing and using in Dashboard.tsx
-import React from 'react';
+import React, {useEffect} from 'react';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import TranslateInput from '../../components/translateInput/index';
+import { useRouter } from 'next/navigation';
+
 
 const Dashboard = () => {
+  const router = useRouter(); 
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      router.push('/auth/login');
+    }
+  }, [router]);
+
   const cardData = [
     {
       headText: 'Lorem ipsum dolor sit amet consectetur.',
