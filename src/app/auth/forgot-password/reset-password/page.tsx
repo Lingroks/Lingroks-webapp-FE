@@ -28,9 +28,9 @@ const ResetPassword: React.FC = () => {
           className="flex flex-col items-start justify-start w-full"
         >
           <AuthInputBox
-            label="Password"
+            label="Email"
             type="email"
-            placeholder="Your Password"
+            placeholder="Your Email"
             value={email}
             id="password"
             required={true}
@@ -41,9 +41,9 @@ const ResetPassword: React.FC = () => {
             className="mb-6 text-secondaryGrey"
           />
           <AuthInputBox
-            label="Confirm Password"
+            label="One time Password(OTP)"
             type="text"
-            placeholder="Confirm your password"
+            placeholder=""
             id="password"
             value={otp}
             required={true}
@@ -52,9 +52,9 @@ const ResetPassword: React.FC = () => {
             className="mb-6"
           />
           <AuthInputBox
-            label="Confirm Password"
+            label="New Password"
             type="password"
-            placeholder="Confirm your password"
+            placeholder="......."
             id="password"
             value={password}
             required={true}
