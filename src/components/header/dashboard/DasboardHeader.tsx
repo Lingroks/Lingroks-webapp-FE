@@ -6,11 +6,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { logoutUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
-import { useUser } from '../contexts/UserContext';
+import { useUser } from '../../../context/UserContext';
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
+  const { user } = useUser();
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -56,7 +57,7 @@ const Header = () => {
               className=""
             />
           </div>
-          <span className={styles.user__name}>Username</span>
+          <span className={styles.user__name}>{user?.firstName || '?'}</span>
           <div className={styles.user__icon}>
             <Image
               src="/down.svg"
