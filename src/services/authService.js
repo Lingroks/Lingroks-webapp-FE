@@ -75,7 +75,7 @@ export const registerUser = async (
 };
 
 // Login User
-export const loginUser = async (email, password, navigate) => {
+export const loginUser = async (email, password, navigate,updateUser) => {
   if (!email || !password) {
     toast.error('Please fill out all fields');
     return;
@@ -105,6 +105,9 @@ export const loginUser = async (email, password, navigate) => {
 
     // Save token or session (if needed)
     localStorage.setItem('authToken', data.token);
+
+      // Update the user context
+      updateUser(data.user);
 
     // Navigate to dashboard after successful login
     navigate('/dashboard');

@@ -8,12 +8,14 @@ import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import { loginUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
+import { useUser } from '../../../context/UserContext';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { updateUser } = useUser();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const Login: React.FC = () => {
     if (loading) return; // Prevent double submissions
     setLoading(true);
     try {
-      await loginUser(email, password, router.push);
+      await loginUser(email, password, router.push, updateUser);
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
