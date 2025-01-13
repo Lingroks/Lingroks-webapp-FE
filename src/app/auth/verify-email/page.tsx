@@ -80,7 +80,7 @@ const VerifyEmail: React.FC = () => {
         <button
           className="w-full border-none bg-gray-200 text-secondaryGrey rounded-[60px] py-2 px-4 text-center"
           onClick={() => {
-            console.log('Skip OTP verification');
+            router.push('/auth/login');
           }}
         >
           Skip
