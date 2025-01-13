@@ -17,7 +17,7 @@ const SetOtpInput: React.FC<SetOtpInputProps> = ({ value, onChange }) => {
             const newOtp = [...value];
             newOtp[index] = digit;
             onChange(newOtp.join(''));
-            if (index < 3) {
+            if (index < 4) {
                 inputs.current[index + 1]?.focus();
             }
         }
@@ -39,7 +39,7 @@ const SetOtpInput: React.FC<SetOtpInputProps> = ({ value, onChange }) => {
     const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>): void => {
         e.preventDefault();
         const paste = e.clipboardData.getData('text');
-        if (paste.length === 4) {
+        if (paste.length === 5) {
             onChange(paste);
         }
     }

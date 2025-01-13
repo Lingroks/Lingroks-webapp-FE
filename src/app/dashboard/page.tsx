@@ -6,6 +6,8 @@ import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import TranslateInput from '../../components/translateInput/index';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const Dashboard = () => {
@@ -73,6 +75,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        toastClassName="text-sm font-inter-regular" 
+      />
     </div>
   );
 };

@@ -9,6 +9,8 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import { loginUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
 import { useUser } from '../../../context/UserContext';
+import { ToastContainer } from 'react-toastify';
+
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -108,6 +110,9 @@ const Login: React.FC = () => {
           </form>
         </div>
       </AuthLayout>
+      <ToastContainer
+        toastClassName="text-sm font-inter-regular" 
+      />
     </>
   );
 };

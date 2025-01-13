@@ -3,11 +3,17 @@
 import React, { useState } from 'react';
 import style from './tsInput.module.scss';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
+import translateService from '../../services/translateService';
+import { useRouter } from 'next/router';
 
 const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2
   const [selectedOption1, setSelectedOption1] = useState('Translate');
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const [selectedOption2, setSelectedOption2] = useState({
     text: 'ENG',
@@ -27,6 +33,33 @@ const TranslateInput = () => {
     { text: 'ENG', icon: <UsaFlagIcon /> },
   ];
 
+  const handleButtonClick = async () => {
+    try {
+      setIsLoading(true);
+      let result;
+
+      if (selectedOption1 === 'Audio') {
+        // Perform text-to-speech if Audio is selected
+        result = await translateService.generateSpeech(textInput);
+        toast.success('Text to speech conversion successful!');
+        // Navigate to the AudioPage and pass the fileDownloadUrl
+        router.push({
+          pathname: '/dashboard/audiopage',
+          query: { track: result }, // Pass the audio result via query
+        });
+      } else if (selectedOption1 === 'Translate') {
+        // Perform text-to-text translation if Translate is selected
+        result = await translateService.generateTranslatedText(textInput);
+        toast.success('Translation successful!');
+        // You can add the translated text display here or handle it accordingly
+      }
+    } catch (error) {
+      toast.error(error.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
       <div className={style.chat__input__container}>
@@ -34,6 +67,7 @@ const TranslateInput = () => {
         <textarea
           className={style.chat__textarea}
           placeholder="Enter your text or link here"
+          onChange={(e) => setTextInput(e.target.value)}
         ></textarea>
 
         {/* Buttons */}
@@ -125,8 +159,12 @@ const TranslateInput = () => {
               )}
             </div>
           </div>
-          <button className={`${style.chat__button} ${style.submit__button}`}>
-            Proceed
+          <button
+            className={`${style.chat__button} ${style.submit__button}`}
+            onClick={handleButtonClick} // Trigger action on button click
+            disabled={isLoading || !textInput}
+          >
+            {isLoading ? 'Processing...' : 'Proceed'}
           </button>
         </div>
       </div>
