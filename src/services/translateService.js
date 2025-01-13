@@ -18,16 +18,22 @@ const translateService = {
       toast.error('Authentication token is missing.');
     }
 
-    const response = await axios.post(
-      `${API_BASE_URL}/`,
-      { text },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data.response;
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/`,
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success('Text translated successfully!');
+      return response.data.response;
+    } catch (error) {
+      toast.error('Error in translation.');
+      throw error;
+    }
   },
 
   async translateUrlPageContent(url, targetLanguage) {
@@ -52,18 +58,22 @@ const translateService = {
     if (!token) {
       toast.error('Authentication token is missing.');
     }
-
-    const response = await axios.post(
-      `${API_BASE_URL}/speech`,
-      { text },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    toast.success("Text translated successfully!");
-    return response.data.fileDownloadUrl;
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/speech`,
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success('Audio generated successfully!');
+      return response.data.fileDownloadUrl;
+    } catch (error) {
+      toast.error('Error in generating audio.');
+      throw error;
+    }
   },
 };
 
