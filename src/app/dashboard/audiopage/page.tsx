@@ -1,20 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '@/assets/scss/pages/translate.module.scss';
 import input from '@/components/translateInput/tsInput.module.scss';
 import Audioplayer from '@/components/audioplayer/index';
-import track1 from '../../../assets/tracks/clarinet-multiphonic-6e-97517-65496.mp3'
+// import track1 from '../../../assets/tracks/clarinet-multiphonic-6e-97517-65496.mp3'
 import Modal from '../../../components/modal'
+import { ToastContainer } from 'react-toastify';
 import ModalContent from './ai_modal_content/index'
+
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const AudioPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const searchParams = useSearchParams();
+  const [isLoaded, setIsLoaded] = useState(false); 
+  const router = useRouter();
+  const track = searchParams.get('track');
+  const textInput = searchParams.get('textInput');
+
+  useEffect(() => {
+    // Check if 'track' and 'textInput' are available
+    if (!track || !textInput) {
+      router.push("/dashboard"); 
+    } else {
+      setIsLoaded(true); 
+    }
+  }, [track, textInput]);
+
   return (
     <>
       <DashboardHeader />
@@ -30,22 +47,13 @@ const AudioPage = () => {
           <textarea
             className={input.translated}
             placeholder="Enter your text or link here"
+            value={textInput || ''}  // Set textarea value to the 'textInput'
+            readOnly
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-            voluptate facilis commodi, quis hic maxime unde esse velit atque,
-            necessitatibus fugit, eos harum consequuntur itaque natus accusamus
-            reiciendis ducimus amet tempora obcaecati nam ipsum neque eligendi.
-            Officia doloremque repudiandae odit, cum dignissimos ad perspiciatis
-            architecto? Dolor minima ipsa nisi quasi alias, adipisci maiores
-            maxime animi similique commodi neque deleniti suscipit odio
-            praesentium accusamus, laborum amet deserunt cum quam in aperiam. Ab
-            fugiat dolor, culpa incidunt iste sint dicta consequuntur quidem
-            architecto esse nobis facilis fuga sunt adipisci recusandae natus
-            officiis sed molestiae porro? Omnis, culpa cumque. Vitae minima
-            rerum eaque!
+          
           </textarea>
 
-          <Audioplayer track={track1}  openModal={openModal}/>
+          <Audioplayer track="track"  openModal={openModal}/>
 
           {/* Buttons */}
           <div className={input.chat__buttons}>
@@ -78,6 +86,8 @@ const AudioPage = () => {
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalContent onClose={closeModal} />
       </Modal>
+
+      <ToastContainer/>
     </>
   );
 };

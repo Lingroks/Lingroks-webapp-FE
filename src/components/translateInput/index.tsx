@@ -5,7 +5,9 @@ import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2
@@ -36,22 +38,24 @@ const TranslateInput = () => {
   const handleButtonClick = async () => {
     try {
       setIsLoading(true);
-      let result;
-
+  
       if (selectedOption1 === 'Audio') {
-        // Perform text-to-speech if Audio is selected
-        result = await translateService.generateSpeech(textInput);
-        toast.success('Text to speech conversion successful!');
-        // Navigate to the AudioPage and pass the fileDownloadUrl
-        router.push({
-          pathname: '/dashboard/audiopage',
-          query: { track: result }, // Pass the audio result via query
-        });
+        // Generate speech and get the file URL
+        const result = await translateService.generateSpeech(textInput);
+  
+        if (!result) {
+          // throw new Error('Audio generation failed.');
+          toast.error('Audio generation failed')
+        }
+  
+        toast.success('Text-to-speech conversion successful!');
+        // Navigate with the generated audio file URL
+        router.push(`/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`);
       } else if (selectedOption1 === 'Translate') {
         // Perform text-to-text translation if Translate is selected
-        result = await translateService.generateTranslatedText(textInput);
+        const result = await translateService.generateTranslatedText(textInput);
         toast.success('Translation successful!');
-        // You can add the translated text display here or handle it accordingly
+        // Handle the translated text here
       }
     } catch (error) {
       toast.error(error.message || 'An error occurred');
@@ -59,6 +63,7 @@ const TranslateInput = () => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div>

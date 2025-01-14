@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const API_BASE_URL = 'http://localhost:8000/v1//translate'; // Adjust based on your backend proxy configuration
+const API_BASE_URL = 'http://localhost:8000/v1/translate'; // Adjust based on your backend proxy configuration
 
 // Fetch auth token from localStorage
 const getAuthToken = () => {
@@ -69,6 +69,7 @@ const translateService = {
         }
       );
       toast.success('Audio generated successfully!');
+
       return response.data.fileDownloadUrl;
     } catch (error) {
       toast.error('Error in generating audio.');
