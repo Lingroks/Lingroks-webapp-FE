@@ -25,7 +25,7 @@ const ResetPassword: React.FC = () => {
     const isLongEnough = password.length > 8;
 
     if (!hasUpperCase || !hasNumber || !isLongEnough) {
-      console.log('everrrrrrrrrryyyyyyyyyy')
+      console.log('everrrrrrrrrryyyyyyyyyy');
       return 'Password must contain at least 1 uppercase letter, 1 number, and be longer than 8 characters.';
     }
     return '';
@@ -48,7 +48,9 @@ const ResetPassword: React.FC = () => {
     }
 
     if (passwordError) {
-      toast.error('Fix the password issues before submitting. Password may not be strong enough');
+      toast.error(
+        'Fix the password issues before submitting. Password may not be strong enough'
+      );
       return;
     }
 
@@ -116,6 +118,9 @@ const ResetPassword: React.FC = () => {
             onChange={handlePasswordChange}
             className="mb-6"
           />
+          {passwordError && (
+            <p className="text-red-500 text-sm mb-6">{passwordError}</p>
+          )}
 
           <div className="w-full ">
             <AuthMainBtn
