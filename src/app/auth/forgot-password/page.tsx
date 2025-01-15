@@ -44,7 +44,7 @@ const ForgotPassword: React.FC = () => {
         <h1 className="text-black text-[2rem] font-inter-medium mb-1">
           Forgot Password?
         </h1>
-        <p className="text-secondaryGrey mb-6 text-[1rem]">dilev22873@nalwan.com
+        <p className="text-secondaryGrey mb-6 text-[1rem]">
           Enter your email for instructions
         </p>
         <form action="" className="w-full">

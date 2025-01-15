@@ -161,7 +161,7 @@ export const requestPasswordReset = async (email, navigate) => {
 };
 
 // Reset password with OTP
-export const resetPassword = async (email, password, otp) => {
+export const resetPassword = async (email, password, otp,navigate) => {
   if (!email || !password || !otp) {
     toast.error('Please fill out all fields');
     return;
