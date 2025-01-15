@@ -80,7 +80,135 @@ interface AudioPlayerProps {
   openModal: () => void;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
+// const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
+//   const [isPlaying, setIsPlaying] = useState(false);
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [loadFailed, setLoadFailed] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState('');
+//   const waveSurferRef = useRef<WaveSurfer | null>(null);
+//   const waveformContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (!track) return;
+
+//     const controller = new AbortController();
+//     const signal = controller.signal;
+
+//     const fetchAudio = async () => {
+//       try {
+//         const response = await fetch(track, { signal });
+//         if (!response.ok) throw new Error(`Failed to fetch audio file ${track}`);
+
+//         const blob = await response.blob();
+//         const audioUrl = URL.createObjectURL(blob);
+
+//         // Initialize WaveSurfer with the fetched audio
+//         if (waveformContainerRef.current) {
+//           setIsLoaded(false); // Set loading state initially
+//           setLoadFailed(false); // Reset error state
+//           setErrorMessage('');
+//           waveSurferRef.current = WaveSurfer.create({
+//             container: waveformContainerRef.current,
+//             waveColor: '#D3D3D3',
+//             progressColor: '#6A5ACD',
+//             height: 70,
+//             cursorWidth: 1,
+//             cursorColor: 'lightgray',
+//             barWidth: 2,
+//             normalize: true,
+//             fillParent: true,
+//           });
+
+//           waveSurferRef.current.on('error', (error) => {
+//             console.error('WaveSurfer error:', error.message);
+//             setIsLoaded(false);
+//             setLoadFailed(true);
+//             setErrorMessage(error.message || 'Failed to load audio file.');
+//             toast.error(`Error: ${error.message}`, {});
+//           });
+
+//           waveSurferRef.current.load(audioUrl);
+
+//           waveSurferRef.current.on('ready', () => {
+//             setIsLoaded(true);
+//             setLoadFailed(false);
+//           });
+//         }
+//       } catch (error) {
+//         if (signal.aborted) {
+//           console.log('Fetch aborted');
+//         } else {
+//           console.error('Fetch error:', error.message);
+//           setLoadFailed(true);
+//           setErrorMessage(error.message || 'Failed to fetch audio file.');
+//           toast.error(`Error: ${error.message}`);
+//         }
+//       }
+//     };
+
+//     fetchAudio();
+
+//     return () => {
+//       controller.abort(); // Abort fetch request
+//       waveSurferRef.current?.destroy(); // Clean up WaveSurfer
+//     };
+//   }, [track]);
+
+//   const togglePlay = () => {
+//     if (waveSurferRef.current && isLoaded) {
+//       waveSurferRef.current.playPause();
+//       setIsPlaying(!isPlaying);
+//     }
+//   };
+
+//   return (
+//     // <div className="audio-player-container">
+//     //   <div ref={waveformContainerRef} className="waveform"></div>
+//     //   {!isLoaded && <p>Loading audio...</p>}
+//     //   <div className="controls">
+//     //     <FaUser className="icon" />
+//     //     <FaBackward className="icon" />
+//     //     <button
+//     //       className="play-button"
+//     //       onClick={togglePlay}
+//     //       disabled={!isLoaded}
+//     //     >
+//     //       {isPlaying ? <FaPause /> : <FaPlay />}
+//     //     </button>
+//     //     <FaForward className="icon" />
+//     //     <FaUser className="icon" onClick={openModal} />
+//     //   </div>
+//     // </div>
+//     <div className="audio-player-container">
+//       <ToastContainer />
+//       {!isLoaded && !loadFailed && <p>Loading audio...</p>}
+//       {loadFailed && (
+//         <p className="error-message">
+//           {errorMessage || 'An unknown error occurred while loading the audio.'}
+//         </p>
+//       )}
+//       <div ref={waveformContainerRef} className="waveform"></div>
+//       <div className="controls">
+//         {isLoaded && !loadFailed && (
+//           <>
+//             <FaUser className="icon" />
+//             <FaBackward className="icon" />
+//             <button className="play-button" onClick={togglePlay}>
+//               {isPlaying ? <FaPause /> : <FaPlay />}
+//             </button>
+//             <FaForward className="icon" />
+//             <FaUser className="icon" onClick={openModal} />
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AudioPlayer;
+
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
+  const hardcodedTrack = "https://mithilaartstorage.blob.core.windows.net/audio-files/azure-audio-1736901927053.wav";
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -89,23 +217,22 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
   const waveformContainerRef = useRef(null);
 
   useEffect(() => {
-    if (!track) return;
+    if (!hardcodedTrack) return;
 
     const controller = new AbortController();
     const signal = controller.signal;
 
     const fetchAudio = async () => {
       try {
-        const response = await fetch(track, { signal });
-        if (!response.ok) throw new Error(`Failed to fetch audio file ${track}`);
+        const response = await fetch(hardcodedTrack, { signal });
+        if (!response.ok) throw new Error(`Failed to fetch audio file ${hardcodedTrack}`);
 
         const blob = await response.blob();
         const audioUrl = URL.createObjectURL(blob);
 
-        // Initialize WaveSurfer with the fetched audio
         if (waveformContainerRef.current) {
-          setIsLoaded(false); // Set loading state initially
-          setLoadFailed(false); // Reset error state
+          setIsLoaded(false);
+          setLoadFailed(false);
           setErrorMessage('');
           waveSurferRef.current = WaveSurfer.create({
             container: waveformContainerRef.current,
@@ -124,7 +251,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             setIsLoaded(false);
             setLoadFailed(true);
             setErrorMessage(error.message || 'Failed to load audio file.');
-            toast.error(`Error: ${error.message}`, {});
           });
 
           waveSurferRef.current.load(audioUrl);
@@ -141,7 +267,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
           console.error('Fetch error:', error.message);
           setLoadFailed(true);
           setErrorMessage(error.message || 'Failed to fetch audio file.');
-          toast.error(`Error: ${error.message}`);
         }
       }
     };
@@ -149,10 +274,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
     fetchAudio();
 
     return () => {
-      controller.abort(); // Abort fetch request
-      waveSurferRef.current?.destroy(); // Clean up WaveSurfer
+      controller.abort();
+      waveSurferRef.current?.destroy();
     };
-  }, [track]);
+  }, [hardcodedTrack]);
 
   const togglePlay = () => {
     if (waveSurferRef.current && isLoaded) {
@@ -162,23 +287,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
   };
 
   return (
-    // <div className="audio-player-container">
-    //   <div ref={waveformContainerRef} className="waveform"></div>
-    //   {!isLoaded && <p>Loading audio...</p>}
-    //   <div className="controls">
-    //     <FaUser className="icon" />
-    //     <FaBackward className="icon" />
-    //     <button
-    //       className="play-button"
-    //       onClick={togglePlay}
-    //       disabled={!isLoaded}
-    //     >
-    //       {isPlaying ? <FaPause /> : <FaPlay />}
-    //     </button>
-    //     <FaForward className="icon" />
-    //     <FaUser className="icon" onClick={openModal} />
-    //   </div>
-    // </div>
     <div className="audio-player-container">
       <ToastContainer />
       {!isLoaded && !loadFailed && <p>Loading audio...</p>}
@@ -206,3 +314,4 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
 };
 
 export default AudioPlayer;
+

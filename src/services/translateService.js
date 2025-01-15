@@ -26,6 +26,7 @@ const translateService = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,
         }
       );
       toast.success('Text translated successfully!');
@@ -47,6 +48,7 @@ const translateService = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        withCredentials: true,
       }
     );
     return response.data.response;
@@ -66,6 +68,7 @@ const translateService = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          // withCredentials: true,
         }
       );
       toast.success('Audio generated successfully!');

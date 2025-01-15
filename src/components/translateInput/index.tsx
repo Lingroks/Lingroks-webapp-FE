@@ -45,11 +45,10 @@ const TranslateInput = () => {
         const result = await translateService.generateSpeech(textInput);
   
         if (!result) {
-          // throw new Error('Audio generation failed.');
           toast.error('Audio generation failed')
         }
-  
         toast.success('Text-to-speech conversion successful!');
+        setTextInput('')
         // Navigate with the generated audio file URL
         router.push(`/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`);
       } else if (selectedOption1 === 'Translate') {
@@ -66,7 +65,7 @@ const TranslateInput = () => {
             return;
         }
         toast.success('Text summary generated successfully!');
-        // Push to the summary page with the summary text as a query parameter
+        setTextInput('')
         router.push(`/dashboard/summarypage?summary=${encodeURIComponent(summary)}`);
     }
     } catch (error) {
