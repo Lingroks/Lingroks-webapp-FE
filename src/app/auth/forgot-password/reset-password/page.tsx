@@ -119,7 +119,7 @@ const ResetPassword: React.FC = () => {
             className="mb-6"
           />
           {passwordError && (
-            <p className="text-red-500 text-sm mb-6">{passwordError}</p>
+            <p className="text-red-600 text-sm mb-6">{passwordError}</p>
           )}
 
           <div className="w-full ">
