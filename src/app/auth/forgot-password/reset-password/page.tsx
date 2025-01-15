@@ -3,14 +3,39 @@ import AuthInputBox from '@/components/input/AuthInputBox';
 import React, { useState } from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
+import { useRouter } from 'next/navigation';
+import { resetPassword } from '../../../../services/authService';
 // import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   //   const [confirmPassword, setConfirmPassword] = React.useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !otp || !password) {
+      toast.error('Please fill out all fields');
+      return;
+    }
+    try {
+      setIsLoading(true);
+      await resetPassword(email, password, otp);
+      router.push('/reset-successful'); // Navigate to success page
+    } catch (error) {
+      console.log(error)
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AuthLayout>
       <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
@@ -26,6 +51,7 @@ const ResetPassword: React.FC = () => {
         <form
           action=""
           className="flex flex-col items-start justify-start w-full"
+          onSubmit={handleSubmit}
         >
           <AuthInputBox
             label="Email"
@@ -65,12 +91,14 @@ const ResetPassword: React.FC = () => {
 
           <div className="w-full ">
             <AuthMainBtn
-              text="Set new password"
+              text={isLoading ? 'Setting Password...' : 'Set new password'}
               className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+              disabled={isLoading}
             />
           </div>
         </form>
       </div>
+      <ToastContainer />
     </AuthLayout>
   );
 };

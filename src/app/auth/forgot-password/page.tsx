@@ -10,6 +10,7 @@ import { requestPasswordReset } from '../../../services/authService.js';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 
+
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +44,7 @@ const ForgotPassword: React.FC = () => {
         <h1 className="text-black text-[2rem] font-inter-medium mb-1">
           Forgot Password?
         </h1>
-        <p className="text-secondaryGrey mb-6 text-[1rem]">
+        <p className="text-secondaryGrey mb-6 text-[1rem]">dilev22873@nalwan.com
           Enter your email for instructions
         </p>
         <form action="" className="w-full">
@@ -61,7 +62,7 @@ const ForgotPassword: React.FC = () => {
             }
           />
           <AuthMainBtn
-            text="Send 4-digit code"
+            text="Send 5-digit code"
             className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
             onClick={handleSubmit}
             disabled={isLoading}
