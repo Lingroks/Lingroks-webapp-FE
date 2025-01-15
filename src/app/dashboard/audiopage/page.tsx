@@ -77,7 +77,7 @@ const AudioPage = () => {
               </div>
             </div>
             <button className={`${input.chat__button} ${input.submit__button}`}>
-              Share
+              Copy
             </button>
           </div>
         </div>

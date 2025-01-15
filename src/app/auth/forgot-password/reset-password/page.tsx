@@ -5,6 +5,7 @@ import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import { useRouter } from 'next/navigation';
 import { resetPassword } from '../../../../services/authService';
+// import { validatePassword } from '@/utils/passwordValidation';
 // import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,9 +14,30 @@ const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [password, setPassword] = React.useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   //   const [confirmPassword, setConfirmPassword] = React.useState('');
+
+  const validatePassword = (password: string) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isLongEnough = password.length > 8;
+
+    if (!hasUpperCase || !hasNumber || !isLongEnough) {
+      console.log('everrrrrrrrrryyyyyyyyyy')
+      return 'Password must contain at least 1 uppercase letter, 1 number, and be longer than 8 characters.';
+    }
+    return '';
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+
+    const errorMessage = validatePassword(newPassword);
+    setPasswordError(errorMessage);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +46,18 @@ const ResetPassword: React.FC = () => {
       toast.error('Please fill out all fields');
       return;
     }
+
+    if (passwordError) {
+      toast.error('Fix the password issues before submitting. Password may not be strong enough');
+      return;
+    }
+
     try {
       setIsLoading(true);
       await resetPassword(email, password, otp, router.push);
-      // router.push('/reset-successful'); 
+      // router.push('/reset-successful');
     } catch (error) {
-      console.log(error)
+      console.log(error);
       // toast.error('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -85,7 +113,7 @@ const ResetPassword: React.FC = () => {
             value={password}
             required={true}
             forgotPassword={false}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             className="mb-6"
           />
 
