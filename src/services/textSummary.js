@@ -18,16 +18,6 @@ export const generateTextSummary = async (text) => {
     throw new Error('Text is required for summarization');
   }
 
-  // try {
-  //     const response = await axios.post('/generate/text-summary', { text });
-  //     return response.data.response; // Assuming the response contains a `response` field
-  // } catch (error) {
-  //     if (error.response && error.response.data && error.response.data.message) {
-  //         throw new Error(error.response.data.message);
-  //     }
-  //     throw new Error('Failed to generate text summary');
-  // }
-
   const token = getAuthToken();
   if (!token) throw new Error('Authentication token is missing.');
   if (!token) {

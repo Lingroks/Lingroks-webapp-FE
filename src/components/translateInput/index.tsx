@@ -5,7 +5,7 @@ import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
-import generateTextSummary from '../../services/textSummary'
+import {generateTextSummary} from '../../services/textSummary'
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
