@@ -1,6 +1,6 @@
 'use client'
 
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -10,6 +10,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 const AudioPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isLoaded, setIsLoaded] = useState(false); 
   const summary = searchParams.get('summary');
 
 
