@@ -5,6 +5,7 @@ import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
+import generateTextSummary from '../../services/textSummary'
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -56,7 +57,18 @@ const TranslateInput = () => {
         const result = await translateService.generateTranslatedText(textInput);
         toast.success('Translation successful!');
         // Handle the translated text here
-      }
+      } else if (selectedOption1 === 'Summary') {
+        // Call the generateTextSummary function
+        const summary = await generateTextSummary(textInput);
+
+        if (!summary) {
+            toast.error('Text summarization failed');
+            return;
+        }
+        toast.success('Text summary generated successfully!');
+        // Push to the summary page with the summary text as a query parameter
+        router.push(`/dashboard/summarypage?summary=${encodeURIComponent(summary)}`);
+    }
     } catch (error) {
       toast.error(error.message || 'An error occurred');
     } finally {
