@@ -13,6 +13,7 @@ const getAuthToken = () => {
 const detectLanguageService = {
   async detectLanguage(text) {
     const token = getAuthToken();
+    console.log('Auth Token detectttttt:', token);
     if (!token) {
       toast.error('Authentication token is missing.');
       throw new Error('Authentication token is missing.');
@@ -38,3 +39,4 @@ const detectLanguageService = {
 };
 
 export default detectLanguageService;
+
