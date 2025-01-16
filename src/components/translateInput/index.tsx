@@ -62,9 +62,13 @@ const TranslateInput = () => {
         );
       } else if (selectedOption1 === 'Translate') {
         // Perform text-to-text translation if Translate is selected
-        const result = await translateService.generateTranslatedText(textInput, selectedOption2.text); // Pass selected language here
-        console.log(result);
+        const translatedText = await translateService.generateTranslatedText(textInput, selectedOption2.text); // Pass selected language here
+        console.log(translatedText);
         toast.success('Translation successful!');
+        setTextInput('');
+        router.push(
+          `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
+        );
         // Handle the translated text here
       } else if (selectedOption1 === 'Summary') {
         // Call the generateTextSummary function
