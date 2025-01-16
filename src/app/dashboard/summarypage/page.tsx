@@ -10,10 +10,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
 
 const AudioPage = () => {
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const summary = searchParams.get('summary');
+
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [isLoaded, setIsLoaded] = useState(false);
-  const summary = searchParams.get('summary');
+  const [summary, setSummary] = useState('');
+
+  useEffect(() => {
+    // Retrieve state from router
+    const state = router.state || {};
+
+    if (!state.summary) {
+      // Redirect if summary is not available
+      router.push('/dashboard');
+    } else {
+      setSummary(state.summary);
+      setIsLoaded(true);
+    }
+  }, [router]);
 
   const handleCopy = (text) => {
     if (!text) {
@@ -24,14 +41,14 @@ const AudioPage = () => {
     copyToClipboard(text);
   };
 
-  useEffect(() => {
-    // Check if 'track' and 'textInput' are available
-    if (!summary) {
-      router.push('/dashboard');
-    } else {
-      setIsLoaded(true);
-    }
-  }, [summary]);
+  // useEffect(() => {
+  //   // Check if 'track' and 'textInput' are available
+  //   if (!summary) {
+  //     router.push('/dashboard');
+  //   } else {
+  //     setIsLoaded(true);
+  //   }
+  // }, [summary]);
 
   return (
     <>

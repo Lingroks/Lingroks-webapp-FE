@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
 import { generateTextSummary } from '../../services/textSummary';
 import { useRouter } from 'next/navigation';
+import { isValidUrl } from '../../utils/urlChecker';
 import 'react-toastify/dist/ReactToastify.css';
 
 const TranslateInput = () => {
@@ -19,7 +20,6 @@ const TranslateInput = () => {
 
   const [selectedOption2, setSelectedOption2] = useState({
     text: 'ENGLISH',
-   
   });
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
@@ -61,15 +61,31 @@ const TranslateInput = () => {
           `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
         );
       } else if (selectedOption1 === 'Translate') {
-        // Perform text-to-text translation if Translate is selected
-        const translatedText = await translateService.generateTranslatedText(textInput, selectedOption2.text); // Pass selected language here
-        console.log(translatedText);
-        toast.success('Translation successful!');
-        setTextInput('');
-        router.push(
-          `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
-        );
-        // Handle the translated text here
+        if (isValidUrl(textInput)) {
+          // Handle URL translation
+          const translatedContent =
+            await translateService.translateUrlPageContent(
+              textInput,
+              selectedOption2.text
+            );
+          toast.success('Web page translation successful!');
+          router.push(
+            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedContent)}`
+          );
+        } else {
+          // Perform text-to-text translation if Translate is selected
+          const translatedText = await translateService.generateTranslatedText(
+            textInput,
+            selectedOption2.text
+          ); // Pass selected language here
+          console.log(translatedText);
+          toast.success('Translation successful!');
+          setTextInput('');
+          router.push(
+            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
+          );
+          // Handle the translated text here
+        }
       } else if (selectedOption1 === 'Summary') {
         // Call the generateTextSummary function
         const summary = await generateTextSummary(textInput);
