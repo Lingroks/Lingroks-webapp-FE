@@ -4,7 +4,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import detectLanguageService from './detectService';
 
-
 const API_BASE_URL = 'http://localhost:8000/v1/translate'; // Adjust based on your backend proxy configuration
 
 // Fetch auth token from localStorage
@@ -13,7 +12,6 @@ const getAuthToken = () => {
 };
 
 const translateService = {
-
   async generateTranslatedText(text, targetLanguage) {
     const token = getAuthToken();
     if (!token) {
@@ -31,8 +29,8 @@ const translateService = {
 
       // Step 2: Proceed to translation
       const response = await axios.post(
-        `${API_BASE_URL}/`,  
-        { text, targetLanguage },  
+        `${API_BASE_URL}/`,
+        { text, targetLanguage },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,32 +38,35 @@ const translateService = {
         }
       );
       toast.success('Text translated successfully!');
-      console.log(response.data.response)
-      return response.data.response[targetLanguage]
-      // return response.data
-      // return response.data.response[targetLanguage];  // Adjust based on the API response structure
+      console.log(response.data.response);
+      return response.data.response[targetLanguage];
     } catch (error) {
       toast.error('Error in translation.');
       throw error;
     }
   },
 
-
   async translateUrlPageContent(url, targetLanguage) {
     const token = getAuthToken();
     if (!token) throw new Error('Authentication token is missing.');
 
-    const response = await axios.post(
-      `${API_BASE_URL}/url`,
-      { url, targetLanguage },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-    return response.data.response;
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/url`,
+        { url, targetLanguage },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success('Page translated successfully!');
+      console.log(response.data.response);
+      return response.data.response;
+    } catch (error) {
+      toast.error('Error in translation.');
+      throw error;
+    }
   },
 
   async generateSpeech(text) {
