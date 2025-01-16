@@ -3,14 +3,69 @@ import AuthInputBox from '@/components/input/AuthInputBox';
 import React, { useState } from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
+import { useRouter } from 'next/navigation';
+import { resetPassword } from '../../../../services/authService';
+// import { validatePassword } from '@/utils/passwordValidation';
 // import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [password, setPassword] = React.useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   //   const [confirmPassword, setConfirmPassword] = React.useState('');
+
+  const validatePassword = (password: string) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isLongEnough = password.length > 8;
+
+    if (!hasUpperCase || !hasNumber || !isLongEnough) {
+      console.log('everrrrrrrrrryyyyyyyyyy');
+      return 'Password must contain at least 1 uppercase letter, 1 number, and be longer than 8 characters.';
+    }
+    return '';
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+
+    const errorMessage = validatePassword(newPassword);
+    setPasswordError(errorMessage);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !otp || !password) {
+      toast.error('Please fill out all fields');
+      return;
+    }
+
+    if (passwordError) {
+      toast.error(
+        'Fix the password issues before submitting. Password may not be strong enough'
+      );
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await resetPassword(email, password, otp, router.push);
+      // router.push('/reset-successful');
+    } catch (error) {
+      console.log(error);
+      // toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AuthLayout>
       <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
@@ -26,6 +81,7 @@ const ResetPassword: React.FC = () => {
         <form
           action=""
           className="flex flex-col items-start justify-start w-full"
+          onSubmit={handleSubmit}
         >
           <AuthInputBox
             label="Email"
@@ -59,18 +115,23 @@ const ResetPassword: React.FC = () => {
             value={password}
             required={true}
             forgotPassword={false}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             className="mb-6"
           />
+          {passwordError && (
+            <p className="text-red-600 text-sm mb-6">{passwordError}</p>
+          )}
 
           <div className="w-full ">
             <AuthMainBtn
-              text="Set new password"
+              text={isLoading ? 'Setting Password...' : 'Set new password'}
               className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+              disabled={isLoading}
             />
           </div>
         </form>
       </div>
+      <ToastContainer />
     </AuthLayout>
   );
 };

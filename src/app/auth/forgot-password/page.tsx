@@ -8,15 +8,31 @@ import AuthInput from '@/components/input/AuthInputBox';
 import ForgotPasswordPic from './ForgotPasswordPic';
 import { requestPasswordReset } from '../../../services/authService.js';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await requestPasswordReset(email, router.push);
+
+    if (!email) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    try {
+      setIsLoading(true);
+      await requestPasswordReset(email, router.push);
+    } catch (error) {
+      console.log(error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -46,12 +62,15 @@ const ForgotPassword: React.FC = () => {
             }
           />
           <AuthMainBtn
-            text="Send 4-digit code"
+            text="Send 5-digit code"
             className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
             onClick={handleSubmit}
+            disabled={isLoading}
           />
         </form>
       </div>
+
+      <ToastContainer />
     </AuthLayout>
   );
 };

@@ -58,9 +58,6 @@ export const registerUser = async (
 
     const data = await response.json();
     console.log('Response:', data);
-
-    // Trigger OTP sending and navigate to verification page
-
     displayToast('success', 'User registered successfully!');
     // navigate('/auth/login');
     // navigate(`/auth/verify-email`, { state: { email } });
@@ -75,7 +72,7 @@ export const registerUser = async (
 };
 
 // Login User
-export const loginUser = async (email, password, navigate,updateUser) => {
+export const loginUser = async (email, password, navigate, updateUser) => {
   if (!email || !password) {
     toast.error('Please fill out all fields');
     return;
@@ -106,8 +103,8 @@ export const loginUser = async (email, password, navigate,updateUser) => {
     // Save token or session (if needed)
     localStorage.setItem('authToken', data.token);
 
-      // Update the user context
-      updateUser(data.user);
+    // Update the user context
+    updateUser(data.user);
 
     // Navigate to dashboard after successful login
     navigate('/dashboard');
@@ -136,7 +133,7 @@ export const requestPasswordReset = async (email, navigate) => {
   try {
     const payload = { email };
     // const response = await axiosInstance.post(`${BASE_URL}/request-pwd-reset`, payload);
-    const response = await fetch(`${BASE_URL}/request-pwd-reset`, {
+    const response = await fetch(`${BASE_URL}/users/request-pwd-reset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -144,9 +141,13 @@ export const requestPasswordReset = async (email, navigate) => {
       },
       body: JSON.stringify(payload),
     });
-    if (response.data.success) {
-      displayToast('success', response.data.message);
-      navigate('/verify-password');
+    // Parse the JSON body
+    const data = await response.json();
+
+    // Check if success is true
+    if (data.success) {
+      displayToast('success', data.message);
+      navigate('/auth/forgot-password/reset-password');
     } else {
       displayToast('error', 'Failed to send password reset token');
     }
@@ -160,7 +161,7 @@ export const requestPasswordReset = async (email, navigate) => {
 };
 
 // Reset password with OTP
-export const resetPassword = async (email, password, otp) => {
+export const resetPassword = async (email, password, otp,navigate) => {
   if (!email || !password || !otp) {
     toast.error('Please fill out all fields');
     return;
@@ -174,7 +175,7 @@ export const resetPassword = async (email, password, otp) => {
     };
 
     // const response = await axiosInstance.post(`${BASE_URL}/reset-pwd`, payload);
-    const response = await fetch(`${BASE_URL}/reset-pwd`, {
+    const response = await fetch(`${BASE_URL}/users/reset-pwd`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -182,9 +183,12 @@ export const resetPassword = async (email, password, otp) => {
       },
       body: JSON.stringify(payload),
     });
-    if (response.data.success) {
-      displayToast('success', response.data.message);
-      navigate('/reset-successful');
+
+    const data = await response.json();
+
+    if (data.success) {
+      displayToast('success', data.message);
+      navigate('/auth/forgot-password/reset-successful');
     } else {
       displayToast('error', 'Failed to reset password');
     }
