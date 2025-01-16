@@ -26,7 +26,6 @@ const detectLanguageService = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        //   withCredentials: true,
         }
       );
       toast.success('Language detected successfully!');

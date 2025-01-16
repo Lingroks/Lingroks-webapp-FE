@@ -36,11 +36,11 @@ const TranslateInput = () => {
     // { text: 'French', icon: <FranceFlagIcon /> },
     // { text: 'Mandarin', icon: <MandarinFlagIcon /> },
     // { text: 'Spanish', icon: <SpainFlagIcon /> },
-    { text: 'ARABIC' },
-    { text: 'ENGLISH' },
-    { text: 'FRENCH' },
-    { text: 'MANDARIN' },
-    { text: 'SPANISH' },
+    { text: 'Arabic' },
+    { text: 'English' },
+    { text: 'French' },
+    { text: 'Mandarin' },
+    { text: 'Spanish' },
   ];
 
   const handleButtonClick = async () => {
@@ -62,7 +62,7 @@ const TranslateInput = () => {
         );
       } else if (selectedOption1 === 'Translate') {
         // Perform text-to-text translation if Translate is selected
-        const result = await translateService.generateTranslatedText(textInput);
+        const result = await translateService.generateTranslatedText(textInput, selectedOption2.text); // Pass selected language here
         console.log(result);
         toast.success('Translation successful!');
         // Handle the translated text here

@@ -13,6 +13,7 @@ const getAuthToken = () => {
 };
 
 const translateService = {
+
   async generateTranslatedText(text, targetLanguage) {
     const token = getAuthToken();
     if (!token) {
@@ -30,8 +31,8 @@ const translateService = {
 
       // Step 2: Proceed to translation
       const response = await axios.post(
-        `${API_BASE_URL}/translate`,  // Adjust to your translation endpoint
-        { text, targetLanguage },  // Pass the target language to the API
+        `${API_BASE_URL}/`,  
+        { text, targetLanguage },  
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,12 +40,16 @@ const translateService = {
         }
       );
       toast.success('Text translated successfully!');
-      return response.data.response[targetLanguage];  // Adjust based on the API response structure
+      console.log(response.data.response)
+      return response.data.response[targetLanguage]
+      // return response.data
+      // return response.data.response[targetLanguage];  // Adjust based on the API response structure
     } catch (error) {
       toast.error('Error in translation.');
       throw error;
     }
   },
+
 
   async translateUrlPageContent(url, targetLanguage) {
     const token = getAuthToken();
