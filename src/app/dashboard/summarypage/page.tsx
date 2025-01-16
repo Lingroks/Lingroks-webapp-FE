@@ -7,6 +7,7 @@ import style from '../../../assets/scss/pages/translate.module.scss';
 import input from '../../../components/translateInput/tsInput.module.scss';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
+import { copyToClipboard } from '../../../utils/copyToClipboard';
 
 const AudioPage = () => {
   const router = useRouter();
@@ -20,15 +21,7 @@ const AudioPage = () => {
       return;
     }
 
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        toast.success('Text copied to clipboard!');
-      })
-      .catch((err) => {
-        console.error('Failed to copy text:', err);
-        toast.error('Failed to copy text. Try again.');
-      });
+    copyToClipboard(text);
   };
 
   useEffect(() => {

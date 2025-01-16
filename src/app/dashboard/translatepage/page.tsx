@@ -1,10 +1,38 @@
-import React from 'react';
+'use client'
+
+import React, { useState, useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
 import input from '../../../components/translateInput/tsInput.module.scss';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import { copyToClipboard } from '../../../utils/copyToClipboard';
 
 const TranslatePage = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const translatedText = searchParams.get('translatedText');
+
+  const handleCopy = (text) => {
+    if (!text) {
+      toast.error('No text to copy!');
+      return;
+    }
+
+    copyToClipboard(text);
+  };
+
+  useEffect(() => {
+    // Check if 'track' and 'textInput' are available
+    if (!translatedText) {
+      router.push('/dashboard');
+    } else {
+      setIsLoaded(true);
+    }
+  }, [translatedText]);
+
   return (
     <>
       <DashboardHeader />
@@ -20,20 +48,9 @@ const TranslatePage = () => {
           <textarea
             className={input.translated}
             placeholder="Enter your text or link here"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-            voluptate facilis commodi, quis hic maxime unde esse velit atque,
-            necessitatibus fugit, eos harum consequuntur itaque natus accusamus
-            reiciendis ducimus amet tempora obcaecati nam ipsum neque eligendi.
-            Officia doloremque repudiandae odit, cum dignissimos ad perspiciatis
-            architecto? Dolor minima ipsa nisi quasi alias, adipisci maiores
-            maxime animi similique commodi neque deleniti suscipit odio
-            praesentium accusamus, laborum amet deserunt cum quam in aperiam. Ab
-            fugiat dolor, culpa incidunt iste sint dicta consequuntur quidem
-            architecto esse nobis facilis fuga sunt adipisci recusandae natus
-            officiis sed molestiae porro? Omnis, culpa cumque. Vitae minima
-            rerum eaque!
-          </textarea>
+            value={translatedText || ''}
+            readOnly
+          />
 
           {/* Buttons */}
           <div className={input.chat__buttons}>
@@ -56,12 +73,16 @@ const TranslatePage = () => {
                 </button>
               </div>
             </div>
-            <button className={`${input.chat__button} ${input.submit__button}`}>
-              Share
+            <button
+              onClick={() => handleCopy(translatedText)}
+              className={`${input.chat__button} ${input.submit__button}`}
+            >
+              Copy
             </button>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
