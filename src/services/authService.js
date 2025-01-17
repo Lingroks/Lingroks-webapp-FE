@@ -5,6 +5,10 @@ import { toast } from 'react-toastify';
 
 const BASE_URL = 'http://localhost:8000/v1';
 
+// Create an Axios instance
+
+
+
 // Function to display toast messages
 const displayToast = (type, message) => {
   if (type === 'success') {
@@ -49,6 +53,8 @@ export const registerUser = async (
       },
       body: JSON.stringify(payload),
     });
+
+    // const response = await axiosInstance.post('/users', payload);
 
     if (!response.ok) {
       const errorData = await response.json();

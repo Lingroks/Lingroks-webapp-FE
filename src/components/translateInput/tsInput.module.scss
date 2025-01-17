@@ -20,6 +20,10 @@
   font-size: 16px;
   font-weight: 500;
   color: #646464;
+  min-height: 60px; 
+  max-height: 200px;
+  overflow-y: auto; 
+ 
 }
 
 .translated {

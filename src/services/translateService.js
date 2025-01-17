@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import detectLanguageService from './detectService';
 
 const API_BASE_URL = 'http://localhost:8000/v1/translate'; // Adjust based on your backend proxy configuration
 
@@ -11,26 +12,34 @@ const getAuthToken = () => {
 };
 
 const translateService = {
-  async generateTranslatedText(text) {
+  async generateTranslatedText(text, targetLanguage) {
     const token = getAuthToken();
-    if (!token) throw new Error('Authentication token is missing.');
     if (!token) {
       toast.error('Authentication token is missing.');
+      throw new Error('Authentication token is missing.');
     }
 
     try {
+      // Step 1: Detect language
+      const detectedLanguage = await detectLanguageService.detectLanguage(text);
+      if (!detectedLanguage || detectedLanguage.error) {
+        toast.error('Error in language detection.');
+        throw new Error('Language detection failed.');
+      }
+
+      // Step 2: Proceed to translation
       const response = await axios.post(
         `${API_BASE_URL}/`,
-        { text },
+        { text, targetLanguage },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          withCredentials: true,
         }
       );
       toast.success('Text translated successfully!');
-      return response.data.response;
+      console.log(response.data.response);
+      return response.data.response[targetLanguage];
     } catch (error) {
       toast.error('Error in translation.');
       throw error;
@@ -41,17 +50,23 @@ const translateService = {
     const token = getAuthToken();
     if (!token) throw new Error('Authentication token is missing.');
 
-    const response = await axios.post(
-      `${API_BASE_URL}/url`,
-      { url, targetLanguage },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-    return response.data.response;
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/url`,
+        { url, targetLanguage },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success('Page translated successfully!');
+      console.log(response.data.response);
+      return response.data.response;
+    } catch (error) {
+      toast.error('Error in translation.');
+      throw error;
+    }
   },
 
   async generateSpeech(text) {

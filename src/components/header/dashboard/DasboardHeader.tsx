@@ -26,7 +26,7 @@ const Header = () => {
       <div className={styles.header}>
         {/* Logo */}
         <div className={styles.logo}>
-          <Link href="/">
+          <Link href="/dashboard">
             <Image
               src="/Lingroks.svg"
               alt="Logo"
@@ -79,7 +79,7 @@ const Header = () => {
                   <li className={styles.listitem}>Security Changes</li>
                 </Link>
 
-                {/* <li className={styles.listitem}>Payment</li> */}
+                <li className={styles.listitem}>Payment</li>
                 <li className={styles.listitem}>Terms and Privacy</li>
                 <li onClick={handleLogout} className={styles.logout}>
                   Log Out
