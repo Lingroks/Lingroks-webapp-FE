@@ -3,15 +3,23 @@
 import React, { useState } from 'react';
 import style from './tsInput.module.scss';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
+import translateService from '../../services/translateService';
+import { generateTextSummary } from '../../services/textSummary';
+import { useRouter } from 'next/navigation';
+import { isValidUrl } from '../../utils/urlChecker';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2
   const [selectedOption1, setSelectedOption1] = useState('Translate');
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const [selectedOption2, setSelectedOption2] = useState({
-    text: 'ENG',
-    icon: <EnglandFlagIcon />,
+    text: 'ENGLISH',
   });
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
@@ -23,9 +31,81 @@ const TranslateInput = () => {
   ];
 
   const button2Options = [
-    { text: 'ENG', icon: <EnglandFlagIcon /> },
-    { text: 'ENG', icon: <UsaFlagIcon /> },
+    // { text: 'Arabic', icon: <ArabicFlagIcon /> },
+    // { text: 'English', icon: <UsaFlagIcon /> },
+    // { text: 'French', icon: <FranceFlagIcon /> },
+    // { text: 'Mandarin', icon: <MandarinFlagIcon /> },
+    // { text: 'Spanish', icon: <SpainFlagIcon /> },
+    { text: 'Arabic' },
+    { text: 'English' },
+    { text: 'French' },
+    { text: 'Mandarin' },
+    { text: 'Spanish' },
   ];
+
+  const handleButtonClick = async () => {
+    try {
+      setIsLoading(true);
+
+      if (selectedOption1 === 'Audio') {
+        // Generate speech and get the file URL
+        const result = await translateService.generateSpeech(textInput);
+
+        if (!result) {
+          toast.error('Audio generation failed');
+        }
+        toast.success('Text-to-speech conversion successful!');
+        setTextInput('');
+        // Navigate with the generated audio file URL
+        router.push(
+          `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
+        );
+      } else if (selectedOption1 === 'Translate') {
+        if (isValidUrl(textInput)) {
+          // Handle URL translation
+          const translatedContent =
+            await translateService.translateUrlPageContent(
+              textInput,
+              selectedOption2.text
+            );
+          toast.success('Web page translation successful!');
+          router.push(
+            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedContent)}`
+          );
+        } else {
+          // Perform text-to-text translation if Translate is selected
+          const translatedText = await translateService.generateTranslatedText(
+            textInput,
+            selectedOption2.text
+          ); // Pass selected language here
+          console.log(translatedText);
+          toast.success('Translation successful!');
+          setTextInput('');
+          router.push(
+            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
+          );
+          // Handle the translated text here
+        }
+      } else if (selectedOption1 === 'Summary') {
+        // Call the generateTextSummary function
+        const summary = await generateTextSummary(textInput);
+
+        if (!summary) {
+          toast.error('Text summarization failed');
+          return;
+        }
+        toast.success('Text summary generated successfully!');
+        setTextInput('');
+        router.push(
+          `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
+        );
+      }
+    } catch (error) {
+      toast.error(error.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -34,6 +114,7 @@ const TranslateInput = () => {
         <textarea
           className={style.chat__textarea}
           placeholder="Enter your text or link here"
+          onChange={(e) => setTextInput(e.target.value)}
         ></textarea>
 
         {/* Buttons */}
@@ -54,13 +135,7 @@ const TranslateInput = () => {
                 </span>
                 {selectedOption1}
                 <div>
-                  <Image
-                    src="/down.svg"
-                    alt="down"
-                    width={10}
-                    height={10}
-                    className=""
-                  />
+                  <Image src="/down.svg" alt="down" width={10} height={10} />
                 </div>
               </button>
               {dropdownOpen1 && (
@@ -84,49 +159,50 @@ const TranslateInput = () => {
               )}
             </div>
 
-            {/* Dropdown Button 2 */}
-            <div className={style.dropdown}>
-              <button
-                className={`${style.chat__button} ${style.dropdown__button}`}
-                onClick={() => setDropdownOpen2(!dropdownOpen2)}
-              >
-                <span className={style.dropdown__icon}>
-                  {selectedOption2.icon}
-                </span>
-                {selectedOption2.text}
-                <div>
-                  <Image
-                    src="/down.svg"
-                    alt="down"
-                    width={10}
-                    height={10}
-                    className=""
-                  />
-                </div>
-              </button>
-              {dropdownOpen2 && (
-                <ul className={style.dropdown__menu}>
-                  {button2Options.map((option) => (
-                    <li
-                      key={option.text}
-                      className={style.dropdown__item}
-                      onClick={() => {
-                        setSelectedOption2(option);
-                        setDropdownOpen2(false);
-                      }}
-                    >
-                      <span className={style.dropdown__icon}>
-                        {option.icon}
-                      </span>
-                      {option.text}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            {/* Dropdown Button 2 (Only displayed when 'Translate' is selected) */}
+            {selectedOption1 === 'Translate' && (
+              <div className={style.dropdown}>
+                <button
+                  className={`${style.chat__button} ${style.dropdown__button}`}
+                  onClick={() => setDropdownOpen2(!dropdownOpen2)}
+                >
+                  {/* <span className={style.dropdown__icon}>
+                    {selectedOption2.icon}
+                  </span> */}
+                  {selectedOption2.text}
+                  <div>
+                    <Image src="/down.svg" alt="down" width={10} height={10} />
+                  </div>
+                </button>
+                {dropdownOpen2 && (
+                  <ul className={style.dropdown__menu}>
+                    {button2Options.map((option) => (
+                      <li
+                        key={option.text}
+                        className={style.dropdown__item}
+                        onClick={() => {
+                          setSelectedOption2(option);
+                          setDropdownOpen2(false);
+                        }}
+                      >
+                        <span className={style.dropdown__icon}>
+                          {option.icon}
+                        </span>
+                        {option.text}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
-          <button className={`${style.chat__button} ${style.submit__button}`}>
-            Proceed
+
+          <button
+            className={`${style.chat__button} ${style.submit__button}`}
+            onClick={handleButtonClick} // Trigger action on button click
+            disabled={isLoading || !textInput}
+          >
+            {isLoading ? 'Processing...' : 'Proceed'}
           </button>
         </div>
       </div>

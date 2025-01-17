@@ -1,19 +1,62 @@
 'use client';
 
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
+import { registerUser } from '../../../services/authService';
+import { validatePassword } from '../../../utils/passwordValidation';
+import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    hasUppercase: false,
+    hasNumber: false,
+    isLongEnough: false,
+  });
+  const router = useRouter(); 
+
+  const handlePasswordChange = (e) => {
+    console.log('nnnnnnnn');
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordCriteria(validatePassword(newPassword));
+  };
+
+  const isFormValid =
+    email &&
+    firstName &&
+    lastName &&
+    passwordCriteria.hasUppercase &&
+    passwordCriteria.hasNumber &&
+    passwordCriteria.isLongEnough;
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    console.log('Before setLoading:', loading); // Debug log
+    if (loading) return; // Prevent double submissions
+    setLoading(true);
+    try {
+      await registerUser(firstName, lastName, email, password,router.push);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthLayout>
       <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
@@ -88,15 +131,24 @@ export default function Signup() {
               value={password}
               required={true}
               forgotPassword={false}
-              onChange={(e) => setPassword(e.target.value)}
               className="mb-6"
+              onChange={handlePasswordChange}
             />
           </div>
           <div className="flex flex-col w-full">
             <div className="flex flex-wrap gap-2 mb-2">
-              <AuthInstruction text="At least one uppercase letter" />
-              <AuthInstruction text="Minimum of 8 characters" />
-              <AuthInstruction text="At least one number" />
+              <AuthInstruction
+                text="At least one uppercase letter"
+                checked={passwordCriteria.hasUppercase}
+              />
+              <AuthInstruction
+                text="Minimum of 8 characters"
+                checked={passwordCriteria.isLongEnough}
+              />
+              <AuthInstruction
+                text="At least one number"
+                checked={passwordCriteria.hasNumber}
+              />
             </div>
             <p className="text-secondaryGrey text-[.9rem] mb-3">
               By clicking on create account, you are agreeing to our{' '}
@@ -111,8 +163,14 @@ export default function Signup() {
           </div>
           <div className="w-full ">
             <AuthMainBtn
-              text="Create Account"
-              className="w-full border-none bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mb-2"
+              text={loading ? '...' : 'Create Account'}
+              className={`w-full border-none rounded-[60px] py-2 px-4 mb-2 ${
+                isFormValid && !loading
+                  ? 'bg-secondaryBlue text-white'
+                  : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+              }`}
+              onClick={handleSignup}
+              disabled={!isFormValid || loading}
             />
             <p className="text-center text-black font-inter-regular leading-3">
               Already have an account?
@@ -123,6 +181,9 @@ export default function Signup() {
           </div>
         </form>
       </div>
+      <ToastContainer
+        toastClassName="text-sm font-inter-regular" 
+      />
     </AuthLayout>
   );
 }

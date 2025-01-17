@@ -34,7 +34,7 @@ const VerifyPassword: React.FC = () => {
                     Enter your code
                 </h1>
                 <p className='text-secondaryGrey mb-6 text-[1rem]'>
-                   We just sent a 4-digit code to your email
+                   We just sent a 5-digit code to your email
                 </p>
                 <form action='' className='flex flex-col items-center justify-start w-full'>
                     <SetOtpInput 

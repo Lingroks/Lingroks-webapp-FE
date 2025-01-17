@@ -1,10 +1,55 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
 import input from '../../../components/translateInput/tsInput.module.scss';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import { copyToClipboard } from '../../../utils/copyToClipboard';
 
 const AudioPage = () => {
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const summary = searchParams.get('summary');
+
+  const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [summary, setSummary] = useState('');
+
+  useEffect(() => {
+    // Retrieve state from router
+    const state = router.state || {};
+
+    if (!state.summary) {
+      // Redirect if summary is not available
+      router.push('/dashboard');
+    } else {
+      setSummary(state.summary);
+      setIsLoaded(true);
+    }
+  }, [router]);
+
+  const handleCopy = (text) => {
+    if (!text) {
+      toast.error('No text to copy!');
+      return;
+    }
+
+    copyToClipboard(text);
+  };
+
+  // useEffect(() => {
+  //   // Check if 'track' and 'textInput' are available
+  //   if (!summary) {
+  //     router.push('/dashboard');
+  //   } else {
+  //     setIsLoaded(true);
+  //   }
+  // }, [summary]);
+
   return (
     <>
       <DashboardHeader />
@@ -20,15 +65,9 @@ const AudioPage = () => {
           <textarea
             className={input.translated}
             placeholder="Enter your text or link here"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-            voluptate facilis commodi, quis hic maxime unde esse velit atque,
-            necessitatibus fugit, eos harum consequuntur itaque natus accusamus
-            reiciendis ducimus amet tempora obcaecati nam ipsum neque eligendi.
-            Officia doloremque repudiandae odit, cum dignissimos ad perspiciatis
-            architecto? Dolor minima ipsa nisi quasi alias, adipisci maiores
-            maxime animi similique commodi neque deleniti suscipit odio
-          </textarea>
+            value={summary || ''} // Set textarea value to the 'textInput'
+            readOnly
+          />
 
           <div className={input.input__cointainer}>
             <div className={input.input__wrapper}>
@@ -60,12 +99,17 @@ const AudioPage = () => {
                 </button>
               </div>
             </div>
-            <button className={`${input.chat__button} ${input.submit__button}`}>
-              Share
+            <button
+              onClick={() => handleCopy(summary)}
+              className={`${input.chat__button} ${input.submit__button}`}
+            >
+              Copy
             </button>
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </>
   );
 };
