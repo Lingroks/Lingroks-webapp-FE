@@ -109,8 +109,9 @@ export const loginUser = async (email, password, navigate, updateUser) => {
     // Save token or session (if needed)
     localStorage.setItem('authToken', data.token);
 
-    // Update the user context
-    updateUser(data.user);
+    const userProfile = await fetchUserProfile(data.token);
+
+    updateUser(userProfile);
 
     // Navigate to dashboard after successful login
     navigate('/dashboard');
@@ -120,14 +121,31 @@ export const loginUser = async (email, password, navigate, updateUser) => {
   }
 };
 
-// // Verify user OTP
-// export const verifyOTP = async (email, otp) => {
-//   const response = await axiosInstance.post('/users/verify-email', {
-//     email,
-//     otp,
-//   });
-//   return response.data;
-// };
+export const fetchUserProfile = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/profile`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.user;
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    toast.error('Failed to fetch user profile!');
+    throw error;
+  }
+};
+
+
 
 // Request password reset
 export const requestPasswordReset = async (email, navigate) => {
