@@ -305,10 +305,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
             <div className="play--icon--wrapper">
               {/* <FaUser className="icon" /> */}
               <Image
-                src="/user-voice-fill.svg"
+                src="/arrow-down.svg"
                 alt="Logo"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 className=""
               />
             </div>
@@ -323,8 +323,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
               <Image
                 src="/user-voice-fill.svg"
                 alt="Logo"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 className=""
               />
             </div>
