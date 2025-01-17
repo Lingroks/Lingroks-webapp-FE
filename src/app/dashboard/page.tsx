@@ -1,18 +1,18 @@
-"use client"
+'use client';
 
 // Example: Importing and using in Dashboard.tsx
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import TranslateInput from '../../components/translateInput/index';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUser } from '../,,/../../context/UserContext';
 import { ToastContainer, toast } from 'react-toastify';
 
-
-
 const Dashboard = () => {
-  const router = useRouter(); 
+  const { user } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -54,7 +54,7 @@ const Dashboard = () => {
         <div className={style.content__inner}>
           <div className={style.headtext__wrap}>
             <h3>
-              Hi, John <br />
+              Hi, {user?.firstName || '?'}! <br />
               What would you like to do today ?
             </h3>
           </div>
@@ -76,9 +76,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <ToastContainer
-        toastClassName="text-sm font-inter-regular" 
-      />
+      <ToastContainer toastClassName="text-sm font-inter-regular" />
     </div>
   );
 };
