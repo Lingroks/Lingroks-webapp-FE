@@ -71,6 +71,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { FaBackward, FaPlay, FaPause, FaForward, FaUser } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
+import Image from 'next/image';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './audio.scss';
@@ -208,7 +209,8 @@ interface AudioPlayerProps {
 // export default AudioPlayer;
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
-  const hardcodedTrack = "https://mithilaartstorage.blob.core.windows.net/audio-files/azure-audio-1736901927053.wav";
+  const hardcodedTrack =
+    'https://mithilaartstorage.blob.core.windows.net/audio-files/azure-audio-1736901927053.wav';
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -225,7 +227,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
     const fetchAudio = async () => {
       try {
         const response = await fetch(hardcodedTrack, { signal });
-        if (!response.ok) throw new Error(`Failed to fetch audio file ${hardcodedTrack}`);
+        if (!response.ok)
+          throw new Error(`Failed to fetch audio file ${hardcodedTrack}`);
 
         const blob = await response.blob();
         const audioUrl = URL.createObjectURL(blob);
@@ -299,13 +302,32 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
       <div className="controls">
         {isLoaded && !loadFailed && (
           <>
-            <FaUser className="icon" />
+            <div className="play--icon--wrapper">
+              {/* <FaUser className="icon" /> */}
+              <Image
+                src="/user-voice-fill.svg"
+                alt="Logo"
+                width={30}
+                height={30}
+                className=""
+              />
+            </div>
             <FaBackward className="icon" />
             <button className="play-button" onClick={togglePlay}>
               {isPlaying ? <FaPause /> : <FaPlay />}
             </button>
             <FaForward className="icon" />
-            <FaUser className="icon" onClick={openModal} />
+
+            <div className="play--icon--wrapper" onClick={openModal}>
+              {/* <FaUser className="icon" /> */}
+              <Image
+                src="/user-voice-fill.svg"
+                alt="Logo"
+                width={30}
+                height={30}
+                className=""
+              />
+            </div>
           </>
         )}
       </div>
@@ -314,4 +336,3 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
 };
 
 export default AudioPlayer;
-
