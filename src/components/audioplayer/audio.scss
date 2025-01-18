@@ -60,6 +60,28 @@
   margin: 0 auto;
 }
 
+.waveform-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.waveform {
+  flex: 1;
+  // height: 70px; 
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.time {
+  font-size: 1rem;
+  color: #333;
+  min-width: 40px; /* Ensures consistent spacing */
+  text-align: center;
+}
+
   .waveform {
     width: 100%;
     // max-width: 600px
@@ -85,6 +107,7 @@
   border-radius: 30px;
   padding: 10px;
   background: #D2C8F933;
+  cursor: pointer;
 }
 
 .play-button {

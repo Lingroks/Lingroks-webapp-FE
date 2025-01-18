@@ -53,7 +53,7 @@ const AudioPage = () => {
           
           </textarea>
 
-          <Audioplayer   openModal={openModal}/>
+          <Audioplayer track={track}  openModal={openModal}/>
 
           {/* Buttons */}
           <div className={input.chat__buttons}>
