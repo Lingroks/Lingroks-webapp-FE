@@ -57,7 +57,7 @@ const Header = () => {
               className=""
             />
           </div>
-          <span className={styles.user__name}>{user?.firstName || '?'}</span>
+          <span className={styles.user__name}>{user?.firstName || '...'}</span>
           <div className={styles.user__icon}>
             <Image
               src="/down.svg"

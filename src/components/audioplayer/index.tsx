@@ -238,11 +238,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
               className="play--icon--wrapper"
               onClick={() => downloadTrack(track)}
             >
-              {/* <a
-                href={audioUrl || '#'} 
-                download="audio-track.mp3" 
-                className="download-icon"
-              > */}
               <Image
                 src="/arrow-down.svg"
                 alt="Logo"
@@ -250,7 +245,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
                 height={20}
                 className=""
               />
-              {/* </a> */}
             </div>
             <FaBackward className="icon" onClick={backward5Seconds} />
             <button className="play-button" onClick={togglePlay}>

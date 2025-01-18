@@ -54,7 +54,7 @@ const Dashboard = () => {
         <div className={style.content__inner}>
           <div className={style.headtext__wrap}>
             <h3>
-              Hi, {user?.firstName || '?'}! <br />
+              Hi, {user?.firstName || '...'}! <br />
               What would you like to do today ?
             </h3>
           </div>

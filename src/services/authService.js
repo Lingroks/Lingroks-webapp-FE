@@ -110,7 +110,7 @@ export const loginUser = async (email, password, navigate, updateUser) => {
     localStorage.setItem('authToken', data.token);
 
     const userProfile = await fetchUserProfile(data.token);
-
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
     updateUser(userProfile);
 
     // Navigate to dashboard after successful login
@@ -229,6 +229,7 @@ export const resetPassword = async (email, password, otp,navigate) => {
 export const logoutUser = (navigate) => {
   // Clear the authentication token from localStorage (or sessionStorage if you are using that)
   localStorage.removeItem('authToken');
+  localStorage.removeItem('userProfile');
   displayToast('success', 'Successfully logged out');
   // Redirect to the login page (or home page)
   navigate('/auth/login');
