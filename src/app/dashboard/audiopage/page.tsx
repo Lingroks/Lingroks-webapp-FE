@@ -76,9 +76,9 @@ const AudioPage = () => {
                 </button>
               </div>
             </div>
-            <button className={`${input.chat__button} ${input.submit__button}`}>
+            {/* <button className={`${input.chat__button} ${input.submit__button}`}>
               Copy
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

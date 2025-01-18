@@ -72,7 +72,7 @@ import WaveSurfer from 'wavesurfer.js';
 import { FaBackward, FaPlay, FaPause, FaForward, FaUser } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import Image from 'next/image';
-import FileSaver from 'file-saver'; 
+import FileSaver from 'file-saver';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './audio.scss';
@@ -139,11 +139,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
           waveSurferRef.current.on('ready', () => {
             setIsLoaded(true);
             setLoadFailed(false);
-            setTotalDuration(waveSurferRef.current!.getDuration());
+            const duration = waveSurferRef.current!.getDuration();
+            console.log('Total Duration:', duration); // Debug log
+            setTotalDuration(duration);
           });
 
           waveSurferRef.current.on('audioprocess', () => {
-            setCurrentTime(waveSurferRef.current!.getCurrentTime());
+            const time = waveSurferRef.current!.getCurrentTime();
+            console.log('Current Time:', time); // Debug log
+            setCurrentTime(time);
+            // setCurrentTime(waveSurferRef.current!.getCurrentTime());
           });
 
           waveSurferRef.current.on('seek', (progress) => {
@@ -205,12 +210,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
       FileSaver.saveAs(blob, fileName);
       console.log('Download completed successfully');
     } catch (error) {
-      toast.error('Error downloading track')
+      toast.error('Error downloading track');
       console.error('Error downloading track:', error.message);
     }
   };
   const formatTime = (time: number) =>
-    new Date(time * 1000).toISOString().slice(14, 5);
+    new Date(time * 1000).toISOString().slice(14, 19);
 
   return (
     <div className="audio-player-container">
@@ -224,11 +229,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
       {/* <div ref={waveformContainerRef} className="waveform"></div> */}
       <div className="waveform-wrapper">
         <span className="time current-time">
-          {/* <span className="time current-time">{formatTime(currentTime)}</span> */}
+          <span className="time current-time">{formatTime(currentTime)}</span>
         </span>
         <div ref={waveformContainerRef} className="waveform"></div>
         <span className="time total-time">
-          {/* <span className="time duration">{formatTime(totalDuration)}</span> */}
+          <span className="time duration">{formatTime(totalDuration)}</span>
         </span>
       </div>
       <div className="controls">
@@ -267,148 +272,5 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
     </div>
   );
 };
-
-// export default AudioPlayer;
-
-// const AudioPlayer: React.FC<AudioPlayerProps> = ({ openModal }) => {
-//   const hardcodedTrack =
-//     'https://mithilaartstorage.blob.core.windows.net/audio-files/azure-audio-1736901927053.wav';
-//   const [isPlaying, setIsPlaying] = useState(false);
-//   const [isLoaded, setIsLoaded] = useState(false);
-//   const [loadFailed, setLoadFailed] = useState(false);
-//   const [errorMessage, setErrorMessage] = useState('');
-//   const waveSurferRef = useRef<WaveSurfer | null>(null);
-//   const waveformContainerRef = useRef(null);
-
-//   useEffect(() => {
-//     if (!hardcodedTrack) return;
-
-//     const controller = new AbortController();
-//     const signal = controller.signal;
-
-//     const fetchAudio = async () => {
-//       try {
-//         const response = await fetch(hardcodedTrack, { signal });
-//         if (!response.ok)
-//           throw new Error(`Failed to fetch audio file ${hardcodedTrack}`);
-
-//         const blob = await response.blob();
-//         const audioUrl = URL.createObjectURL(blob);
-
-//         if (waveformContainerRef.current) {
-//           setIsLoaded(false);
-//           setLoadFailed(false);
-//           setErrorMessage('');
-//           waveSurferRef.current = WaveSurfer.create({
-//             container: waveformContainerRef.current,
-//             waveColor: '#D3D3D3',
-//             progressColor: '#6A5ACD',
-//             height: 70,
-//             cursorWidth: 1,
-//             cursorColor: 'lightgray',
-//             barWidth: 2,
-//             normalize: true,
-//             fillParent: true,
-//           });
-
-//           waveSurferRef.current.on('error', (error) => {
-//             console.error('WaveSurfer error:', error.message);
-//             setIsLoaded(false);
-//             setLoadFailed(true);
-//             setErrorMessage(error.message || 'Failed to load audio file.');
-//           });
-
-//           waveSurferRef.current.load(audioUrl);
-
-//           waveSurferRef.current.on('ready', () => {
-//             setIsLoaded(true);
-//             setLoadFailed(false);
-//           });
-//         }
-//       } catch (error) {
-//         if (signal.aborted) {
-//           console.log('Fetch aborted');
-//         } else {
-//           console.error('Fetch error:', error.message);
-//           setLoadFailed(true);
-//           setErrorMessage(error.message || 'Failed to fetch audio file.');
-//         }
-//       }
-//     };
-
-//     fetchAudio();
-
-//     return () => {
-//       controller.abort();
-//       waveSurferRef.current?.destroy();
-//     };
-//   }, [hardcodedTrack]);
-
-//   const togglePlay = () => {
-//     if (waveSurferRef.current && isLoaded) {
-//       waveSurferRef.current.playPause();
-//       setIsPlaying(!isPlaying);
-//     }
-//   };
-
-//   const forward5Seconds = () => {
-//     if (waveSurferRef.current) {
-//       const currentTime = waveSurferRef.current.getCurrentTime();
-//       waveSurferRef.current.seekTo(currentTime + 5);
-//     }
-//   };
-
-//   const backward5Seconds = () => {
-//     if (waveSurferRef.current) {
-//       const currentTime = waveSurferRef.current.getCurrentTime();
-//       waveSurferRef.current.seekTo(currentTime - 5);
-//     }
-//   };
-
-//   return (
-//     <div className="audio-player-container">
-//       <ToastContainer />
-//       {!isLoaded && !loadFailed && <p>Loading audio...</p>}
-//       {loadFailed && (
-//         <p className="error-message">
-//           {errorMessage || 'An unknown error occurred while loading the audio.'}
-//         </p>
-//       )}
-//       <div ref={waveformContainerRef} className="waveform"></div>
-//       <div className="controls">
-//         {isLoaded && !loadFailed && (
-//           <>
-//             <div className="play--icon--wrapper">
-//               {/* <FaUser className="icon" /> */}
-//               <Image
-//                 src="/arrow-down.svg"
-//                 alt="Logo"
-//                 width={20}
-//                 height={20}
-//                 className=""
-//               />
-//             </div>
-//             <FaBackward className="icon" onClick={backward5Seconds} />
-//             <button className="play-button" onClick={togglePlay}>
-//               {isPlaying ? <FaPause /> : <FaPlay />}
-//             </button>
-//             <FaForward className="icon" onClick={forward5Seconds} />
-
-//             <div className="play--icon--wrapper" onClick={openModal}>
-//               {/* <FaUser className="icon" /> */}
-//               <Image
-//                 src="/user-voice-fill.svg"
-//                 alt="Logo"
-//                 width={20}
-//                 height={20}
-//                 className=""
-//               />
-//             </div>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
 
 export default AudioPlayer;
