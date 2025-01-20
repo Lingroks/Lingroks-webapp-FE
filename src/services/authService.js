@@ -7,9 +7,6 @@ const BASE_URL = 'http://localhost:8000/v1';
 
 // Create an Axios instance
 
-
-
-// Function to display toast messages
 const displayToast = (type, message) => {
   if (type === 'success') {
     toast.success(message, { position: 'top-right' });
