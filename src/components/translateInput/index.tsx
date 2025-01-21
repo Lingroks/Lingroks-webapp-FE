@@ -100,8 +100,9 @@ const TranslateInput = () => {
           `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
         );
       }
-    } catch (error) {
-      toast.error(error.message || 'An error occurred');
+    } catch (e) {
+      console.log(e)
+      // toast.error(error.message || 'An error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -185,9 +186,9 @@ const TranslateInput = () => {
                           setDropdownOpen2(false);
                         }}
                       >
-                        <span className={style.dropdown__icon}>
+                        {/* <span className={style.dropdown__icon}>
                           {option.icon}
-                        </span>
+                        </span> */}
                         {option.text}
                       </li>
                     ))}

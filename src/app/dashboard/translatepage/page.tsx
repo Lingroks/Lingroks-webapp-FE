@@ -15,7 +15,7 @@ const TranslatePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const translatedText = searchParams.get('translatedText');
 
-  const handleCopy = (text) => {
+  const handleCopy = (text: string | null) => {
     if (!text) {
       toast.error('No text to copy!');
       return;
@@ -31,7 +31,7 @@ const TranslatePage = () => {
     } else {
       setIsLoaded(true);
     }
-  }, [translatedText]);
+  }, [router, translatedText]);
 
   return (
     <>

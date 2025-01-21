@@ -8,7 +8,7 @@ import TranslateInput from '../../components/translateInput/index';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
   const { user } = useUser();
