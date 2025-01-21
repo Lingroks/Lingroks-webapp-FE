@@ -31,7 +31,7 @@ const AudioPage = () => {
     } else {
       setIsLoaded(true);
     }
-  }, [track, textInput]);
+  }, [track, textInput, router]);
 
   return (
     <>
@@ -52,7 +52,9 @@ const AudioPage = () => {
             readOnly
           ></textarea>
 
-          <Audioplayer track={track} openModal={openModal} />
+          {/* <Audioplayer track={track} openModal={openModal} /> */}
+          <Audioplayer track={track ?? undefined} openModal={openModal} />
+
 
           {/* Buttons */}
           <div className={input.chat__buttons}>

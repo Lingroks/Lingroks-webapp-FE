@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
@@ -73,7 +73,7 @@ const TranslatePage = () => {
               </div>
             </div>
             <button
-              onClick={() => handleCopy(translatedText)}
+              onClick={() => handleCopy(translatedText ?? '')}
               className={`${input.chat__button} ${input.submit__button}`}
             >
               Copy
