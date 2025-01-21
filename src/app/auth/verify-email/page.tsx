@@ -17,7 +17,7 @@ const VerifyEmail: React.FC = () => {
   const [otp, setOtp] = useState('');
 
   useEffect(() => {
-    const queryEmail = searchParams.get('email'); // Get email from URL query
+    const queryEmail = searchParams?.get('email'); // Get email from URL query
 
     if (queryEmail) {
       setEmail(queryEmail);
@@ -57,8 +57,12 @@ const VerifyEmail: React.FC = () => {
 
       toast.success('Email verified successfully!');
       router.push('/auth/verify-mail-success');
-    } catch (error: any) {
-      toast.error(error.message || 'An unexpected error occurred!');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'An unexpected error occurred!');
+      } else {
+        toast.error('An unexpected error occurred!');
+      }
     }
   };
 
