@@ -13,7 +13,7 @@ const TranslatePage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoaded, setIsLoaded] = useState(false);
-  const translatedText = searchParams.get('translatedText');
+  const translatedText = searchParams?.get('translatedText');
 
   const handleCopy = (text: string | null) => {
     if (!text) {

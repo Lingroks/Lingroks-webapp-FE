@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './audio.scss';
 
 interface AudioPlayerProps {
-  track?: string; 
+  track?: string;
   openModal: () => void;
 }
 
@@ -84,18 +84,27 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             // setCurrentTime(waveSurferRef.current!.getCurrentTime());
           });
 
-          waveSurferRef.current.on('seek', (progress) => {
-            setCurrentTime(waveSurferRef.current!.getDuration() * progress);
-          });
+          // waveSurferRef.current.on('seek', (progress) => {
+          //   setCurrentTime(waveSurferRef.current!.getDuration() * progress);
+          // });
         }
-      } catch (error) {
+      } catch (error: unknown) {
         if (signal.aborted) {
           console.log('Fetch aborted');
         } else {
-          console.error('Fetch error:', error.message);
-          setLoadFailed(true);
-          setErrorMessage(error.message || 'Failed to fetch audio file.');
-          toast.error(`Error: ${error.message}`);
+          // Type assertion to assume that error is an instance of Error
+          if (error instanceof Error) {
+            console.error('Fetch error:', error.message);
+            setLoadFailed(true);
+            setErrorMessage(error.message || 'Failed to fetch audio file.');
+            toast.error(`Error: ${error.message}`);
+          } else {
+            // Handle non-Error cases if necessary
+            console.error('Unknown error:', error);
+            setLoadFailed(true);
+            setErrorMessage('Failed to fetch audio file.');
+            toast.error('Unknown error occurred');
+          }
         }
       }
     };
@@ -142,9 +151,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
 
       FileSaver.saveAs(blob, fileName);
       console.log('Download completed successfully');
-    } catch (error) {
+    } catch {
       toast.error('Error downloading track');
-      console.error('Error downloading track:', error.message);
     }
   };
   const formatTime = (time: number) =>
@@ -174,7 +182,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
           <>
             <div
               className="play--icon--wrapper"
-              onClick={() => downloadTrack(track)}
+              onClick={() => {
+                if (track) {
+                  downloadTrack(track);
+                } else {
+                  toast.error('No track available to download');
+                }
+              }}
             >
               <Image
                 src="/arrow-down.svg"

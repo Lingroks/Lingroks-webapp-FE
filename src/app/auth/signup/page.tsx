@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, ChangeEvent   } from 'react';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
@@ -10,7 +10,7 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import AuthInstruction from './AuthInstruction';
 import { registerUser } from '../../../services/authService';
 import { validatePassword } from '../../../utils/passwordValidation';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,7 +27,7 @@ export default function Signup() {
   });
   const router = useRouter(); 
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('nnnnnnnn');
     const newPassword = e.target.value;
     setPassword(newPassword);
@@ -42,7 +42,7 @@ export default function Signup() {
     passwordCriteria.hasNumber &&
     passwordCriteria.isLongEnough;
 
-  const handleSignup = async (e) => {
+    const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     console.log('Before setLoading:', loading); // Debug log
