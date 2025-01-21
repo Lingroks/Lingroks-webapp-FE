@@ -25,7 +25,6 @@ const TranslatePage = () => {
   };
 
   useEffect(() => {
-    // Check if 'track' and 'textInput' are available
     if (!translatedText) {
       router.push('/dashboard');
     } else {
