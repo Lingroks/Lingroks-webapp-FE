@@ -25,7 +25,6 @@ const ResetPassword: React.FC = () => {
     const isLongEnough = password.length > 8;
 
     if (!hasUpperCase || !hasNumber || !isLongEnough) {
-      console.log('everrrrrrrrrryyyyyyyyyy');
       return 'Password must contain at least 1 uppercase letter, 1 number, and be longer than 8 characters.';
     }
     return '';

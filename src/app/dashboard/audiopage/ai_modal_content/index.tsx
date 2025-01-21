@@ -1,10 +1,13 @@
 'use client';
 
 import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import './index.scss';
 
-const ModalContent = ({ onClose }) => {
+interface ModalContentProps {
+  onClose: () => void;
+}
+
+const ModalContent: React.FC<ModalContentProps> = ({ onClose }) => {
   const voices = ["Mary Ann's", 'Barry Johnson', 'Kemi Hannah'];
   return (
     <div>
@@ -27,3 +30,4 @@ const ModalContent = ({ onClose }) => {
 };
 
 export default ModalContent;
+
