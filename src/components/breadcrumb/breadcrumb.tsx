@@ -4,7 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './breadcrumb.module.scss';
 
-const Breadcrumb = ({ title, date, author }) => {
+interface BreadcrumbProps {
+  title: string;
+  date: string;
+  author: string;
+}
+
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, date, author }) => {
   const router = useRouter();
 
   return (

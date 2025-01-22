@@ -12,7 +12,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ onClose }) => {
   return (
     <div>
       <div className="modal-header">
-        <h2>Change AI's Voice</h2>
+        <h2>Change AI Voice</h2>
         <div>
           {/* <button className="close-icon" onClick={onClose}>Close</button> */}
           <button className="close-button" onClick={onClose}>Close</button>

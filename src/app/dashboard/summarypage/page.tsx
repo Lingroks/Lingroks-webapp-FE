@@ -10,29 +10,29 @@ import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
 
 const AudioPage = () => {
-  // const router = useRouter();
-  // const searchParams = useSearchParams();
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const summary = searchParams.get('summary');
-
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [summary, setSummary] = useState('');
+  const summary = searchParams?.get('summary');
+
+  // const router = useRouter();
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const [summary, setSummary] = useState('');
 
   useEffect(() => {
     // Retrieve state from router
-    const state = router.state || {};
+    // const state = router.state || {};
 
-    if (!state.summary) {
+    if (!summary) {
       // Redirect if summary is not available
       router.push('/dashboard');
     } else {
-      setSummary(state.summary);
+      // setSummary(state.summary);
       setIsLoaded(true);
     }
-  }, [router]);
+  }, [router, summary]);
 
-  const handleCopy = (text) => {
+  const handleCopy = (text: string | null | undefined) => {
     if (!text) {
       toast.error('No text to copy!');
       return;
