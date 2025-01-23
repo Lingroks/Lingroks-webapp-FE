@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
+import Loader from "../../components/loader/index"
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -76,6 +77,7 @@ const Dashboard = () => {
           </div> */}
         </div>
       </div>
+      {/* <Loader/> */}
       <ToastContainer toastClassName="text-sm font-inter-regular" />
     </div>
   );

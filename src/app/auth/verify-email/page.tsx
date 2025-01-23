@@ -5,6 +5,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import SetOtpInput from '@/components/input/SetOtpInput';
+import Loader from "@/components/loader/index"
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -95,7 +96,7 @@ const VerifyEmailContent: React.FC = () => {
 const VerifyEmail: React.FC = () => {
   return (
     <AuthLayout>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader/>}>
         <VerifyEmailContent />
       </Suspense>
       <ToastContainer toastClassName="text-sm font-inter-regular" />
