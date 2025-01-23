@@ -1,24 +1,23 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '@/assets/scss/pages/translate.module.scss';
 import input from '@/components/translateInput/tsInput.module.scss';
 import Audioplayer from '@/components/audioplayer/index';
-// import track1 from '../../../assets/tracks/clarinet-multiphonic-6e-97517-65496.mp3'
 import Modal from '../../../components/modal';
 import { ToastContainer, toast } from 'react-toastify';
 import ModalContent from './ai_modal_content/index';
-
 import { useSearchParams, useRouter } from 'next/navigation';
+import Loader from '@/components/loader/index';
 
-const AudioPage = () => {
+const AudioPageContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
   const searchParams = useSearchParams();
-  // const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
   const track = searchParams?.get('track');
   const textInput = searchParams?.get('textInput');
@@ -26,7 +25,7 @@ const AudioPage = () => {
   useEffect(() => {
     // Check if 'track' and 'textInput' are available
     if (!track || !textInput) {
-      toast.error('track cannot be found');
+      toast.error('Track cannot be found.');
       router.push('/dashboard');
     }
   }, [track, textInput, router]);
@@ -50,7 +49,6 @@ const AudioPage = () => {
             readOnly
           ></textarea>
 
-          {/* <Audioplayer track={track} openModal={openModal} /> */}
           <Audioplayer track={track ?? undefined} openModal={openModal} />
 
           {/* Buttons */}
@@ -74,9 +72,6 @@ const AudioPage = () => {
                 </button>
               </div>
             </div>
-            {/* <button className={`${input.chat__button} ${input.submit__button}`}>
-              Copy
-            </button> */}
           </div>
         </div>
       </div>
@@ -87,6 +82,14 @@ const AudioPage = () => {
 
       <ToastContainer />
     </>
+  );
+};
+
+const AudioPage = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <AudioPageContent />
+    </Suspense>
   );
 };
 

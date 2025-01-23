@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -8,21 +8,14 @@ import input from '../../../components/translateInput/tsInput.module.scss';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
+import Loader from '@/components/loader/index'
 
-const AudioPage = () => {
+const SummaryContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  // const [isLoaded, setIsLoaded] = useState(false);
   const summary = searchParams?.get('summary');
 
-  // const router = useRouter();
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const [summary, setSummary] = useState('');
-
   useEffect(() => {
-    // Retrieve state from router
-    // const state = router.state || {};
-
     if (!summary) {
       // Redirect if summary is not available
       router.push('/dashboard');
@@ -37,15 +30,6 @@ const AudioPage = () => {
 
     copyToClipboard(text);
   };
-
-  // useEffect(() => {
-  //   // Check if 'track' and 'textInput' are available
-  //   if (!summary) {
-  //     router.push('/dashboard');
-  //   } else {
-  //     setIsLoaded(true);
-  //   }
-  // }, [summary]);
 
   return (
     <>
@@ -62,7 +46,7 @@ const AudioPage = () => {
           <textarea
             className={input.translated}
             placeholder="Enter your text or link here"
-            value={summary || ''} // Set textarea value to the 'textInput'
+            value={summary || ''} // Set textarea value to the 'summary'
             readOnly
           />
 
@@ -75,7 +59,7 @@ const AudioPage = () => {
             </div>
           </div>
 
-          {/* Bu  ttons */}
+          {/* Buttons */}
           <div className={input.chat__buttons}>
             <div className={input.left__buttons}>
               {/* Dropdown Button 1 */}
@@ -111,4 +95,10 @@ const AudioPage = () => {
   );
 };
 
-export default AudioPage;
+const SummaryPage = () => (
+  <Suspense fallback={<Loader/>}>
+    <SummaryContent />
+  </Suspense>
+);
+
+export default SummaryPage;
