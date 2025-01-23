@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -8,11 +8,11 @@ import input from '../../../components/translateInput/tsInput.module.scss';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
+import Loader from '@/components/loader/index'
 
-const TranslatePage = () => {
+const TranslateContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  // const [isLoaded, setIsLoaded] = useState(false);
   const translatedText = searchParams?.get('translatedText');
 
   const handleCopy = (text: string | null) => {
@@ -83,5 +83,11 @@ const TranslatePage = () => {
     </>
   );
 };
+
+const TranslatePage = () => (
+  <Suspense fallback={<Loader/>}>
+    <TranslateContent />
+  </Suspense>
+);
 
 export default TranslatePage;
