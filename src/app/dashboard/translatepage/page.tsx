@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -12,7 +12,7 @@ import { copyToClipboard } from '../../../utils/copyToClipboard';
 const TranslatePage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const translatedText = searchParams?.get('translatedText');
 
   const handleCopy = (text: string | null) => {
@@ -27,8 +27,6 @@ const TranslatePage = () => {
   useEffect(() => {
     if (!translatedText) {
       router.push('/dashboard');
-    } else {
-      setIsLoaded(true);
     }
   }, [router, translatedText]);
 

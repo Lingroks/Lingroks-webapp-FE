@@ -31,6 +31,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
 
     const controller = new AbortController();
     const signal = controller.signal;
+    console.log(audioUrl)
 
     const fetchAudio = async () => {
       try {
@@ -115,7 +116,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
       controller.abort(); // Abort fetch request
       waveSurferRef.current?.destroy(); // Clean up WaveSurfer
     };
-  }, [track]);
+  }, [audioUrl, track]);
 
   const togglePlay = () => {
     if (waveSurferRef.current && isLoaded) {

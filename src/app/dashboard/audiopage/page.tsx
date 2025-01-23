@@ -18,7 +18,7 @@ const AudioPage = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const searchParams = useSearchParams();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
   const track = searchParams?.get('track');
   const textInput = searchParams?.get('textInput');
@@ -28,8 +28,6 @@ const AudioPage = () => {
     if (!track || !textInput) {
       toast.error('track cannot be found');
       router.push('/dashboard');
-    } else {
-      setIsLoaded(true);
     }
   }, [track, textInput, router]);
 
@@ -54,7 +52,6 @@ const AudioPage = () => {
 
           {/* <Audioplayer track={track} openModal={openModal} /> */}
           <Audioplayer track={track ?? undefined} openModal={openModal} />
-
 
           {/* Buttons */}
           <div className={input.chat__buttons}>

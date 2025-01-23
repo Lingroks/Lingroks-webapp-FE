@@ -4,8 +4,7 @@
 import React from 'react';
 import DashboardHeader from '@/components/header/dashboard/DasboardHeader';
 import style from '@/assets/scss/pages/Dashboard.module.scss';
-import Link from 'next/link';
-import {useState} from 'react';
+import Link from 'next/link'
 
 const SecurityChanges = () => {
   // const [oldPassword, setOldPassword] = useState('');

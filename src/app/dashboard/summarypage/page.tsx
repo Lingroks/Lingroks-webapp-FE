@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -12,7 +12,7 @@ import { copyToClipboard } from '../../../utils/copyToClipboard';
 const AudioPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const summary = searchParams?.get('summary');
 
   // const router = useRouter();
@@ -26,9 +26,6 @@ const AudioPage = () => {
     if (!summary) {
       // Redirect if summary is not available
       router.push('/dashboard');
-    } else {
-      // setSummary(state.summary);
-      setIsLoaded(true);
     }
   }, [router, summary]);
 
