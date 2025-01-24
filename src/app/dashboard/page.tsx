@@ -61,20 +61,6 @@ const Dashboard = () => {
           </div>
 
           <TranslateInput />
-
-          {/* your history */}
-
-          {/* <div className={style.history__container}>
-            <div className={style.head__text}>Your history</div>
-            <div className={style.cards__container}>
-              {cardData.map((card, index) => (
-                <div key={index} className={style.card}>
-                  <h3 className={style.card__head}>{card.headText}</h3>
-                  <p className={style.card__bottom}>{card.bottomText}</p>
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
       {/* <Loader/> */}
