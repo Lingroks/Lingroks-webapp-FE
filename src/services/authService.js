@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 // Register a new user
 
-const BASE_URL = 'http://localhost:8000/v1';
+const BASE_URL = 'http://51.20.70.91/v1';
 
 // Create an Axios instance
 
