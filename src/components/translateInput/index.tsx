@@ -100,8 +100,9 @@ const TranslateInput = () => {
           `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
         );
       }
-    } catch (error) {
-      toast.error(error.message || 'An error occurred');
+    } catch (e) {
+      console.log(e)
+      // toast.error(error.message || 'An error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -185,9 +186,9 @@ const TranslateInput = () => {
                           setDropdownOpen2(false);
                         }}
                       >
-                        <span className={style.dropdown__icon}>
+                        {/* <span className={style.dropdown__icon}>
                           {option.icon}
-                        </span>
+                        </span> */}
                         {option.text}
                       </li>
                     ))}
@@ -284,35 +285,5 @@ const InsightIcon = () => (
         <rect width="16" height="16" fill="white" />
       </clipPath>
     </defs>
-  </svg>
-);
-
-const EnglandFlagIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-  >
-    <rect width="24" height="24" fill="#fff" />
-    <path d="M0 10h24v4H0z" fill="#D7141A" />
-    <path d="M10 0h4v24h-4z" fill="#D7141A" />
-  </svg>
-);
-
-const UsaFlagIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-  >
-    <rect width="24" height="24" fill="#fff" />
-    <path d="M0 3h24v3H0zm0 6h24v3H0zm0 6h24v3H0zm0 6h24v3H0z" fill="#B22234" />
-    <rect width="10" height="12" fill="#3C3B6E" />
-    <circle cx="2" cy="2" r="1" fill="#fff" />
-    <circle cx="4" cy="2" r="1" fill="#fff" />
-    <circle cx="2" cy="4" r="1" fill="#fff" />
-    <circle cx="4" cy="4" r="1" fill="#fff" />
   </svg>
 );

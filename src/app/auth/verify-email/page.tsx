@@ -1,23 +1,24 @@
 // SignupOtpVerification.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import AuthLayout from '@/app/auth/AuthLayout';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import SetOtpInput from '@/components/input/SetOtpInput';
+import Loader from "@/components/loader/index"
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 
 const BASE_URL = 'http://localhost:8000/v1';
 
-const VerifyEmail: React.FC = () => {
+const VerifyEmailContent: React.FC = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [email, setEmail] = useState<string | null>(null);
   const [otp, setOtp] = useState('');
 
   useEffect(() => {
-    const queryEmail = searchParams.get('email'); // Get email from URL query
+    const queryEmail = searchParams?.get('email'); // Get email from URL query
 
     if (queryEmail) {
       setEmail(queryEmail);
@@ -57,38 +58,48 @@ const VerifyEmail: React.FC = () => {
 
       toast.success('Email verified successfully!');
       router.push('/auth/verify-mail-success');
-    } catch (error: any) {
-      toast.error(error.message || 'An unexpected error occurred!');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'An unexpected error occurred!');
+      } else {
+        toast.error('An unexpected error occurred!');
+      }
     }
   };
 
   return (
-    <AuthLayout>
-      <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
-        <h1 className="text-black text-[2rem] font-inter-medium mb-2">
-          Verify Email
-        </h1>
-        <p className="text-secondaryGrey mb-6 text-[1rem] text-center">
-          Please enter the OTP sent to <strong>{email}</strong>.
-        </p>
-        <SetOtpInput value={otp} onChange={handleOtpChange} />
-        <AuthMainBtn
-          text="Verify"
-          className="w-full border-none mb-4 bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mt-4"
-          onClick={handleVerifyOtp}
-        />
-        <button
-          className="w-full border-none bg-gray-200 text-secondaryGrey rounded-[60px] py-2 px-4 text-center"
-          onClick={() => {
-            router.push('/auth/login');
-          }}
-        >
-          Skip
-        </button>
-      </div>
-      <ToastContainer
-        toastClassName="text-sm font-inter-regular" // Custom toast class
+    <div className="w-full flex items-center justify-center flex-col max-w-[430px] my-0 mx-auto px-5 pb-5">
+      <h1 className="text-black text-[2rem] font-inter-medium mb-2">
+        Verify Email
+      </h1>
+      <p className="text-secondaryGrey mb-6 text-[1rem] text-center">
+        Please enter the OTP sent to <strong>{email}</strong>.
+      </p>
+      <SetOtpInput value={otp} onChange={handleOtpChange} />
+      <AuthMainBtn
+        text="Verify"
+        className="w-full border-none mb-4 bg-secondaryBlue text-white rounded-[60px] py-2 px-4 mt-4"
+        onClick={handleVerifyOtp}
       />
+      <button
+        className="w-full border-none bg-gray-200 text-secondaryGrey rounded-[60px] py-2 px-4 text-center"
+        onClick={() => {
+          router.push('/auth/login');
+        }}
+      >
+        Skip
+      </button>
+    </div>
+  );
+};
+
+const VerifyEmail: React.FC = () => {
+  return (
+    <AuthLayout>
+      <Suspense fallback={<Loader/>}>
+        <VerifyEmailContent />
+      </Suspense>
+      <ToastContainer toastClassName="text-sm font-inter-regular" />
     </AuthLayout>
   );
 };

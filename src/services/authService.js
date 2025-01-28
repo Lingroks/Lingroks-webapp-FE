@@ -3,13 +3,10 @@ import { toast } from 'react-toastify';
 
 // Register a new user
 
-const BASE_URL = 'http://localhost:8000/v1';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // Create an Axios instance
 
-
-
-// Function to display toast messages
 const displayToast = (type, message) => {
   if (type === 'success') {
     toast.success(message, { position: 'top-right' });
@@ -79,6 +76,8 @@ export const registerUser = async (
 
 // Login User
 export const loginUser = async (email, password, navigate, updateUser) => {
+  console.log(BASE_URL)
+
   if (!email || !password) {
     toast.error('Please fill out all fields');
     return;

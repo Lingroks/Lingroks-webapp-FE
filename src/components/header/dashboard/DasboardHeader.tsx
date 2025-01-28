@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { logoutUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
+
 import { useUser } from '../../../context/UserContext';
 
 const Header = () => {

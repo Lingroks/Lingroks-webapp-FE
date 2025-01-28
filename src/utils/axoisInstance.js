@@ -37,10 +37,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle global response errors
     if (error.response) {
-      // Check for specific error statuses
       if (error.response.status === 401) {
         toast.error('Unauthorized. Please log in again.');
-        // Optionally, navigate to the login page
       } else if (error.response.status === 500) {
         toast.error('Server error. Please try again later.');
       } else {

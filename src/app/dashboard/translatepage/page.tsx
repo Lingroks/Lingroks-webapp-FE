@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Breadcrumb from '../../../components/breadcrumb/breadcrumb';
 import DashboardHeader from '../../../components/header/dashboard/DasboardHeader';
 import style from '../../../assets/scss/pages/translate.module.scss';
@@ -8,14 +8,14 @@ import input from '../../../components/translateInput/tsInput.module.scss';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
+import Loader from '@/components/loader/index'
 
-const TranslatePage = () => {
+const TranslateContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const translatedText = searchParams.get('translatedText');
+  const translatedText = searchParams?.get('translatedText');
 
-  const handleCopy = (text) => {
+  const handleCopy = (text: string | null) => {
     if (!text) {
       toast.error('No text to copy!');
       return;
@@ -25,13 +25,10 @@ const TranslatePage = () => {
   };
 
   useEffect(() => {
-    // Check if 'track' and 'textInput' are available
     if (!translatedText) {
       router.push('/dashboard');
-    } else {
-      setIsLoaded(true);
     }
-  }, [translatedText]);
+  }, [router, translatedText]);
 
   return (
     <>
@@ -74,7 +71,7 @@ const TranslatePage = () => {
               </div>
             </div>
             <button
-              onClick={() => handleCopy(translatedText)}
+              onClick={() => handleCopy(translatedText ?? '')}
               className={`${input.chat__button} ${input.submit__button}`}
             >
               Copy
@@ -86,5 +83,11 @@ const TranslatePage = () => {
     </>
   );
 };
+
+const TranslatePage = () => (
+  <Suspense fallback={<Loader/>}>
+    <TranslateContent />
+  </Suspense>
+);
 
 export default TranslatePage;

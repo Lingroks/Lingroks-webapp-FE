@@ -6,11 +6,6 @@ import AuthMainBtn from '@/components/button/AuthMainBtn';
 import SetOtpInput from '@/components/input/SetOtpInput';
 import ForgotPasswordPic from '../ForgotPasswordPic';
 
-// const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const newOtp = event.target.value;
-//     setOtp(newOtp.split(''));
-// };
-// Remove the OtpChangeEvent interface as it is no longer needed
 const VerifyPassword: React.FC = () => {
     const [otp, setOtp] = useState(["", "", "", ""]);
 

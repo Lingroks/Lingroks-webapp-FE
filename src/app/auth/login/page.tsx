@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const router = useRouter();
   const { updateUser } = useUser();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log('Before setLoading:', loading); // Debug log

@@ -1,16 +1,28 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
-const Modal = ({ isOpen, onClose, children }) => {
-  const modalRef = useRef(null);
+interface ModalProps {
+  isOpen: boolean; // `isOpen` is a boolean
+  onClose: () => void; // `onClose` is a function
+  children: React.ReactNode; // `children` represents the content passed into the modal
+}
 
-  // Close modal on click-away
-  const handleClickAway = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickAway = (e: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       onClose();
     }
   };
+
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickAway);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickAway);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (isOpen) {

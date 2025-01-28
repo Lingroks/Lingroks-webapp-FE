@@ -1,0 +1,36 @@
+.loader__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+  
+    .box {
+      width: 20px;
+      height: 20px;
+      margin: 0 10px;
+      background-color: #5732e9;
+      border-radius: 5px;
+      animation: zoomEffect 1.5s infinite ease-in-out;
+    }
+  
+    .box:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+  
+    .box:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+  }
+  
+  @keyframes zoomEffect {
+    0%, 100% {
+      transform: scale(1);
+      background-color: #ccc;
+    }
+    50% {
+      transform: scale(1.5);
+      background-color: #5732e9;
+    }
+  }
+  

@@ -8,7 +8,8 @@ import TranslateInput from '../../components/translateInput/index';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+// import Loader from "../../components/loader/index"
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -21,32 +22,32 @@ const Dashboard = () => {
     }
   }, [router]);
 
-  const cardData = [
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Summary',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Insight',
-    },
-    {
-      headText: 'Lorem ipsum dolor sit amet consectetur.',
-      bottomText: 'Translate',
-    },
-  ];
+  // const cardData = [
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Translate',
+  //   },
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Translate',
+  //   },
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Summary',
+  //   },
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Translate',
+  //   },
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Insight',
+  //   },
+  //   {
+  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
+  //     bottomText: 'Translate',
+  //   },
+  // ];
   return (
     <div>
       <DashboardHeader />
@@ -60,22 +61,9 @@ const Dashboard = () => {
           </div>
 
           <TranslateInput />
-
-          {/* your history */}
-
-          {/* <div className={style.history__container}>
-            <div className={style.head__text}>Your history</div>
-            <div className={style.cards__container}>
-              {cardData.map((card, index) => (
-                <div key={index} className={style.card}>
-                  <h3 className={style.card__head}>{card.headText}</h3>
-                  <p className={style.card__bottom}>{card.bottomText}</p>
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
+      {/* <Loader/> */}
       <ToastContainer toastClassName="text-sm font-inter-regular" />
     </div>
   );
