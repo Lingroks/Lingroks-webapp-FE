@@ -30,11 +30,6 @@ const TranslateInput = () => {
   ];
 
   const button2Options = [
-    // { text: 'Arabic', icon: <ArabicFlagIcon /> },
-    // { text: 'English', icon: <UsaFlagIcon /> },
-    // { text: 'French', icon: <FranceFlagIcon /> },
-    // { text: 'Mandarin', icon: <MandarinFlagIcon /> },
-    // { text: 'Spanish', icon: <SpainFlagIcon /> },
     { text: 'Arabic' },
     { text: 'English' },
     { text: 'French' },
@@ -105,7 +100,7 @@ const TranslateInput = () => {
         );
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       // toast.error(error.message || 'An error occurred');
     } finally {
       setIsLoading(false);
@@ -193,6 +188,37 @@ const TranslateInput = () => {
                         {/* <span className={style.dropdown__icon}>
                           {option.icon}
                         </span> */}
+                        {option.text}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+
+             {/* Dropdown Button 3 (Only for Insight) */}
+             {selectedOption1 === 'Insight' && (
+              <div className={style.dropdown}>
+                <button
+                  className={`${style.chat__button} ${style.dropdown__button}`}
+                  onClick={() => setDropdownOpen3(!dropdownOpen3)}
+                >
+                  {selectedOption3 || 'Select Analysis'}
+                  <div>
+                    <Image src="/down.svg" alt="down" width={10} height={10} />
+                  </div>
+                </button>
+                {dropdownOpen3 && (
+                  <ul className={style.dropdown__menu}>
+                    {button3Options.map((option) => (
+                      <li
+                        key={option.text}
+                        className={style.dropdown__item}
+                        onClick={() => {
+                          setSelectedOption3(option.text);
+                          setDropdownOpen3(false);
+                        }}
+                      >
                         {option.text}
                       </li>
                     ))}
