@@ -4,7 +4,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import detectLanguageService from './detectService';
 
-const API_BASE_URL = 'http://localhost:8000/v1/translate'; // Adjust based on your backend proxy configuration
+const BASE_URL = process.env.process.env.NEXT_PUBLIC_BASE_URL;
+
+const TRANSLATE_URL = `${BASE_URL}/translate`;
 
 // Fetch auth token from localStorage
 const getAuthToken = () => {
@@ -29,7 +31,7 @@ const translateService = {
 
       // Step 2: Proceed to translation
       const response = await axios.post(
-        `${API_BASE_URL}/`,
+        `${TRANSLATE_URL}/`,
         { text, targetLanguage },
         {
           headers: {
@@ -52,7 +54,7 @@ const translateService = {
 
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/url`,
+        `${TRANSLATE_URL}/url`,
         { url, targetLanguage },
         {
           headers: {
@@ -77,7 +79,7 @@ const translateService = {
     }
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/speech`,
+        `${TRANSLATE_URL}/speech`,
         { text },
         {
           headers: {
