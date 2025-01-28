@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
 import { generateTextSummary } from '../../services/textSummary';
+import { generateTextInsight } from '../../services/insightService';
 import { useRouter } from 'next/navigation';
 import { isValidUrl } from '../../utils/urlChecker';
 import 'react-toastify/dist/ReactToastify.css';
@@ -97,6 +98,25 @@ const TranslateInput = () => {
         setTextInput('');
         router.push(
           `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
+        );
+      } else if (selectedOption1 === 'Insight') {
+        // Handle Insight processing
+        const selectedOption3 = 'Sentiment Analysis'; // Default option for Button3
+        const insightResult = await generateTextInsight(
+          textInput,
+          selectedOption3.text
+        ); // Replace with the actual function and pass the required param
+
+        if (!insightResult) {
+          toast.error('Insight generation failed');
+          return;
+        }
+        toast.success('Insight generated successfully!');
+        setTextInput('');
+        router.push(
+          `/dashboard/insightpage?insightType=${encodeURIComponent(
+            selectedOption3
+          )}&insightResult=${encodeURIComponent(insightResult)}`
         );
       }
     } catch (e) {
@@ -196,8 +216,8 @@ const TranslateInput = () => {
               </div>
             )}
 
-             {/* Dropdown Button 3 (Only for Insight) */}
-             {selectedOption1 === 'Insight' && (
+            {/* Dropdown Button 3 (Only for Insight) */}
+            {selectedOption1 === 'Insight' && (
               <div className={style.dropdown}>
                 <button
                   className={`${style.chat__button} ${style.dropdown__button}`}
