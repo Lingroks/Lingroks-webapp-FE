@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 // Register a new user
 
-const BASE_URL = 'http://51.20.70.91/v1';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // Create an Axios instance
 
@@ -76,6 +76,8 @@ export const registerUser = async (
 
 // Login User
 export const loginUser = async (email, password, navigate, updateUser) => {
+  console.log(BASE_URL)
+
   if (!email || !password) {
     toast.error('Please fill out all fields');
     return;
