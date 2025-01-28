@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Eye, EyeOff } from 'lucide-react'; // You can replace this with any icon library you use
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 interface AuthInputBoxProps {
   label: string;
@@ -61,7 +61,7 @@ const AuthInputBox: React.FC<AuthInputBoxProps> = ({
             onClick={togglePasswordVisibility}
             className="absolute inset-y-0 right-3 flex items-center justify-center text-gray-500 hover:text-gray-700"
           >
-            {isPasswordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+          {isPasswordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
           </button>
         )}
       </div>
