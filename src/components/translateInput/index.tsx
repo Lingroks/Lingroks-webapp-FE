@@ -42,6 +42,11 @@ const TranslateInput = () => {
     { text: 'Spanish' },
   ];
 
+  const button3Options = [
+    { text: 'Sentimental Analysis' },
+    { text: 'Emotional Analysis' },
+  ];
+
   const handleButtonClick = async () => {
     try {
       setIsLoading(true);
