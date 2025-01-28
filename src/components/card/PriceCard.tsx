@@ -24,7 +24,7 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
             'No social media integration'
         ],
         pro: [
-            'Unlimited text and text-to-speech translation (up to 20 languages)',
+            'Unlimited text and text-to-speech translation (up to 50 languages)',
             'Unlimited webpage translation for browser extension',
             'Text-to-speech with multiple voices',
             'Advanced text insights',
@@ -37,16 +37,16 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
            'One summary per day',
         ],
         proLimit: [
-          'Up to 20 languages for text translation',
+          'Up to 50 languages for text translation',
           'Up to 10 summaries per day',
           'Up to 20 key phrases per summary',
 
         ],
         basicLanguages: [
-          'Three languages (English, Spanish, French)',
+          'Five languages (English, Spanish, French, Mandarin, Arabic)',
         ],
         proLanguages: [
-          'Twenty languages (English, Spanish, French, German, Italian, Dutch, Portuguese, Russian, Chinese, Japanese, Korean, Arabic, Turkish, Hindi, Bengali, Punjabi, Urdu, Vietnamese, Thai, Indonesian)',
+          'Everything in Basic plus 45 more languages',
         ]
     }
     const selectedFeatures = variant === 'basic' ? FeatureList.basic : FeatureList.pro;

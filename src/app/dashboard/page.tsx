@@ -63,7 +63,7 @@ const Dashboard = () => {
 
           {/* your history */}
 
-          <div className={style.history__container}>
+          {/* <div className={style.history__container}>
             <div className={style.head__text}>Your history</div>
             <div className={style.cards__container}>
               {cardData.map((card, index) => (
@@ -73,7 +73,7 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <ToastContainer toastClassName="text-sm font-inter-regular" />
