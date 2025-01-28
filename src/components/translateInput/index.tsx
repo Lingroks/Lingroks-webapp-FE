@@ -14,14 +14,13 @@ const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2
   const [selectedOption1, setSelectedOption1] = useState('Translate');
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
+  const [selectedOption2, setSelectedOption2] = useState({ text: 'ENGLISH' });
+  const [dropdownOpen2, setDropdownOpen2] = useState(false);
+  const [selectedOption3, setSelectedOption3] = useState('');
+  const [dropdownOpen3, setDropdownOpen3] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  const [selectedOption2, setSelectedOption2] = useState({
-    text: 'ENGLISH',
-  });
-  const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
   const button1Options = [
     { text: 'Translate', icon: <TranslateIcon /> },
