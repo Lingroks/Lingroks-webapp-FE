@@ -104,7 +104,7 @@ const TranslateInput = () => {
         const selectedOption3 = 'Sentiment Analysis'; // Default option for Button3
         const insightResult = await generateTextInsight(
           textInput,
-          selectedOption3.text
+          selectedOption3
         ); // Replace with the actual function and pass the required param
 
         if (!insightResult) {
