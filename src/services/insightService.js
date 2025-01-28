@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
 /**
  * Service to generate text insights.
  * @param {string} document - The input document to analyze.
