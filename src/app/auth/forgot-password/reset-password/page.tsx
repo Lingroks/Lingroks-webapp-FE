@@ -56,7 +56,7 @@ const ResetPassword: React.FC = () => {
     try {
       setIsLoading(true);
       await resetPassword(email, password, otp, router.push);
-      // router.push('/reset-successful');
+  
     } catch (error) {
       console.log(error);
       // toast.error('An error occurred. Please try again.');
