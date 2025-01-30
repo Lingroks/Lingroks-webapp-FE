@@ -99,26 +99,7 @@ const TranslateInput = () => {
         router.push(
           `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
         );
-      } else if (selectedOption1 === 'Insight') {
-        // Handle Insight processing
-        const selectedOption3 = 'Sentiment Analysis'; // Default option for Button3
-        const insightResult = await generateTextInsight(
-          textInput,
-          selectedOption3
-        ); // Replace with the actual function and pass the required param
-
-        if (!insightResult) {
-          toast.error('Insight generation failed');
-          return;
-        }
-        toast.success('Insight generated successfully!');
-        setTextInput('');
-        router.push(
-          `/dashboard/insightpage?insightType=${encodeURIComponent(
-            selectedOption3
-          )}&insightResult=${encodeURIComponent(insightResult)}`
-        );
-      }
+      } 
     } catch (e) {
       console.log(e);
       // toast.error(error.message || 'An error occurred');

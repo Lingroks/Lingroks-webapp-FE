@@ -16,6 +16,10 @@
   cursor: pointer;
   font-size: 14px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
 .separator {

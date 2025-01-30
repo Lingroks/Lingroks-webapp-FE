@@ -25,7 +25,7 @@ const translateService = {
       // Step 1: Detect language
       const detectedLanguage = await detectLanguageService.detectLanguage(text);
       if (!detectedLanguage || detectedLanguage.error) {
-        toast.error('Error in language detection.');
+        toast.error('Error in language detection. transss');
         throw new Error('Language detection failed.');
       }
 
