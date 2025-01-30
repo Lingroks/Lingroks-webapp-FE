@@ -15,10 +15,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, date, author }) => {
   return (
     <div className={styles.breadcrumbContainer}>
       <div className={styles.breadcrumbFirstrow}>
-        {/* <span className={styles.backLink} onClick={() => router.back()}>
-          &lt; Back
-        </span> */}
-        {/* <span className={styles.separator}>|</span> */}
         <span className={styles.backLink} onClick={() => router.back()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
 import { generateTextSummary } from '../../services/textSummary';
+import { generateTextInsight } from '../../services/insightService';
 import { useRouter } from 'next/navigation';
 import { isValidUrl } from '../../utils/urlChecker';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,14 +15,13 @@ const TranslateInput = () => {
   // Dropdown states for Button 1 and Button 2
   const [selectedOption1, setSelectedOption1] = useState('Translate');
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
+  const [selectedOption2, setSelectedOption2] = useState({ text: 'ENGLISH' });
+  const [dropdownOpen2, setDropdownOpen2] = useState(false);
+  const [selectedOption3, setSelectedOption3] = useState('');
+  const [dropdownOpen3, setDropdownOpen3] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  const [selectedOption2, setSelectedOption2] = useState({
-    text: 'ENGLISH',
-  });
-  const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
   const button1Options = [
     { text: 'Translate', icon: <TranslateIcon /> },
@@ -31,16 +31,16 @@ const TranslateInput = () => {
   ];
 
   const button2Options = [
-    // { text: 'Arabic', icon: <ArabicFlagIcon /> },
-    // { text: 'English', icon: <UsaFlagIcon /> },
-    // { text: 'French', icon: <FranceFlagIcon /> },
-    // { text: 'Mandarin', icon: <MandarinFlagIcon /> },
-    // { text: 'Spanish', icon: <SpainFlagIcon /> },
     { text: 'Arabic' },
     { text: 'English' },
     { text: 'French' },
     { text: 'Mandarin' },
     { text: 'Spanish' },
+  ];
+
+  const button3Options = [
+    { text: 'Sentimental Analysis' },
+    { text: 'Emotional Analysis' },
   ];
 
   const handleButtonClick = async () => {
@@ -99,9 +99,28 @@ const TranslateInput = () => {
         router.push(
           `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
         );
+      } else if (selectedOption1 === 'Insight') {
+        // Handle Insight processing
+        const selectedOption3 = 'Sentiment Analysis'; // Default option for Button3
+        const insightResult = await generateTextInsight(
+          textInput,
+          selectedOption3
+        ); // Replace with the actual function and pass the required param
+
+        if (!insightResult) {
+          toast.error('Insight generation failed');
+          return;
+        }
+        toast.success('Insight generated successfully!');
+        setTextInput('');
+        router.push(
+          `/dashboard/insightpage?insightType=${encodeURIComponent(
+            selectedOption3
+          )}&insightResult=${encodeURIComponent(insightResult)}`
+        );
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       // toast.error(error.message || 'An error occurred');
     } finally {
       setIsLoading(false);
@@ -189,6 +208,37 @@ const TranslateInput = () => {
                         {/* <span className={style.dropdown__icon}>
                           {option.icon}
                         </span> */}
+                        {option.text}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+
+            {/* Dropdown Button 3 (Only for Insight) */}
+            {selectedOption1 === 'Insight' && (
+              <div className={style.dropdown}>
+                <button
+                  className={`${style.chat__button} ${style.dropdown__button}`}
+                  onClick={() => setDropdownOpen3(!dropdownOpen3)}
+                >
+                  {selectedOption3 || 'Select Analysis'}
+                  <div>
+                    <Image src="/down.svg" alt="down" width={10} height={10} />
+                  </div>
+                </button>
+                {dropdownOpen3 && (
+                  <ul className={style.dropdown__menu}>
+                    {button3Options.map((option) => (
+                      <li
+                        key={option.text}
+                        className={style.dropdown__item}
+                        onClick={() => {
+                          setSelectedOption3(option.text);
+                          setDropdownOpen3(false);
+                        }}
+                      >
                         {option.text}
                       </li>
                     ))}

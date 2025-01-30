@@ -7,7 +7,9 @@ import { toast } from 'react-toastify';
  * @returns {Promise<string>} - The summarized text.
  */
 
-const API_BASE_URL = 'http://localhost:8000/v1/generate';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+const SUMMARY_URL = `${BASE_URL}/generate`;
 
 const getAuthToken = () => {
   return localStorage.getItem('authToken');
@@ -26,7 +28,7 @@ export const generateTextSummary = async (text) => {
 
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/text-summary`,
+      `${SUMMARY_URL}/text-summary`,
       { text },
       {
         headers: {
