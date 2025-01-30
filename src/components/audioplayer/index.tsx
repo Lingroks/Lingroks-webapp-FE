@@ -85,6 +85,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             // setCurrentTime(waveSurferRef.current!.getCurrentTime());
           });
 
+           // Handle audio finish event
+        waveSurferRef.current.on('finish', () => {
+          setIsPlaying(false); // Reset play button
+          setCurrentTime(0); // Reset audio to start
+          waveSurferRef.current!.stop(); // Ensure it resets
+        });
+
+
           // waveSurferRef.current.on('seek', (progress) => {
           //   setCurrentTime(waveSurferRef.current!.getDuration() * progress);
           // });
