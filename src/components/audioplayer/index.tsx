@@ -65,7 +65,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             setIsLoaded(false);
             setLoadFailed(true);
             setErrorMessage(error.message || 'Failed to load audio file.');
-            toast.error(`Error: ${error.message}`, {});
+            toast.error(`Error-message: ${error.message}`, {});
           });
 
           waveSurferRef.current.load(audioUrl);
@@ -98,7 +98,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             console.error('Fetch error:', error.message);
             setLoadFailed(true);
             setErrorMessage(error.message || 'Failed to fetch audio file.');
-            toast.error(`Error: ${error.message}`);
+            toast.error(`Error: ${error.message} `);
           } else {
             // Handle non-Error cases if necessary
             console.error('Unknown error:', error);
@@ -116,7 +116,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
       controller.abort(); // Abort fetch request
       waveSurferRef.current?.destroy(); // Clean up WaveSurfer
     };
-  }, [audioUrl, track]);
+  }, [track]);
 
   const togglePlay = () => {
     if (waveSurferRef.current && isLoaded) {
