@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-
-const BASE_URL =  process.env.NEXT_PUBLIC_BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -27,23 +26,23 @@ axiosInstance.interceptors.request.use(
 );
 
 // Response Interceptor: Handle Unauthorized Errors
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response) {
-      if (error.response.status === 401) {
+    if (error.response?.status === 401) {
+      // ✅ Trigger auth redirect inside a React component
+      if (typeof window !== 'undefined') {
         // ✅ Remove token and log out user when unauthorized
         toast.error('Session expired. Please log in again.');
         localStorage.removeItem('authToken');
-        localStorage.removeItem('userProfile'); // Optional: Remove user profile
-        window.location.href = '/auth/login'; // Redirect to login page
-      } else if (error.response.status === 500) {
-        toast.error('Server error. Please try again later.');
-      } else {
-        toast.error(error.response.data?.message || 'An error occurred.');
+        localStorage.removeItem('userProfile');
+        window.dispatchEvent(new Event('logout')); // Dispatch a global event
       }
+    } else if (error.response?.status === 500) {
+      toast.error('Server error. Please try again later.');
     } else {
-      toast.error('Network error. Please check your connection.');
+      toast.error(error.response?.data?.message || 'An error occurred.');
     }
     return Promise.reject(error);
   }

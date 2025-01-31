@@ -1,5 +1,5 @@
-import axiosInstance from '../utils/axoisInstance.js';
 import { toast } from 'react-toastify';
+import axiosInstance from '../utils/axoisInstance.js';
 
 // Register a new user
 
