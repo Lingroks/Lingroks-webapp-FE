@@ -1,6 +1,6 @@
 // Example: Importing and using in Dashboard.tsx
 'use client';
-import React, { useState } from 'react';
+import React, { useState,useCallback, useMemo } from 'react';
 import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
@@ -12,250 +12,188 @@ import { isValidUrl } from '../../utils/urlChecker';
 import 'react-toastify/dist/ReactToastify.css';
 
 const TranslateInput = () => {
-  // Dropdown states for Button 1 and Button 2
-  const [selectedOption1, setSelectedOption1] = useState('Translate');
-  const [dropdownOpen1, setDropdownOpen1] = useState(false);
-  const [selectedOption2, setSelectedOption2] = useState({ text: 'ENGLISH' });
-  const [dropdownOpen2, setDropdownOpen2] = useState(false);
-  const [selectedOption3, setSelectedOption3] = useState('');
-  const [dropdownOpen3, setDropdownOpen3] = useState(false);
+  const router = useRouter();
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
-  const button1Options = [
-    { text: 'Translate', icon: <TranslateIcon /> },
-    { text: 'Audio', icon: <AudioIcon /> },
-    { text: 'Summary', icon: <SummaryIcon /> },
-    { text: 'Insight', icon: <InsightIcon /> },
-  ];
+  const [selectedOptions, setSelectedOptions] = useState({
+    option1: 'Translate',
+    option2: { text: 'ENGLISH' },
+    option3: '',
+  });
 
-  const button2Options = [
-    { text: 'Arabic' },
-    { text: 'English' },
-    { text: 'French' },
-    { text: 'Mandarin' },
-    { text: 'Spanish' },
-  ];
+  const [dropdownOpen, setDropdownOpen] = useState({
+    dropdown1: false,
+    dropdown2: false,
+    dropdown3: false,
+  });
 
-  const button3Options = [
-    { text: 'Sentimental Analysis' },
-    { text: 'Emotional Analysis' },
-  ];
+  // Memoized dropdown options
+  const button1Options = useMemo(
+    () => [
+      { text: 'Translate', icon: <TranslateIcon /> },
+      { text: 'Audio', icon: <AudioIcon /> },
+      { text: 'Summary', icon: <SummaryIcon /> },
+      { text: 'Insight', icon: <InsightIcon /> },
+    ],
+    []
+  );
 
+  const button2Options = useMemo(
+    () => [
+      { text: 'Arabic' },
+      { text: 'English' },
+      { text: 'French' },
+      { text: 'Mandarin' },
+      { text: 'Spanish' },
+    ],
+    []
+  );
+
+  const button3Options = useMemo(
+    () => [
+      { text: 'Sentimental Analysis' },
+      { text: 'Emotional Analysis' },
+    ],
+    []
+  );
+
+  // Handle dropdown selection
+  const handleSelection = useCallback((dropdown, value) => {
+    setSelectedOptions((prev) => ({ ...prev, [dropdown]: value }));
+    setDropdownOpen((prev) => ({ ...prev, [`dropdown${dropdown.slice(-1)}`]: false }));
+  }, []);
+
+  // Handle dropdown toggle
+  const toggleDropdown = useCallback((dropdown) => {
+    setDropdownOpen((prev) => ({ ...prev, [dropdown]: !prev[dropdown] }));
+  }, []);
+
+  // Optimized API handling function
   const handleButtonClick = async () => {
+    if (!textInput) return toast.error('Please enter text or a URL.');
+
     try {
       setIsLoading(true);
+      const { option1, option2, option3 } = selectedOptions;
+      let result;
 
-      if (selectedOption1 === 'Audio') {
-        // Generate speech and get the file URL
-        const result = await translateService.generateSpeech(textInput);
+      switch (option1) {
+        case 'Audio':
+          result = await translateService.generateSpeech(textInput);
+          if (!result) throw new Error('Audio generation failed');
+          router.push(`/dashboard/audiopage?track=${encodeURIComponent(result)}&text=${encodeURIComponent(textInput)}`);
+          break;
 
-        if (!result) {
-          toast.error('Audio generation failed');
-        }
-        toast.success('Text-to-speech conversion successful!');
-        setTextInput('');
-        // Navigate with the generated audio file URL
-        router.push(
-          `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
-        );
-      } else if (selectedOption1 === 'Translate') {
-        if (isValidUrl(textInput)) {
-          // Handle URL translation
-          const translatedContent =
-            await translateService.translateUrlPageContent(
-              textInput,
-              selectedOption2.text
-            );
-          toast.success('Web page translation successful!');
-          router.push(
-            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedContent)}`
-          );
-        } else {
-          // Perform text-to-text translation if Translate is selected
-          const translatedText = await translateService.generateTranslatedText(
-            textInput,
-            selectedOption2.text
-          ); // Pass selected language here
-          console.log(translatedText);
-          toast.success('Translation successful!');
-          setTextInput('');
-          router.push(
-            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
-          );
-          // Handle the translated text here
-        }
-      } else if (selectedOption1 === 'Summary') {
-        // Call the generateTextSummary function
-        const summary = await generateTextSummary(textInput);
+        case 'Translate':
+          if (isValidUrl(textInput)) {
+            result = await translateService.translateUrlPageContent(textInput, option2.text);
+            toast.success('Web page translation successful!');
+            router.push(`/dashboard/translatepage?translatedText=${encodeURIComponent(result)}`);
+          } else {
+            result = await translateService.generateTranslatedText(textInput, option2.text);
+            router.push(`/dashboard/translatepage?translatedText=${encodeURIComponent(result)}`);
+          }
+          break;
 
-        if (!summary) {
-          toast.error('Text summarization failed');
-          return;
-        }
-        toast.success('Text summary generated successfully!');
-        setTextInput('');
-        router.push(
-          `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
-        );
-      } else if (selectedOption1 === 'Insight') {
-        // Handle Insight processing
-        const selectedOption3 = 'Sentiment Analysis'; // Default option for Button3
-        const insightResult = await generateTextInsight(
-          textInput,
-          selectedOption3
-        ); // Replace with the actual function and pass the required param
+        case 'Summary':
+          result = await generateTextSummary(textInput);
+          if (!result) throw new Error('Text summarization failed');
+          router.push(`/dashboard/summarypage?summary=${encodeURIComponent(result)}`);
+          break;
 
-        if (!insightResult) {
-          toast.error('Insight generation failed');
-          return;
-        }
-        toast.success('Insight generated successfully!');
-        setTextInput('');
-        router.push(
-          `/dashboard/insightpage?insightType=${encodeURIComponent(
-            selectedOption3
-          )}&insightResult=${encodeURIComponent(insightResult)}`
-        );
+        case 'Insight':
+          if (!option3) throw new Error('Please select an analysis type.');
+          result = await generateTextInsight(textInput, option3);
+          router.push(`/dashboard/insightpage?insightType=${encodeURIComponent(option3)}&insightResult=${encodeURIComponent(result)}`);
+          break;
+
+        default:
+          toast.error('Invalid selection');
       }
-    } catch (e) {
-      console.log(e);
-      // toast.error(error.message || 'An error occurred');
+    } catch (error) {
+      toast.error(error.message || 'An error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div>
-      <div className={style.chat__input__container}>
-        {/* Textarea */}
-        <textarea
-          className={style.chat__textarea}
-          placeholder="Enter your text or link here"
-          onChange={(e) => setTextInput(e.target.value)}
-        ></textarea>
+    <div className={style.chat__input__container}>
+      {/* Textarea */}
+      <textarea
+        className={style.chat__textarea}
+        placeholder="Enter your text or link here"
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
+      ></textarea>
 
-        {/* Buttons */}
-        <div className={style.chat__buttons}>
-          <div className={style.left__buttons}>
-            {/* Dropdown Button 1 */}
+      {/* Buttons */}
+      <div className={style.chat__buttons}>
+        <div className={style.left__buttons}>
+          {/* Dropdown Button 1 */}
+          <div className={style.dropdown}>
+            <button className={`${style.chat__button} ${style.dropdown__button}`} onClick={() => toggleDropdown('dropdown1')}>
+              <span className={style.dropdown__icon}>
+                {button1Options.find((option) => option.text === selectedOptions.option1)?.icon}
+              </span>
+              {selectedOptions.option1}
+              <Image src="/down.svg" alt="down" width={10} height={10} />
+            </button>
+            {dropdownOpen.dropdown1 && (
+              <ul className={style.dropdown__menu}>
+                {button1Options.map((option) => (
+                  <li key={option.text} className={style.dropdown__item} onClick={() => handleSelection('option1', option.text)}>
+                    <span className={style.dropdown__icon}>{option.icon}</span>
+                    {option.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Dropdown Button 2 (Translate Option) */}
+          {selectedOptions.option1 === 'Translate' && (
             <div className={style.dropdown}>
-              <button
-                className={`${style.chat__button} ${style.dropdown__button}`}
-                onClick={() => setDropdownOpen1(!dropdownOpen1)}
-              >
-                <span className={style.dropdown__icon}>
-                  {
-                    button1Options.find(
-                      (option) => option.text === selectedOption1
-                    )?.icon
-                  }
-                </span>
-                {selectedOption1}
-                <div>
-                  <Image src="/down.svg" alt="down" width={10} height={10} />
-                </div>
+              <button className={`${style.chat__button} ${style.dropdown__button}`} onClick={() => toggleDropdown('dropdown2')}>
+                {selectedOptions.option2.text}
+                <Image src="/down.svg" alt="down" width={10} height={10} />
               </button>
-              {dropdownOpen1 && (
+              {dropdownOpen.dropdown2 && (
                 <ul className={style.dropdown__menu}>
-                  {button1Options.map((option) => (
-                    <li
-                      key={option.text}
-                      className={style.dropdown__item}
-                      onClick={() => {
-                        setSelectedOption1(option.text);
-                        setDropdownOpen1(false);
-                      }}
-                    >
-                      <span className={style.dropdown__icon}>
-                        {option.icon}
-                      </span>
+                  {button2Options.map((option) => (
+                    <li key={option.text} className={style.dropdown__item} onClick={() => handleSelection('option2', option)}>
                       {option.text}
                     </li>
                   ))}
                 </ul>
               )}
             </div>
+          )}
 
-            {/* Dropdown Button 2 (Only displayed when 'Translate' is selected) */}
-            {selectedOption1 === 'Translate' && (
-              <div className={style.dropdown}>
-                <button
-                  className={`${style.chat__button} ${style.dropdown__button}`}
-                  onClick={() => setDropdownOpen2(!dropdownOpen2)}
-                >
-                  {/* <span className={style.dropdown__icon}>
-                    {selectedOption2.icon}
-                  </span> */}
-                  {selectedOption2.text}
-                  <div>
-                    <Image src="/down.svg" alt="down" width={10} height={10} />
-                  </div>
-                </button>
-                {dropdownOpen2 && (
-                  <ul className={style.dropdown__menu}>
-                    {button2Options.map((option) => (
-                      <li
-                        key={option.text}
-                        className={style.dropdown__item}
-                        onClick={() => {
-                          setSelectedOption2(option);
-                          setDropdownOpen2(false);
-                        }}
-                      >
-                        {/* <span className={style.dropdown__icon}>
-                          {option.icon}
-                        </span> */}
-                        {option.text}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-
-            {/* Dropdown Button 3 (Only for Insight) */}
-            {selectedOption1 === 'Insight' && (
-              <div className={style.dropdown}>
-                <button
-                  className={`${style.chat__button} ${style.dropdown__button}`}
-                  onClick={() => setDropdownOpen3(!dropdownOpen3)}
-                >
-                  {selectedOption3 || 'Select Analysis'}
-                  <div>
-                    <Image src="/down.svg" alt="down" width={10} height={10} />
-                  </div>
-                </button>
-                {dropdownOpen3 && (
-                  <ul className={style.dropdown__menu}>
-                    {button3Options.map((option) => (
-                      <li
-                        key={option.text}
-                        className={style.dropdown__item}
-                        onClick={() => {
-                          setSelectedOption3(option.text);
-                          setDropdownOpen3(false);
-                        }}
-                      >
-                        {option.text}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-
-          <button
-            className={`${style.chat__button} ${style.submit__button}`}
-            onClick={handleButtonClick} // Trigger action on button click
-            disabled={isLoading || !textInput}
-          >
-            {isLoading ? 'Processing...' : 'Proceed'}
-          </button>
+          {/* Dropdown Button 3 (Insight Option) */}
+          {selectedOptions.option1 === 'Insight' && (
+            <div className={style.dropdown}>
+              <button className={`${style.chat__button} ${style.dropdown__button}`} onClick={() => toggleDropdown('dropdown3')}>
+                {selectedOptions.option3 || 'Select Analysis'}
+                <Image src="/down.svg" alt="down" width={10} height={10} />
+              </button>
+              {dropdownOpen.dropdown3 && (
+                <ul className={style.dropdown__menu}>
+                  {button3Options.map((option) => (
+                    <li key={option.text} className={style.dropdown__item} onClick={() => handleSelection('option3', option.text)}>
+                      {option.text}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
         </div>
+
+        <button className={`${style.chat__button} ${style.submit__button}`} onClick={handleButtonClick} disabled={isLoading || !textInput}>
+          {isLoading ? 'Processing...' : 'Proceed'}
+        </button>
       </div>
     </div>
   );
