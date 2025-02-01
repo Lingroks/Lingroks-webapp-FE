@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import '../app/globals.css';
 import '../assets/scss/main.scss';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import { UserProvider } from '../context/UserContext';
 
 // Configure the Inter font
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
+// const inter = Inter({
+//   subsets: ['latin'],
+//   variable: '--font-inter',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   icons: {
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
         {/* Amplitude Script */}
         <Script
