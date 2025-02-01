@@ -14,6 +14,7 @@ import Loader from '@/components/loader/index';
 
 const AudioPageContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -24,9 +25,12 @@ const AudioPageContent = () => {
 
   useEffect(() => {
     // Check if 'track' and 'textInput' are available
-    if (!track || !textInput) {
+    if (track !== null && textInput !== null) {
+      console.log('is loading setting to false')
+      setLoading(false);
+    } else {
       toast.error('Track cannot be found.');
-      // router.push('/dashboard');
+      router.push('/dashboard');
     }
   }, [track, textInput, router]);
 
@@ -49,7 +53,9 @@ const AudioPageContent = () => {
             readOnly
           ></textarea>
 
-          <Audioplayer track={track ?? undefined} openModal={openModal} />
+          {!loading && (
+            <Audioplayer track={track ?? undefined} openModal={openModal} />
+          )}
 
           {/* Buttons */}
           <div className={input.chat__buttons}>

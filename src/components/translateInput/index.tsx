@@ -65,7 +65,7 @@ const TranslateInput = () => {
   );
 
   const button3Options = useMemo(
-    () => [{ text: 'SentimentAnalysis' }, { text: 'EmotionalAnalysis' }],
+    () => [{ text: 'SentimentAnalysis' }, { text: 'SentimentAnalysis' }],
     []
   );
 

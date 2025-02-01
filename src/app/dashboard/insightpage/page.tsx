@@ -47,11 +47,12 @@ const InsightContent = () => {
     console.log('Parsed insights:', insights);
   }, [router, insights]);
 
-  const handleCopy = (text) => {
+  const handleCopy = (text: string | null | undefined) => {
     if (!text) {
       toast.error('No text to copy!');
       return;
     }
+
     copyToClipboard(text);
   };
 
