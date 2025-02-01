@@ -36,9 +36,9 @@ const SummaryContent = () => {
       <DashboardHeader />
       <div className={style.translate__main__content}>
         <Breadcrumb
-          title="Home | Loom"
-          date="2 days ago"
-          author="Einstein Namah"
+          // title="Home | Loom"
+          // date="2 days ago"
+          // author="Einstein Namah"
         />
 
         <div className={input.chat__input__container}>

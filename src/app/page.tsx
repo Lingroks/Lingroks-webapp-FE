@@ -98,8 +98,8 @@ const Home: React.FC = () => {
         <div className="h-[140px] w-full"></div>
         <section className="w-full">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
-            <h3 className="text-center max-w-[650px] text-[#323232] text-3xl">
-              Get started with our free plan today and see the difference.
+            <h3 className="text-center max-w-[400px] text-[#323232] text-3xl">
+              Sign up now and see Lingroks in action
             </h3>
             <Link href="/auth/signup">
               <button
