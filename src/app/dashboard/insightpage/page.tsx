@@ -10,12 +10,28 @@ import { ToastContainer, toast } from 'react-toastify';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
 import Loader from '@/components/loader/index';
 
+interface Insight {
+  id: string;
+  text: string;
+  length: number;
+  overallSentiment: string;
+  confidenceScores: {
+    positive: number;
+    neutral: number;
+    negative: number;
+  };
+}
+
+interface InsightsData {
+  insights: Insight[];
+}
+
 const InsightContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const insightParam = searchParams?.get('insights');
 
-  let insights = null;
+  let insights: InsightsData | null = null;
   try {
     insights = insightParam
       ? JSON.parse(decodeURIComponent(insightParam))
@@ -49,7 +65,7 @@ const InsightContent = () => {
           author="Einstein Namah"
         />
         <div className={input.chat__input__container}>
-          {insights?.insights?.map((insight, index) => (
+          {insights?.insights?.map((insight: Insight, index: number) => (
             <div key={index} className={input.insight__wrapper}>
               <textarea
                 className={input.translated}
@@ -61,7 +77,8 @@ const InsightContent = () => {
               {insight && (
                 <div className={input.insight__details}>
                   <p>
-                    <strong>Overall Sentiment:</strong> {insight.overallSentiment}
+                    <strong>Overall Sentiment:</strong>{' '}
+                    {insight.overallSentiment}
                   </p>
                   <p>
                     <strong>Confidence Scores:</strong>
@@ -105,7 +122,6 @@ const InsightContent = () => {
     </>
   );
 };
-
 
 const InsightPage = () => (
   <Suspense fallback={<Loader />}>
