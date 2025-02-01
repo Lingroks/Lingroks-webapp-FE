@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import '../app/globals.css';
 import '../assets/scss/main.scss';
 import { Inter } from 'next/font/google';
@@ -13,7 +14,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   icons: {
-    icon: '/favicon.ico', // Standard favicon
+    icon: '/favicon.ico',
     shortcut: '/favicon.ico',
   },
   title: 'Lingroks - Your All-in-One Language Tool',
@@ -28,6 +29,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        {/* Amplitude Script */}
+        <Script
+          src="https://cdn.amplitude.com/script/911d66f270261720f85ea7a0b6f7780b.js"
+          strategy="afterInteractive"
+        />
+        <Script id="amplitude-init" strategy="afterInteractive">
+          {`
+            window.amplitude.init('911d66f270261720f85ea7a0b6f7780b', {
+              fetchRemoteConfig: true,
+              autocapture: true
+            });
+          `}
+        </Script>
+      </head>
       <body>
         <UserProvider>{children}</UserProvider>
       </body>

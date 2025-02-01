@@ -36,9 +36,9 @@ const SummaryContent = () => {
       <DashboardHeader />
       <div className={style.translate__main__content}>
         <Breadcrumb
-          title="Home | Loom"
-          date="2 days ago"
-          author="Einstein Namah"
+          // title="Home | Loom"
+          // date="2 days ago"
+          // author="Einstein Namah"
         />
 
         <div className={input.chat__input__container}>
@@ -50,14 +50,14 @@ const SummaryContent = () => {
             readOnly
           />
 
-          <div className={input.input__cointainer}>
+          {/* <div className={input.input__cointainer}>
             <div className={input.input__wrapper}>
               <input type="email" name="" id="" value="johndoe@gmail.com" />
             </div>
             <div>
               <button className={input.input__retrybutton}>retry</button>
             </div>
-          </div>
+          </div> */}
 
           {/* Buttons */}
           <div className={input.chat__buttons}>
