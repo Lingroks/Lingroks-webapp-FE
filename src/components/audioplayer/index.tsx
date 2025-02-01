@@ -155,7 +155,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
         throw new Error(`Failed to fetch track: ${response.statusText}`);
 
       const blob = await response.blob();
-      const fileExtension = trackUrl.split('.').pop() || 'mp3'; // Default to .mp3 if no extension is found
+      const fileExtension = trackUrl.split('.').pop() || 'mp3'; 
       const fileName = `downloaded_track.${fileExtension}`;
 
       FileSaver.saveAs(blob, fileName);

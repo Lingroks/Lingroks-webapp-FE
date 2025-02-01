@@ -26,7 +26,7 @@ const AudioPageContent = () => {
     // Check if 'track' and 'textInput' are available
     if (!track || !textInput) {
       toast.error('Track cannot be found.');
-      router.push('/dashboard');
+      // router.push('/dashboard');
     }
   }, [track, textInput, router]);
 

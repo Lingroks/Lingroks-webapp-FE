@@ -23,32 +23,6 @@ const Dashboard = () => {
     }
   }, [router]);
 
-  // const cardData = [
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Translate',
-  //   },
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Translate',
-  //   },
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Summary',
-  //   },
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Translate',
-  //   },
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Insight',
-  //   },
-  //   {
-  //     headText: 'Lorem ipsum dolor sit amet consectetur.',
-  //     bottomText: 'Translate',
-  //   },
-  // ];
   return (
     <div>
       <AuthHandler/>
@@ -72,3 +46,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+

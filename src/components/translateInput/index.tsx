@@ -107,7 +107,7 @@ const TranslateInput = () => {
           result = await translateService.generateSpeech(textInput);
           if (!result) throw new Error('Audio generation failed');
           router.push(
-            `/dashboard/audiopage?track=${encodeURIComponent(result)}&text=${encodeURIComponent(textInput)}`
+            `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
           );
           break;
 
