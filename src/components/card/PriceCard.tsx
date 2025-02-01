@@ -27,6 +27,7 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
             'Unlimited text and text-to-speech translation (up to 50 languages)',
             'Unlimited webpage translation for browser extension',
             'Text-to-speech with multiple voices',
+            'PDF translation',
             'Advanced text insights',
             'Limited access to the text summary API (up to 10 summaries per day)',
             'Social media integration'

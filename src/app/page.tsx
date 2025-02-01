@@ -12,9 +12,10 @@ const Home: React.FC = () => {
     <>
       <div className={style.main}>
         <Header />
-        <Hero title="One AI-powered translation platform for your content needs" />
+        <Hero 
+        />
         <div className="h-[140px] w-full"></div>
-        <section className="w-full">
+        <section className="w-full" id="features">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
               Powerful Tools for Your Content
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
             <FeaturesTabbedPanel />
           </div>
         </section>
-        <div className="h-[140px] w-full"></div>
+        <div className="h-[140px] w-full" id="use-case"></div>
         <section className="w-full">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
           </div>
         </section>
         <div className="h-[140px] w-full"></div>
-        <section className="w-full">
+        <section className="w-full" id="pricing">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
               Choose a plan that works for you
