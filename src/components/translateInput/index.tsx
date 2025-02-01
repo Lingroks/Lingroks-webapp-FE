@@ -30,7 +30,9 @@ const TranslateInput = () => {
 
   const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
     option1: 'Translate',
-    option2: { text: 'ENGLISH' },
+    // option2: { text: 'ENGLISH' },
+    option2: { text: '' },
+
     option3: '',
   });
 
@@ -63,17 +65,20 @@ const TranslateInput = () => {
   );
 
   const button3Options = useMemo(
-    () => [{ text: 'Sentimental Analysis' }, { text: 'Emotional Analysis' }],
+    () => [{ text: 'SentimentAnalysis' }, { text: 'EmotionalAnalysis' }],
     []
   );
 
   // Handle dropdown selection with proper types
   const handleSelection = useCallback(
     (optionKey: 'option1' | 'option2' | 'option3', value: string) => {
-      setSelectedOptions((prev) => ({ ...prev, [optionKey]: value }));
+      setSelectedOptions((prev) => ({
+        ...prev,
+        [optionKey]: optionKey === 'option2' ? { text: value } : value, // Ensure option2 remains an object
+      }));
       setDropdownOpen((prev) => ({
         ...prev,
-        [`dropdown${optionKey.slice(-1)}`]: false, // Close dropdown based on optionKey
+        [`dropdown${optionKey.slice(-1)}`]: false, // Close dropdown
       }));
     },
     []
@@ -107,6 +112,7 @@ const TranslateInput = () => {
           break;
 
         case 'Translate':
+          if (!option2.text) throw new Error('Please select an language.');
           if (isValidUrl(textInput)) {
             result = await translateService.translateUrlPageContent(
               textInput,
@@ -138,8 +144,11 @@ const TranslateInput = () => {
         case 'Insight':
           if (!option3) throw new Error('Please select an analysis type.');
           result = await generateTextInsight(textInput, option3);
+          console.log(result)
           router.push(
-            `/dashboard/insightpage?insightType=${encodeURIComponent(option3)}&insightResult=${encodeURIComponent(result)}`
+              `/dashboard/insightpage?insights=${encodeURIComponent(JSON.stringify(result))}`
+            // `/dashboard/insightpage?insightType=${encodeURIComponent(option3)}&insights=${encodeURIComponent(result)}`
+
           );
           break;
 
@@ -209,7 +218,8 @@ const TranslateInput = () => {
                 className={`${style.chat__button} ${style.dropdown__button}`}
                 onClick={() => toggleDropdown('dropdown2')}
               >
-                {selectedOptions.option2.text}
+                {/* {selectedOptions.option2.text} */}
+                {selectedOptions.option2.text|| 'Select Language'}
                 <Image src="/down.svg" alt="down" width={10} height={10} />
               </button>
               {dropdownOpen.dropdown2 && (
