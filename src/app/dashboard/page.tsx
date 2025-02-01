@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
+import AuthHandler from '@/components/authhandler';
 // import Loader from "../../components/loader/index"
 
 const Dashboard = () => {
@@ -50,6 +51,7 @@ const Dashboard = () => {
   // ];
   return (
     <div>
+      <AuthHandler/>
       <DashboardHeader />
       <div className={style.dashboard__main__content}>
         <div className={style.content__inner}>

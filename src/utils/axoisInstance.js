@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-
-const BASE_URL =  'http://localhost:8000/v1'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -11,10 +10,9 @@ const axiosInstance = axios.create({
   },
 });
 
-// Add request interceptor
+// Request Interceptor: Attach Authorization Token
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Add Authorization token to headers if available
     const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -22,31 +20,32 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    // Handle request error
     console.error('Request Error:', error);
     return Promise.reject(error);
   }
 );
 
-// Add response interceptor
+// Response Interceptor: Handle Unauthorized Errors
+
 axiosInstance.interceptors.response.use(
-  (response) => {
-    // Modify or log the response before returning it
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // Handle global response errors
-    if (error.response) {
-      if (error.response.status === 401) {
-        toast.error('Unauthorized. Please log in again.');
-      } else if (error.response.status === 500) {
-        toast.error('Server error. Please try again later.');
-      } else {
-        toast.error(error.response.data?.message || 'An error occurred.');
+    if (error.response?.status === 401) {
+      // ✅ Trigger auth redirect inside a React component
+      if (typeof window !== 'undefined') {
+        // ✅ Remove token and log out user when unauthorized
+        toast.error('Session expired. Please log in again.');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userProfile');
+        window.dispatchEvent(new Event('logout')); // Dispatch a global event
       }
+    } else if (error.response?.status === 500) {
+      toast.error('Server error. Please try again later.');
     } else {
-      toast.error('Network error. Please check your connection.');
+      toast.error(error.response?.data?.message || 'An error occurred.');
     }
     return Promise.reject(error);
   }
 );
+
+export default axiosInstance;

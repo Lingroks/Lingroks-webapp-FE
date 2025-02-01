@@ -12,6 +12,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/favicon.ico', // Standard favicon
+    shortcut: '/favicon.ico',
+  },
   title: 'Lingroks - Your All-in-One Language Tool',
   description:
     'Lingroks is a language translator and learning platform that helps you learn and translate languages in a fun and interactive way.',
