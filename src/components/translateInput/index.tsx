@@ -32,7 +32,6 @@ const TranslateInput = () => {
     option1: 'Translate',
     // option2: { text: 'ENGLISH' },
     option2: { text: '' },
-
     option3: '',
   });
 
@@ -64,10 +63,7 @@ const TranslateInput = () => {
     []
   );
 
-  const button3Options = useMemo(
-    () => [{ text: 'SentimentAnalysis' }, { text: 'SentimentAnalysis' }],
-    []
-  );
+const button3Options = useMemo(() => [{ text: 'SentimentAnalysis' }], []);
 
   // Handle dropdown selection with proper types
   const handleSelection = useCallback(
