@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import styles from './breadcrumb.module.scss';
 
 interface BreadcrumbProps {
-  title: string;
-  date: string;
-  author: string;
+  title?: string;
+  date?: string;
+  author?: string;
 }
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, date, author }) => {

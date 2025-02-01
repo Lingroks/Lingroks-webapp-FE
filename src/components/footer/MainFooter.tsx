@@ -9,10 +9,13 @@ const MainFooter: React.FC = () => {
         <footer className={style.footer}>
                 <div className={style.footer__wrapper}>
                   <div className={style.footer__bottom}>
-                     <p className={style.footer__bottom__left}>
+                      <p className={style.footer__bottom__left}>
                         © 2025 Lingroks. Powered by <Link href='/'>NextBuildr</Link>
-                     </p>
-                     <div className={style.social__media__wrapper}>
+                      </p>
+                      <p className={style.footer__bottom__right}>
+                          <Link href='/privacy-policy'>Privacy Policy</Link>•<Link href='/terms'>Terms of Service</Link> 
+                      </p>
+                      <div className={style.social__media__wrapper}>
                         <Link href='https://www.linkedin.com/company/lingroks/' className={style.social__media__icon}>
                           <FaLinkedin />
                         </Link>

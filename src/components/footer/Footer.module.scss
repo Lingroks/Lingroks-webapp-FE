@@ -19,7 +19,7 @@
 .footer__bottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     @include breakpoint-custom-down(768) {
         flex-direction: column-reverse;
@@ -28,7 +28,7 @@
     }
 
     .footer__bottom__left {
-        font-size: .945rem;
+        font-size: .9rem;
         color: #646464;
         font-weight: 400;
 
@@ -41,14 +41,34 @@
     }
 }
 
+.footer__bottom__right {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1.5rem;
+
+    a {
+        color: #646464;
+        font-size: .9rem;
+        transition: color .3s;
+        text-decoration: underline;
+    }
+}
+
 .social__media__wrapper {
     display: flex;
     gap: 1rem;
     align-items: center;
+    margin-left: auto;
 
     a {
         color: #646464;
         font-size: 1.25rem;
         transition: color .3s;
+
+        &:hover {
+            color: rgb(87 50 233);
+        }
     }
 }
