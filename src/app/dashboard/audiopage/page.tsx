@@ -35,9 +35,9 @@ const AudioPageContent = () => {
       <DashboardHeader />
       <div className={style.translate__main__content}>
         <Breadcrumb
-          title="Home | Loom"
-          date="29 October 2024"
-          author="Einstein Namah"
+          // title="Home | Loom"
+          // date="29 October 2024"
+          // author="Einstein Namah"
         />
 
         <div className={input.chat__input__container}>
