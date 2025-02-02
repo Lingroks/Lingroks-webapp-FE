@@ -53,11 +53,11 @@
   </style>
   
   <!-- Background Lines -->
-  <path d="M50 300 Q200 50, 400 200 T750 150" stroke="#7d5eff" stroke-width="2" fill="transparent"/>
-  <path d="M100 350 Q250 100, 500 250 T780 120" stroke="#4b34d2" stroke-width="2" fill="transparent"/>
-  <path d="M30 250 Q180 80, 380 180 T730 130" stroke="#2d1c95" stroke-width="2" fill="transparent"/>
-  <path d="M60 280 Q220 40, 420 190 T770 140" stroke="#551fff" stroke-width="2" fill="transparent"/>
-  <path d="M90 320 Q270 90, 480 230 T760 110" stroke="#3a12c2" stroke-width="2" fill="transparent"/>
+  <path d="M50 300 Q200 50, 400 200 T750 150" stroke="#7d5eff" stroke-width="1" fill="transparent"/>
+  <path d="M100 350 Q250 100, 500 250 T780 120" stroke="#4b34d2" stroke-width="1" fill="transparent"/>
+  <path d="M30 250 Q180 80, 380 180 T730 130" stroke="#2d1c95" stroke-width="1" fill="transparent"/>
+  <path d="M60 280 Q220 40, 420 190 T770 140" stroke="#551fff" stroke-width="1" fill="transparent"/>
+  <path d="M90 320 Q270 90, 480 230 T760 110" stroke="#3a12c2" stroke-width="1" fill="transparent"/>
 
   <!-- Glowing Nodes -->
   <circle cx="50" cy="300" r="10" fill="#ffffff" class="glowing-node"/>

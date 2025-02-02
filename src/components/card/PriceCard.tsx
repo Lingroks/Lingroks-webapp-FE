@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoCheckmark } from "react-icons/io5";
 import style from './Card.module.scss'
+import Link from 'next/link';
 
 interface PriceCardProps {
     title: string,
@@ -118,9 +119,11 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
                     </ul>
                  </div>
                  <div className="button-wrapper mt-2">
+                    <Link href='/auth/signup'>
                     <button className={`${variant === 'basic' ? "bg-[#5732e9] text-white" : "bg-[#1e1e1e] text-white"} p-2 rounded-lg w-full`}>
                       Get Started
                     </button>
+                    </Link>
                  </div>
             </div>
         </div>
