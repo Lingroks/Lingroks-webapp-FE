@@ -13,14 +13,14 @@ const MobileMenu: React.FC<MobileMenuProps> = () => {
     return (
         <div className={style.mobile__menu}>
                 <nav className={style.mobile__nav}>
-                    <Link href="/" className={style.mobile__nav_link} aria-label="Subjects"
+                    <Link href="#features" className={style.mobile__nav_link} aria-label="Subjects"
                     >
                         <FaLightbulb />
                         <span>
                             Features
                         </span>
                     </Link>
-                    <Link href="/"
+                    <Link href="#use-case"
                     className={style.mobile__nav_link} aria-label="exam preps"
                     >
                         <BsPersonBoundingBox />
@@ -28,7 +28,7 @@ const MobileMenu: React.FC<MobileMenuProps> = () => {
                             Use cases
                         </span>
                     </Link>
-                    <Link href="/" className={style.mobile__nav_link} aria-label="Become a tutor">
+                    <Link href="#pricing" className={style.mobile__nav_link} aria-label="Become a tutor">
                         <FaDollarSign />
                         <span>
                             Pricing

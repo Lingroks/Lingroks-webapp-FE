@@ -1,15 +1,12 @@
-import axiosInstance from '../utils/axoisInstance.js';
 import { toast } from 'react-toastify';
+import axiosInstance from '../utils/axoisInstance.js';
 
 // Register a new user
 
-const BASE_URL = 'http://localhost:8000/v1';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // Create an Axios instance
 
-
-
-// Function to display toast messages
 const displayToast = (type, message) => {
   if (type === 'success') {
     toast.success(message, { position: 'top-right' });
@@ -45,24 +42,29 @@ export const registerUser = async (
       password: password.trim(),
     };
 
-    const response = await fetch(`${BASE_URL}/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    // const response = await fetch(`${BASE_URL}/users`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     accept: 'application/json',
+    //   },
+    //   body: JSON.stringify(payload),
+    // });
+
+    const response = await axiosInstance.post('/users', payload);
 
     // const response = await axiosInstance.post('/users', payload);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      toast.error(errorData.message || 'Registration failed!');
-      return;
-    }
+    
 
-    const data = await response.json();
+    // if (!response.ok) {
+    //   const errorData = await response.json();
+    //   toast.error(errorData.message || 'Registration failed!');
+    //   return;
+    // }
+
+    // const data = await response.json();
+    const data = response.data; 
     console.log('Response:', data);
     displayToast('success', 'User registered successfully!');
     // navigate('/auth/login');
@@ -79,6 +81,8 @@ export const registerUser = async (
 
 // Login User
 export const loginUser = async (email, password, navigate, updateUser) => {
+  console.log(BASE_URL)
+
   if (!email || !password) {
     toast.error('Please fill out all fields');
     return;
@@ -90,27 +94,29 @@ export const loginUser = async (email, password, navigate, updateUser) => {
       password: password.trim(),
     };
 
-    const response = await fetch(`${BASE_URL}/users/tokens`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    // const response = await fetch(`${BASE_URL}/users/tokens`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     accept: 'application/json',
+    //   },
+    //   body: JSON.stringify(payload),
+    // });
+    const response = await axiosInstance.post('/users/tokens', payload);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! Status: ${response.status}`);
+    // }
 
-    const data = await response.json();
+    // const data = await response.json();
+    const data = response.data; 
     console.log('Login successful:', data);
 
     // Save token or session (if needed)
     localStorage.setItem('authToken', data.token);
 
     const userProfile = await fetchUserProfile(data.token);
-
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
     updateUser(userProfile);
 
     // Navigate to dashboard after successful login
@@ -229,6 +235,7 @@ export const resetPassword = async (email, password, otp,navigate) => {
 export const logoutUser = (navigate) => {
   // Clear the authentication token from localStorage (or sessionStorage if you are using that)
   localStorage.removeItem('authToken');
+  localStorage.removeItem('userProfile');
   displayToast('success', 'Successfully logged out');
   // Redirect to the login page (or home page)
   navigate('/auth/login');

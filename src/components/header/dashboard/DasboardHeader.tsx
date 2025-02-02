@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { logoutUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
+
 import { useUser } from '../../../context/UserContext';
 
 const Header = () => {
@@ -57,7 +58,7 @@ const Header = () => {
               className=""
             />
           </div>
-          <span className={styles.user__name}>{user?.firstName || '?'}</span>
+          <span className={styles.user__name}>{user?.firstName || '...'}</span>
           <div className={styles.user__icon}>
             <Image
               src="/down.svg"
@@ -75,9 +76,9 @@ const Header = () => {
                 <Link href="/dashboard/personal-info">
                   <li className={styles.listitem}>Personal Info</li>
                 </Link>
-                <Link href="/dashboard/security-changes">
+                {/* <Link href="/dashboard/security-changes">
                   <li className={styles.listitem}>Security Changes</li>
-                </Link>
+                </Link> */}
 
                 <li className={styles.listitem}>Payment</li>
                 <li className={styles.listitem}>Terms and Privacy</li>

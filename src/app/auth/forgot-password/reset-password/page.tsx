@@ -25,7 +25,6 @@ const ResetPassword: React.FC = () => {
     const isLongEnough = password.length > 8;
 
     if (!hasUpperCase || !hasNumber || !isLongEnough) {
-      console.log('everrrrrrrrrryyyyyyyyyy');
       return 'Password must contain at least 1 uppercase letter, 1 number, and be longer than 8 characters.';
     }
     return '';
@@ -57,7 +56,7 @@ const ResetPassword: React.FC = () => {
     try {
       setIsLoading(true);
       await resetPassword(email, password, otp, router.push);
-      // router.push('/reset-successful');
+  
     } catch (error) {
       console.log(error);
       // toast.error('An error occurred. Please try again.');

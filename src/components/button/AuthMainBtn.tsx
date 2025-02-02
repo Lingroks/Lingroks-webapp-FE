@@ -18,7 +18,9 @@ export default function AuthMainBtn({
     <button
       onClick={onClick}
       disabled={disabled} // Pass disabled to the button
-      className={`${className} rounded-[60px] ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} // Add styles for disabled state
+      className={`${className} rounded-[60px] ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`} // Add styles for disabled state
     >
       {text}
     </button>

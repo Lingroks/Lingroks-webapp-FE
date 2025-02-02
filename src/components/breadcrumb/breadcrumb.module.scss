@@ -3,6 +3,7 @@
   flex-direction: column;
   font-family: Arial, sans-serif;
   margin: 1rem 0;
+  font-family: 'Inter';
 }
 
 .breadcrumbFirstrow {
@@ -15,7 +16,12 @@
   color: #5b63f1;
   cursor: pointer;
   font-size: 14px;
+  font-family: 'Inter';
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
 .separator {
@@ -26,6 +32,7 @@
 
 .title {
   font-size: 20px;
+  font-family: 'Inter';
   font-weight: 600;
   color: #323232;
   font-family: 'Inter';
@@ -36,6 +43,7 @@
   display: flex;
   gap: 10px;
   font-size: 12px;
+  font-family: 'Inter';
   color: #6c757d;
 }
 
@@ -48,6 +56,7 @@
 
 .date {
   font-size: 14px;
+  font-family: 'Inter';
   font-weight: 500;
   color: #646464;
   font-family: 'Inter';

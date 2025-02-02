@@ -3,7 +3,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const API_BASE_URL = 'http://localhost:8000/v1/detect'; // Adjust based on your backend proxy configuration
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+const DETECT_URL = `${BASE_URL}/detect`;
 
 // Fetch auth token from localStorage
 const getAuthToken = () => {
@@ -21,7 +23,7 @@ const detectLanguageService = {
 
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/`,
+        `${DETECT_URL}`,
         { text },
         {
           headers: {
@@ -32,11 +34,10 @@ const detectLanguageService = {
       toast.success('Language detected successfully!');
       return response.data.response;
     } catch (error) {
-      toast.error('Error in language detection.');
+      toast.error('Error in language detection. stsatt');
       throw error;
     }
   },
 };
 
 export default detectLanguageService;
-

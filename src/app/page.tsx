@@ -12,9 +12,10 @@ const Home: React.FC = () => {
     <>
       <div className={style.main}>
         <Header />
-        <Hero title="One AI-powered translation platform for your content needs" />
+        <Hero 
+        />
         <div className="h-[140px] w-full"></div>
-        <section className="w-full">
+        <section className="w-full" id="features">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
               Powerful Tools for Your Content
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
             <FeaturesTabbedPanel />
           </div>
         </section>
-        <div className="h-[140px] w-full"></div>
+        <div className="h-[140px] w-full" id="use-case"></div>
         <section className="w-full">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
@@ -55,10 +56,10 @@ const Home: React.FC = () => {
                   subtitle="From URLs get concise and actionable insights."
                 />
                 <FeatureCard
-                  alt="Legal Professional"
-                  imgSrc="https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  title="Legal Professionals"
-                  subtitle="Summarize contracts and legal docs for faster review"
+                  alt="Visually impaired"
+                  imgSrc="https://images.pexels.com/photos/6981045/pexels-photo-6981045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  title="Visually Impaired"
+                  subtitle="Convert text to audio for easy listening."
                 />
                 <FeatureCard
                   alt="journalist"
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
           </div>
         </section>
         <div className="h-[140px] w-full"></div>
-        <section className="w-full">
+        <section className="w-full" id="pricing">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
             <h2 className="text-[#323232] text-3xl max-w-[400px] text-center">
               Choose a plan that works for you
@@ -89,7 +90,7 @@ const Home: React.FC = () => {
                 priceType="Pro"
                 priceTag={true}
                 price="$15/month"
-                priceTagText="Most Popular"
+                priceTagText="Coming Soon"
                 variant="pro"
               />
             </div>
@@ -98,8 +99,8 @@ const Home: React.FC = () => {
         <div className="h-[140px] w-full"></div>
         <section className="w-full">
           <div className="max-w-[900px] m-auto flex items-center justify-center gap-4 flex-col px-4">
-            <h3 className="text-center max-w-[650px] text-[#323232] text-3xl">
-              Get started with our free plan today and see the difference.
+            <h3 className="text-center max-w-[400px] text-[#323232] text-3xl">
+              Sign up now and see Lingroks in action
             </h3>
             <Link href="/auth/signup">
               <button

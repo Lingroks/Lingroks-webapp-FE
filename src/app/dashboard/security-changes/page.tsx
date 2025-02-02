@@ -4,25 +4,24 @@
 import React from 'react';
 import DashboardHeader from '@/components/header/dashboard/DasboardHeader';
 import style from '@/assets/scss/pages/Dashboard.module.scss';
-import Link from 'next/link';
-import {useState} from 'react';
+import Link from 'next/link'
 
 const SecurityChanges = () => {
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // const [oldPassword, setOldPassword] = useState('');
+  // const [newPassword, setNewPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleOldPasswordChange = (e) => {
-    setOldPassword(e.target.value);
-  }
+  // const handleOldPasswordChange = (e) => {
+  //   setOldPassword(e.target.value);
+  // }
 
-  const handleNewPasswordChange = (e) => {
-    setNewPassword(e.target.value);
-  }
+  // const handleNewPasswordChange = (e) => {
+  //   setNewPassword(e.target.value);
+  // }
 
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  }
+  // const handleConfirmPasswordChange = (e) => {
+  //   setConfirmPassword(e.target.value);
+  // }
 
   return (
     <div>

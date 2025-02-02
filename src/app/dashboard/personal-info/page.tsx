@@ -5,8 +5,10 @@ import React from 'react';
 import DashboardHeader from '@/components/header/dashboard/DasboardHeader';
 import style from '@/assets/scss/pages/Dashboard.module.scss';
 import Link from 'next/link';
+import { useUser } from '../../../context/UserContext'; // Adjust path if needed
 
 const PersonalInfo = () => {
+  const { user } = useUser(); // Access user data
   return (
     <div>
       <DashboardHeader />
@@ -21,11 +23,21 @@ const PersonalInfo = () => {
             <div className={style.row}>
               <div className={style.input_group}>
                 <label className={style.label}>First Name</label>
-                <input type="text" className={style.input} placeholder="John" />
+                <input
+                  type="text"
+                  className={style.input}
+                  value={user?.firstName || ''}
+                  readOnly
+                />
               </div>
               <div className={style.input_group}>
                 <label className={style.label}>Last Name</label>
-                <input type="text" className={style.input} placeholder="Doe" />
+                <input
+                  type="text"
+                  className={style.input}
+                  value={user?.lastName || ''}
+                  readOnly
+                />
               </div>
             </div>
             <div className={style.input_group}>
@@ -33,7 +45,8 @@ const PersonalInfo = () => {
               <input
                 type="email"
                 className={style.input}
-                placeholder="johndoe@gmail.com"
+                value={user?.email || ''}
+                readOnly
               />
             </div>
           </div>

@@ -27,17 +27,17 @@ export default function Header() {
                 <nav className='flex-1 justify-start ml-6 max-md:hidden'>
                     <ul className='flex gap-4 items-center justify-start'>
                         <li>
-                            <Link href="/features">
+                            <Link href="#features">
                                 Features
                             </Link>
                         </li>
                         <li>
-                            <Link href="/pricing">
+                            <Link href="#use-case">
                                 Use Cases
                             </Link>
                         </li>
                         <li>
-                            <Link href="/contact">
+                            <Link href="#pricing">
                                 Pricing
                             </Link>
                         </li>

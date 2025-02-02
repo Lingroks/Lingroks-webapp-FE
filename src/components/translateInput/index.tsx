@@ -1,210 +1,273 @@
 // Example: Importing and using in Dashboard.tsx
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import translateService from '../../services/translateService';
 import { generateTextSummary } from '../../services/textSummary';
+import { generateTextInsight } from '../../services/insightService';
 import { useRouter } from 'next/navigation';
 import { isValidUrl } from '../../utils/urlChecker';
 import 'react-toastify/dist/ReactToastify.css';
 
+interface DropdownState {
+  dropdown1: boolean;
+  dropdown2: boolean;
+  dropdown3: boolean;
+}
+
+interface SelectedOptions {
+  option1: string;
+  option2: { text: string };
+  option3: string;
+}
+
 const TranslateInput = () => {
-  // Dropdown states for Button 1 and Button 2
-  const [selectedOption1, setSelectedOption1] = useState('Translate');
-  const [dropdownOpen1, setDropdownOpen1] = useState(false);
+  const router = useRouter();
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
-  const [selectedOption2, setSelectedOption2] = useState({
-    text: 'ENGLISH',
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
+    option1: 'Translate',
+    // option2: { text: 'ENGLISH' },
+    option2: { text: '' },
+    option3: '',
   });
-  const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
-  const button1Options = [
-    { text: 'Translate', icon: <TranslateIcon /> },
-    { text: 'Audio', icon: <AudioIcon /> },
-    { text: 'Summary', icon: <SummaryIcon /> },
-    { text: 'Insight', icon: <InsightIcon /> },
-  ];
+  const [dropdownOpen, setDropdownOpen] = useState<DropdownState>({
+    dropdown1: false,
+    dropdown2: false,
+    dropdown3: false,
+  });
 
-  const button2Options = [
-    // { text: 'Arabic', icon: <ArabicFlagIcon /> },
-    // { text: 'English', icon: <UsaFlagIcon /> },
-    // { text: 'French', icon: <FranceFlagIcon /> },
-    // { text: 'Mandarin', icon: <MandarinFlagIcon /> },
-    // { text: 'Spanish', icon: <SpainFlagIcon /> },
-    { text: 'Arabic' },
-    { text: 'English' },
-    { text: 'French' },
-    { text: 'Mandarin' },
-    { text: 'Spanish' },
-  ];
+  // Memoized dropdown options
+  const button1Options = useMemo(
+    () => [
+      { text: 'Translate', icon: <TranslateIcon /> },
+      { text: 'Audio', icon: <AudioIcon /> },
+      { text: 'Summary', icon: <SummaryIcon /> },
+      { text: 'Insight', icon: <InsightIcon /> },
+    ],
+    []
+  );
 
+  const button2Options = useMemo(
+    () => [
+      { text: 'Arabic' },
+      { text: 'English' },
+      { text: 'French' },
+      { text: 'Mandarin' },
+      { text: 'Spanish' },
+    ],
+    []
+  );
+
+const button3Options = useMemo(() => [{ text: 'SentimentAnalysis' }], []);
+
+  // Handle dropdown selection with proper types
+  const handleSelection = useCallback(
+    (optionKey: 'option1' | 'option2' | 'option3', value: string) => {
+      setSelectedOptions((prev) => ({
+        ...prev,
+        [optionKey]: optionKey === 'option2' ? { text: value } : value, // Ensure option2 remains an object
+      }));
+      setDropdownOpen((prev) => ({
+        ...prev,
+        [`dropdown${optionKey.slice(-1)}`]: false, // Close dropdown
+      }));
+    },
+    []
+  );
+  // Handle dropdown toggle with proper types
+  const toggleDropdown = useCallback(
+    (dropdownKey: 'dropdown1' | 'dropdown2' | 'dropdown3') => {
+      setDropdownOpen((prev) => ({
+        ...prev,
+        [dropdownKey]: !prev[dropdownKey],
+      }));
+    },
+    []
+  );
+  // Optimized API handling function
   const handleButtonClick = async () => {
+    if (!textInput) return toast.error('Please enter text or a URL.');
+
     try {
       setIsLoading(true);
+      const { option1, option2, option3 } = selectedOptions;
+      let result;
 
-      if (selectedOption1 === 'Audio') {
-        // Generate speech and get the file URL
-        const result = await translateService.generateSpeech(textInput);
+      switch (option1) {
+        case 'Audio':
+          result = await translateService.generateSpeech(textInput);
+          if (!result) throw new Error('Audio generation failed');
+          router.push(
+            `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
+          );
+          break;
 
-        if (!result) {
-          toast.error('Audio generation failed');
-        }
-        toast.success('Text-to-speech conversion successful!');
-        setTextInput('');
-        // Navigate with the generated audio file URL
-        router.push(
-          `/dashboard/audiopage?track=${encodeURIComponent(result)}&textInput=${encodeURIComponent(textInput)}`
-        );
-      } else if (selectedOption1 === 'Translate') {
-        if (isValidUrl(textInput)) {
-          // Handle URL translation
-          const translatedContent =
-            await translateService.translateUrlPageContent(
+        case 'Translate':
+          if (!option2.text) throw new Error('Please select an language.');
+          if (isValidUrl(textInput)) {
+            result = await translateService.translateUrlPageContent(
               textInput,
-              selectedOption2.text
+              option2.text
             );
-          toast.success('Web page translation successful!');
-          router.push(
-            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedContent)}`
-          );
-        } else {
-          // Perform text-to-text translation if Translate is selected
-          const translatedText = await translateService.generateTranslatedText(
-            textInput,
-            selectedOption2.text
-          ); // Pass selected language here
-          console.log(translatedText);
-          toast.success('Translation successful!');
-          setTextInput('');
-          router.push(
-            `/dashboard/translatepage?translatedText=${encodeURIComponent(translatedText)}`
-          );
-          // Handle the translated text here
-        }
-      } else if (selectedOption1 === 'Summary') {
-        // Call the generateTextSummary function
-        const summary = await generateTextSummary(textInput);
+            toast.success('Web page translation successful!');
+            router.push(
+              `/dashboard/translatepage?translatedText=${encodeURIComponent(result)}`
+            );
+          } else {
+            result = await translateService.generateTranslatedText(
+              textInput,
+              option2.text
+            );
+            router.push(
+              `/dashboard/translatepage?translatedText=${encodeURIComponent(result)}`
+            );
+          }
+          break;
 
-        if (!summary) {
-          toast.error('Text summarization failed');
-          return;
-        }
-        toast.success('Text summary generated successfully!');
-        setTextInput('');
-        router.push(
-          `/dashboard/summarypage?summary=${encodeURIComponent(summary)}`
-        );
+        case 'Summary':
+          result = await generateTextSummary(textInput);
+          if (!result) throw new Error('Text summarization failed');
+          router.push(
+            `/dashboard/summarypage?summary=${encodeURIComponent(result)}`
+          );
+          break;
+
+        case 'Insight':
+          if (!option3) throw new Error('Please select an analysis type.');
+          result = await generateTextInsight(textInput, option3);
+          console.log(result)
+          router.push(
+              `/dashboard/insightpage?insights=${encodeURIComponent(JSON.stringify(result))}`
+            // `/dashboard/insightpage?insightType=${encodeURIComponent(option3)}&insights=${encodeURIComponent(result)}`
+
+          );
+          break;
+
+        default:
+          toast.error('Invalid selection');
       }
-    } catch (error) {
-      toast.error(error.message || 'An error occurred');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'An error occurred');
+      } else {
+        toast.error('An error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div>
-      <div className={style.chat__input__container}>
-        {/* Textarea */}
-        <textarea
-          className={style.chat__textarea}
-          placeholder="Enter your text or link here"
-          onChange={(e) => setTextInput(e.target.value)}
-        ></textarea>
+    <div className={style.chat__input__container}>
+      {/* Textarea */}
+      <textarea
+        className={style.chat__textarea}
+        placeholder="Enter your text or link here"
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
+      ></textarea>
 
-        {/* Buttons */}
-        <div className={style.chat__buttons}>
-          <div className={style.left__buttons}>
-            {/* Dropdown Button 1 */}
+      {/* Buttons */}
+      <div className={style.chat__buttons}>
+        <div className={style.left__buttons}>
+          {/* Dropdown Button 1 */}
+          <div className={style.dropdown}>
+            <button
+              className={`${style.chat__button} ${style.dropdown__button}`}
+              onClick={() => toggleDropdown('dropdown1')}
+            >
+              <span className={style.dropdown__icon}>
+                {
+                  button1Options.find(
+                    (option) => option.text === selectedOptions.option1
+                  )?.icon
+                }
+              </span>
+              {selectedOptions.option1}
+              <Image src="/down.svg" alt="down" width={10} height={10} />
+            </button>
+            {dropdownOpen.dropdown1 && (
+              <ul className={style.dropdown__menu}>
+                {button1Options.map((option) => (
+                  <li
+                    key={option.text}
+                    className={style.dropdown__item}
+                    onClick={() => handleSelection('option1', option.text)}
+                  >
+                    <span className={style.dropdown__icon}>{option.icon}</span>
+                    {option.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Dropdown Button 2 (Translate Option) */}
+          {selectedOptions.option1 === 'Translate' && (
             <div className={style.dropdown}>
               <button
                 className={`${style.chat__button} ${style.dropdown__button}`}
-                onClick={() => setDropdownOpen1(!dropdownOpen1)}
+                onClick={() => toggleDropdown('dropdown2')}
               >
-                <span className={style.dropdown__icon}>
-                  {
-                    button1Options.find(
-                      (option) => option.text === selectedOption1
-                    )?.icon
-                  }
-                </span>
-                {selectedOption1}
-                <div>
-                  <Image src="/down.svg" alt="down" width={10} height={10} />
-                </div>
+                {/* {selectedOptions.option2.text} */}
+                {selectedOptions.option2.text|| 'Select Language'}
+                <Image src="/down.svg" alt="down" width={10} height={10} />
               </button>
-              {dropdownOpen1 && (
+              {dropdownOpen.dropdown2 && (
                 <ul className={style.dropdown__menu}>
-                  {button1Options.map((option) => (
+                  {button2Options.map((option) => (
                     <li
                       key={option.text}
                       className={style.dropdown__item}
-                      onClick={() => {
-                        setSelectedOption1(option.text);
-                        setDropdownOpen1(false);
-                      }}
+                      onClick={() => handleSelection('option2', option.text)}
                     >
-                      <span className={style.dropdown__icon}>
-                        {option.icon}
-                      </span>
                       {option.text}
                     </li>
                   ))}
                 </ul>
               )}
             </div>
+          )}
 
-            {/* Dropdown Button 2 (Only displayed when 'Translate' is selected) */}
-            {selectedOption1 === 'Translate' && (
-              <div className={style.dropdown}>
-                <button
-                  className={`${style.chat__button} ${style.dropdown__button}`}
-                  onClick={() => setDropdownOpen2(!dropdownOpen2)}
-                >
-                  {/* <span className={style.dropdown__icon}>
-                    {selectedOption2.icon}
-                  </span> */}
-                  {selectedOption2.text}
-                  <div>
-                    <Image src="/down.svg" alt="down" width={10} height={10} />
-                  </div>
-                </button>
-                {dropdownOpen2 && (
-                  <ul className={style.dropdown__menu}>
-                    {button2Options.map((option) => (
-                      <li
-                        key={option.text}
-                        className={style.dropdown__item}
-                        onClick={() => {
-                          setSelectedOption2(option);
-                          setDropdownOpen2(false);
-                        }}
-                      >
-                        <span className={style.dropdown__icon}>
-                          {option.icon}
-                        </span>
-                        {option.text}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-
-          <button
-            className={`${style.chat__button} ${style.submit__button}`}
-            onClick={handleButtonClick} // Trigger action on button click
-            disabled={isLoading || !textInput}
-          >
-            {isLoading ? 'Processing...' : 'Proceed'}
-          </button>
+          {/* Dropdown Button 3 (Insight Option) */}
+          {selectedOptions.option1 === 'Insight' && (
+            <div className={style.dropdown}>
+              <button
+                className={`${style.chat__button} ${style.dropdown__button}`}
+                onClick={() => toggleDropdown('dropdown3')}
+              >
+                {selectedOptions.option3 || 'Select Analysis'}
+                <Image src="/down.svg" alt="down" width={10} height={10} />
+              </button>
+              {dropdownOpen.dropdown3 && (
+                <ul className={style.dropdown__menu}>
+                  {button3Options.map((option) => (
+                    <li
+                      key={option.text}
+                      className={style.dropdown__item}
+                      onClick={() => handleSelection('option3', option.text)}
+                    >
+                      {option.text}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
         </div>
+
+        <button
+          className={`${style.chat__button} ${style.submit__button}`}
+          onClick={handleButtonClick}
+          disabled={isLoading || !textInput}
+        >
+          {isLoading ? 'Processing...' : 'Proceed'}
+        </button>
       </div>
     </div>
   );
@@ -284,35 +347,5 @@ const InsightIcon = () => (
         <rect width="16" height="16" fill="white" />
       </clipPath>
     </defs>
-  </svg>
-);
-
-const EnglandFlagIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-  >
-    <rect width="24" height="24" fill="#fff" />
-    <path d="M0 10h24v4H0z" fill="#D7141A" />
-    <path d="M10 0h4v24h-4z" fill="#D7141A" />
-  </svg>
-);
-
-const UsaFlagIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-  >
-    <rect width="24" height="24" fill="#fff" />
-    <path d="M0 3h24v3H0zm0 6h24v3H0zm0 6h24v3H0zm0 6h24v3H0z" fill="#B22234" />
-    <rect width="10" height="12" fill="#3C3B6E" />
-    <circle cx="2" cy="2" r="1" fill="#fff" />
-    <circle cx="4" cy="2" r="1" fill="#fff" />
-    <circle cx="2" cy="4" r="1" fill="#fff" />
-    <circle cx="4" cy="4" r="1" fill="#fff" />
   </svg>
 );
