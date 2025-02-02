@@ -17,9 +17,9 @@ const Hero: React.FC = () => {
                         Get Started For Free
                     </Link>
                 </div>
-                <div className={styles.hero__svg}>
-                    <img src="/neural.svg" alt="hero" />
-                </div>
+            </div>
+            <div className={styles.hero__svg}>
+                <img src="/neural.svg" alt="hero" />
             </div>
         </div>
     );
