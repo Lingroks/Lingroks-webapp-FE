@@ -13,6 +13,7 @@ export default function Header() {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     }
+    
     return(
         <header className={style.main__header}>
             <div className={style.main__header_wrapper}>
@@ -77,10 +78,10 @@ export default function Header() {
                 animate={{ x: isMobileMenuOpen ? 0 : '-100%' }}
                 transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className={style.mobile__menu_container}>
-                    <MobileMenu 
+                <MobileMenu 
                     menu={isMobileMenuOpen}
                     onToggle={toggleMobileMenu}
-                    />
+                />
             </motion.div>
         </header>
     )

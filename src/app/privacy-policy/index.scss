@@ -1,0 +1,53 @@
+.privacy-policy {
+    padding: 20px;
+    padding-top: 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: #333;
+    a {
+        color: #007bff;
+        text-decoration: none;
+        &:hover {
+        text-decoration: underline;
+        }
+    }
+    h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+    h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    h3 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    h4 {
+        font-size: 23px;
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+    p {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    ul {
+        margin-bottom: 30px;
+        padding-left: 20px;
+        list-style: disc;
+        li {
+        margin-bottom: 5px;
+        }
+    }
+    ol {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        li {
+        margin-bottom: 5px;
+        }
+    }
+}

@@ -2,32 +2,33 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './TabbedPanel.module.scss';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
+import VideoEmbed from '@/components/demovideo/page';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
     const FeaturesAssets = [
         {
             index: 0,
-            videoSrc: 'https://youtu.be/ZK-rNEhJIDs?si=KiFHUoBPqjpP2Dwe',
+            videoSrc: 'https://www.loom.com/embed/5d1481bf342f4e0dbfce9badd38481fd?sid=23085b99-046c-4e81-beac-6220e9b23cd9',
             text: 'Text',
             icon: '/text.svg'
         },
         {
             index: 1,
-            videoSrc: 'https://youtu.be/mtPqxJBMXCQ?si=mYGuW70MGgcSRv2E',
+            videoSrc: 'https://www.loom.com/embed/5be62135eaf04cd78aac76cdfec99d7a?sid=1b5a8c98-a4d7-4d35-b77b-895855e0ac9b',
             text: 'Audio',
             icon: '/audio.svg'
         },
         {
             index: 2,
-            videoSrc: 'https://youtu.be/mZlzS9i9i2Y?si=HM2QbBwtgAIlKe8W',
+            videoSrc: 'https://www.loom.com/embed/a059c43e769e4b92bd2a302577323ae4?sid=6f8f51fd-bda9-4064-95e4-40f9b40758ea',
             text: 'Summary',
             icon: '/summary.svg'
         },
         {
             index: 3,
-            videoSrc: 'https://youtu.be/HzAHRtJiiGk?si=DUxE68rabSNNUCai',
+            videoSrc: 'https://www.loom.com/embed/a46e9d27849e483db7a83d80354b94f5?sid=34822708-1d66-4c5e-bc2a-bc173f3afbb4',
             text: 'Insights',
             icon: '/insight.svg'
         }
@@ -60,15 +61,12 @@ const FeaturesTabbedPanel: React.FC = () => {
                     ))}
                 </div>
                 <div className='flex-1 w-full h-full'>
-                    {/* We'll make a demo video for each of the features and upload on youtube...then we will refrence them here...I only keep these videos here as placeholders */}
-                    <ReactPlayer
-                        url={FeaturesAssets[currentIndex].videoSrc}
-                        controls
-                        width='100%'
-                        height='100%'
-                        autoPlay={false}
-                        className='rounded-[12px] p-4'
-                    />
+                    <div className='w-full h-full'>
+                        <VideoEmbed 
+                        src={FeaturesAssets[currentIndex].videoSrc}
+                        title='video'
+                        />
+                    </div>
                 </div>
             </div>
         </div>
