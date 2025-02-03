@@ -3,12 +3,12 @@
 font-family: 'Inter';
 }
 
-.text {
-  color: red;
-  @include breakpoint-custom-up(900) {
-    color: green;
-  }
-}
+// .text {
+//   color: red;
+//   @include breakpoint-custom-up(900) {
+//     color: green;
+//   }
+// }
 
 .usecase__grid_container {
   width: 100%;

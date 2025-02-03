@@ -19,13 +19,14 @@
 
 .hero__title {
     text-align: center;
-    font-size: clamp(2.35rem, 1.932rem + 2.09vw, 3.5rem);
+    font-size: clamp(2.6rem, 2.018rem + 2.91vw, 4.2rem);
     line-height: 1.1;
     font-weight: 600;
     color: #323232;
+    max-width: 700px;
 
     span {
-        font-size: clamp(2.35rem, 1.932rem + 2.09vw, 3.5rem);
+        font-size: clamp(2.6rem, 2.018rem + 2.91vw, 4.2rem);
         background: linear-gradient(90deg, #5732e9, #e93257, #32e9a2);
         background-size: 200% 200%;
         color: transparent;
@@ -37,9 +38,10 @@
 
 .hero__subtitle {
     text-align: center;
-    font-size: clamp(1.25rem, 1.25rem + 0.5vw, 1.5rem);
+    font-size: clamp(1.1rem, 0.955rem + 0.73vw, 1.5rem);
     color: #646464;
     margin-top: 1rem;
+    max-width: 700px;
 }
 
 .hero__btn {
@@ -60,13 +62,15 @@
 
 
 .hero__svg {
-    width: 110%;
-    height: 70px;
-    height: auto;
+    width: 100%;
+    height: clamp(21.875rem, 18.466rem + 17.05vw, 31.25rem);
     margin-top: 4rem;
 
-    img {
+    video {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px;
     }
 }

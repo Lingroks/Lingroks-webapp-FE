@@ -2,6 +2,7 @@
 
 // Example: Importing and using in Dashboard.tsx
 import React, { useEffect } from 'react';
+// import type { Metadata } from 'next';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import TranslateInput from '../../components/translateInput/index';
@@ -10,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import AuthHandler from '@/components/authhandler';
-// import Loader from "../../components/loader/index"
 
 const Dashboard = () => {
   const { user } = useUser();

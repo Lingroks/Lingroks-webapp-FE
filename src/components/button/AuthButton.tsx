@@ -9,15 +9,13 @@ interface AuthButtonProps {
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   icon,
-  text = '',
   className = '',
   alt = '',
 }) => {
   return (
-    <button  className={`${className} py-2 px-4 rounded-[60px]`}>
+    <button  className={`${className} py-1 px-1 rounded-[8px] flex items-center justify-center`}>
       <div className="flex items-center justify-center">
-        <img src={icon} alt={alt} className="mr-2 w-[20px]" />
-        <span className="ml-1 block text-[1rem] sm:text-[.7rem]">{text}</span>
+        <img src={icon} alt={alt} className="mr-0 w-[40px]" />
       </div>
     </button>
   );

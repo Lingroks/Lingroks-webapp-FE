@@ -64,7 +64,7 @@ const PriceCard: React.FC<PriceCardProps> = ({title, priceType, priceTag=false,p
                     </div>
                     {priceTag !== false && (
                     <div className="tag">
-                      <p className='bg-[#ffffff66] text-[#f4f4f4] p-2 rounded-lg'>{priceTagText}</p>
+                      <p className='bg-[#ffffff66] text-[#f4f4f4] p-2 rounded-lg text-[12px]'>{priceTagText}</p>
                     </div>
                     )}
                  </div>

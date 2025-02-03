@@ -3,6 +3,7 @@
 import React from 'react';
 import { useState, ChangeEvent   } from 'react';
 import Link from 'next/link';
+// import type { Metadata } from 'next';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
@@ -13,6 +14,7 @@ import { validatePassword } from '../../../utils/passwordValidation';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -63,21 +65,34 @@ export default function Signup() {
         <h1 className="text-black text-[2rem] font-inter-medium mb-1 text-center">
           Create account for free
         </h1>
-        <p className="text-textGrey text-[16px] font-inter-regular mb-4 leading-normal">
+        <p className="text-textGrey text-[16px] font-inter-regular mb-12 leading-normal">
           Start translating your contents
         </p>
-        <div className="flex justify-between flex-col items-center w-full gap-3 mb-4 sm:flex-row sm:gap-2">
-          <AuthButton
-            icon="/google.svg"
-            text="Continue with Google"
-            className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"
-          />
-          <AuthButton
-            icon="/microsoft.svg"
-            text="Continue with Microsoft"
-            className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-textGrey w-full"
-          />
-        </div>
+        <div className="flex justify-between flex-row items-center gap-3 mb-4">
+            {/* Google Button with Tooltip */}
+            <div className="relative group w-full">
+              <AuthButton
+                icon="/google.svg"
+                className="bg-white text-textGrey w-full border"
+              />
+              {/* Tooltip */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                Coming soon!
+              </div>
+            </div>
+
+            {/* Microsoft Button with Tooltip */}
+            <div className="relative group w-full">
+              <AuthButton
+                icon="/microsoft.svg"
+                className = "bg-white text-textGrey w-full border"
+              />
+              {/* Tooltip */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                Coming soon!
+              </div>
+            </div>
+          </div>
         <div className="flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full">
           <div className="h-[.5px] bg-secondaryGrey w-[45%]"></div>
           <span className="block text-base text-secondaryGrey font-inter-medium">

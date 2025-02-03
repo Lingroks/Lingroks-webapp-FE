@@ -9,11 +9,16 @@ interface MobileMenuProps {
     onToggle: () => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = () => {
+const MobileMenu: React.FC<MobileMenuProps> = ({onToggle}) => {
+    const [isVisible, setIsVisible] = React.useState(false);
+    const toggleMenu = () => {
+        setIsVisible(!isVisible);
+    }
+
     return (
         <div className={style.mobile__menu}>
                 <nav className={style.mobile__nav}>
-                    <Link href="#features" className={style.mobile__nav_link} aria-label="Subjects"
+                    <Link href="#features" className={style.mobile__nav_link} aria-label="Subjects" onClick={onToggle}
                     >
                         <FaLightbulb />
                         <span>
@@ -21,14 +26,14 @@ const MobileMenu: React.FC<MobileMenuProps> = () => {
                         </span>
                     </Link>
                     <Link href="#use-case"
-                    className={style.mobile__nav_link} aria-label="exam preps"
+                    className={style.mobile__nav_link} aria-label="exam preps" onClick={onToggle}
                     >
                         <BsPersonBoundingBox />
                         <span>
                             Use cases
                         </span>
                     </Link>
-                    <Link href="#pricing" className={style.mobile__nav_link} aria-label="Become a tutor">
+                    <Link href="#pricing" className={style.mobile__nav_link} aria-label="Become a tutor" onClick={onToggle}>
                         <FaDollarSign />
                         <span>
                             Pricing
