@@ -11,12 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../,,/../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import AuthHandler from '@/components/authhandler';
-// import Loader from "../../components/loader/index"
-
-export const metadata = {
-  title: "Dashboard ",
-  description: "Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.",
-};
 
 const Dashboard = () => {
   const { user } = useUser();

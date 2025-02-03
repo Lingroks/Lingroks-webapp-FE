@@ -12,11 +12,6 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
 
-// export const metadata: Metadata = {
-//   title: 'Log In',
-//   description: 'Log in to access your dashboard and other lingroks features.',
-// };
-
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -15,10 +15,6 @@ import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
-// export const metadata: Metadata = {
-//   title: 'Sign Up',
-//   description: 'Create an account with Lingrok today.',
-// };
 
 export default function Signup() {
   const [email, setEmail] = useState('');
