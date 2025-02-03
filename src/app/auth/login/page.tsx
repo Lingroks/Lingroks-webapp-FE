@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useState } from 'react';
+// import type { Metadata } from 'next';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
@@ -10,7 +11,6 @@ import { loginUser } from '../../../services/authService';
 import { useRouter } from 'next/navigation';
 import { useUser } from '../../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
-
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -135,9 +135,7 @@ const Login: React.FC = () => {
           </form>
         </div>
       </AuthLayout>
-      <ToastContainer
-        toastClassName="text-sm font-inter-regular" 
-      />
+      <ToastContainer toastClassName="text-sm font-inter-regular" />
     </>
   );
 };

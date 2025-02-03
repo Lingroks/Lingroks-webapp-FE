@@ -3,6 +3,7 @@
 import React from 'react';
 import { useState, ChangeEvent   } from 'react';
 import Link from 'next/link';
+// import type { Metadata } from 'next';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
@@ -13,6 +14,7 @@ import { validatePassword } from '../../../utils/passwordValidation';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
   const [email, setEmail] = useState('');
