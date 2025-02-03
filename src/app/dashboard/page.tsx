@@ -2,7 +2,7 @@
 
 // Example: Importing and using in Dashboard.tsx
 import React, { useEffect } from 'react';
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 import DashboardHeader from '../../components/header/dashboard/DasboardHeader';
 import style from '../../assets/scss/pages/Dashboard.module.scss';
 import TranslateInput from '../../components/translateInput/index';
@@ -13,9 +13,9 @@ import { ToastContainer } from 'react-toastify';
 import AuthHandler from '@/components/authhandler';
 // import Loader from "../../components/loader/index"
 
-export const metadata: Metadata = {
-  title: 'Translate',
-  description: '.',
+export const metadata = {
+  title: "Dashboard ",
+  description: "Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.",
 };
 
 const Dashboard = () => {
