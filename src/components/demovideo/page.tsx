@@ -1,6 +1,12 @@
-// components/VideoEmbed.js
+import React from "react";
 
-const VideoEmbed = ({ src, title, width = "100%", height = "500px" }) => {
+interface VideoEmbedProps {
+  src: string;
+  title: string;
+}
+
+
+const VideoEmbed: React.FC<VideoEmbedProps> = ({ src, title}) => {
     return (
       <div style={{ position: "relative", paddingBottom: "56.25%", height: "100%", overflow: "hidden" }}>
         <iframe

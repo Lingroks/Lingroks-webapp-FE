@@ -10,10 +10,6 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({onToggle}) => {
-    const [isVisible, setIsVisible] = React.useState(false);
-    const toggleMenu = () => {
-        setIsVisible(!isVisible);
-    }
 
     return (
         <div className={style.mobile__menu}>
