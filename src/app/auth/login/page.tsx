@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useState } from 'react';
+// import type { Metadata } from 'next';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
 import AuthButton from '@/components/button/AuthButton';
@@ -11,6 +12,10 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../../../context/UserContext';
 import { ToastContainer } from 'react-toastify';
 
+// export const metadata: Metadata = {
+//   title: 'Log In',
+//   description: 'Log in to access your dashboard and other lingroks features.',
+// };
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -110,9 +115,7 @@ const Login: React.FC = () => {
           </form>
         </div>
       </AuthLayout>
-      <ToastContainer
-        toastClassName="text-sm font-inter-regular" 
-      />
+      <ToastContainer toastClassName="text-sm font-inter-regular" />
     </>
   );
 };
