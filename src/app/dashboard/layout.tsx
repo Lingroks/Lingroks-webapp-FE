@@ -4,6 +4,49 @@ export const metadata: Metadata = {
   title: 'Dashboard',
   description:
     'Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.',
+
+  keywords: ['dashboard', 'Translate web pages with AI', 'Free AI text-to-speech tool', 'Summarize articles using AI'],
+  // Open Graph (OG) metadata
+  openGraph: {
+    title: 'Dashboard',
+    description: 'Access your personal dashboard on Your App.',
+    url: 'https://lingroks.live/dashboard',
+    siteName: 'Your App',
+    images: [
+      {
+        url: 'https://lingroks.live/lingroks-dashboard.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dashboard Preview',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+
+  // Robots & Canonical URL
+  robots: {
+    index: true, // Allow indexing
+    follow: true, // Allow following links
+  },
+  alternates: {
+    canonical: 'https://lingroks.live/dashboard', // Preferred URL
+  },
+
+  // Icons (Favicon & App Icons)
+  icons: {
+    icon: '/favicon.ico', // Default favicon
+    apple: '/apple-touch-icon.png', // Apple Touch icon
+  },
+
+  // Theme & Viewport
+  themeColor: '#ffffff',
+  colorScheme: 'light dark',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
+    maximumScale: 1.0,
+  },
 };
 
 export default function DashboardLayout({
@@ -13,7 +56,7 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <div className='dashlay'>{children}</div>
+      <div className="dashlay">{children}</div>
     </>
   );
 }
