@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       'Lingroks is a language translator and learning platform that helps you learn and translate languages in a fun and interactive way.',
     url: 'https://lingroks.live',
-    siteName: 'Lingroks',
+    siteName: 'Lingroks - Your All-in-One Language Tool',
     images: [
       {
         url: 'https://lingroks.live/hero-main.png',
