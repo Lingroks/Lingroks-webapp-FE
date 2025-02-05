@@ -4,7 +4,7 @@ import { useState } from 'react';
 // import type { Metadata } from 'next';
 import Link from 'next/link';
 import AuthLayout from '../AuthLayout';
-import AuthButton from '@/components/button/AuthButton';
+// import AuthButton from '@/components/button/AuthButton';
 import AuthInputBox from '@/components/input/AuthInputBox';
 import AuthMainBtn from '@/components/button/AuthMainBtn';
 import { loginUser } from '../../../services/authService';
@@ -56,38 +56,38 @@ const Login: React.FC = () => {
               className="bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]  text-textGrey w-full"
             />
           </div> */}
-          <div className="flex justify-between flex-row items-center gap-3 mb-4">
+          {/* <div className="flex justify-between flex-row items-center gap-3 mb-4"> */}
             {/* Google Button with Tooltip */}
-            <div className="relative group w-full">
+            {/* <div className="relative group w-full">
               <AuthButton
                 icon="/google.svg"
                 className="bg-white text-textGrey w-full border"
               />
               {/* Tooltip */}
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+              {/* <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 Coming soon!
-              </div>
-            </div>
+              </div> */}
+            {/* </div>  */}
 
             {/* Microsoft Button with Tooltip */}
-            <div className="relative group w-full">
-              <AuthButton
+            {/* <div className="relative group w-full"> */}
+              {/* <AuthButton
                 icon="/microsoft.svg"
                 className = "bg-white text-textGrey w-full border"
-              />
+              /> */}
               {/* Tooltip */}
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+              {/* <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-textGrey rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 Coming soon!
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full">
+              </div> */}
+            {/* </div> */}
+          {/* </div> */}
+          {/* <div className="flex items-center justify-between text-base text-textGrey leading-3 font-inter-regular my-4 gap-2 w-full">
             <div className="h-[.5px] bg-secondaryGrey w-[45%]"></div>
             <span className="block text-base text-secondaryGrey font-inter-medium">
               Or
             </span>
             <div className="h-[.5px] bg-secondaryGrey w-[45%]"></div>
-          </div>
+          </div> */}
           <form
             action=""
             className="flex flex-col items-start justify-start w-full"
