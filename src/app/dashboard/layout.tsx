@@ -5,7 +5,14 @@ export const metadata: Metadata = {
   description:
     'Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.',
 
-  keywords: ['dashboard', 'Translate web pages with AI', 'Free AI text-to-speech tool', 'Summarize articles using AI'],
+  keywords: [
+    'dashboard',
+    'Translate web pages with AI',
+    'Free AI text-to-speech tool',
+    'Summarize articles using AI',
+    'Audio to text',
+    'Insights'
+  ],
   // Open Graph (OG) metadata
   openGraph: {
     title: 'Dashboard',
@@ -14,10 +21,10 @@ export const metadata: Metadata = {
     siteName: 'Lingroks',
     images: [
       {
-        url: 'https://lingroks.live/hero-main.png',
+        url: 'https://lingroks.live/lingroks-dashboard.png',
         width: 1200,
         height: 630,
-        alt: 'Home Preview',
+        alt: 'Dashboard Preview',
       },
     ],
     locale: 'en_US',
@@ -28,8 +35,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dashboard',
     description:
-    'Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.',
+      'Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.',
     images: ['https://lingroks.live/hero-main.png'],
+    site: '@lingroks',
   },
 
   // Robots & Canonical URL
@@ -38,12 +46,12 @@ export const metadata: Metadata = {
     follow: true, // Allow following links
   },
   alternates: {
-    canonical: 'https://lingroks.live/dashboard', // Preferred URL
+    canonical: 'https://lingroks.live/dashboard',
   },
 
   // Icons (Favicon & App Icons)
   icons: {
-    icon: '/favicon.ico', // Default favicon
+    icon: '/favicon.ico',
   },
 
   // Theme & Viewport
