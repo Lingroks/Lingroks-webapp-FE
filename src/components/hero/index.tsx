@@ -17,9 +17,9 @@ const Hero: React.FC = () => {
                         Get Started For Free
                     </Link>
                 </div>
-            <div className={styles.hero__svg}>
-                <video src="https://videos.pexels.com/video-files/3141208/3141208-uhd_2560_1440_25fps.mp4" autoPlay muted playsInline loop preload='auto'/>
-            </div>
+                <div className={styles.hero__svg}>
+                    <video src="/2025-02-05-Translate_text_to_any_language_easily.mp4" autoPlay muted playsInline loop preload='auto'/>
+                </div>
             </div>
         </div>
     );
