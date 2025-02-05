@@ -63,8 +63,17 @@
 
 .hero__svg {
     width: 100%;
-    height: clamp(21.875rem, 18.466rem + 17.05vw, 31.25rem);
-    margin-top: 4rem;
+    // height: clamp(21.875rem, 18.466rem + 17.05vw, 31.25rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 1.3rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    height: auto;
+
 
     video {
         width: 100%;

@@ -2,33 +2,31 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './TabbedPanel.module.scss';
-// import ReactPlayer from 'react-player';
-import VideoEmbed from '@/components/demovideo/page';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
     const FeaturesAssets = [
         {
             index: 0,
-            videoSrc: 'https://www.loom.com/embed/5d1481bf342f4e0dbfce9badd38481fd?sid=23085b99-046c-4e81-beac-6220e9b23cd9',
+            videoSrc: '/2025-02-05-Translate_text_to_any_language_easily.mp4',
             text: 'Text',
             icon: '/text.svg'
         },
         {
             index: 1,
-            videoSrc: 'https://www.loom.com/embed/5be62135eaf04cd78aac76cdfec99d7a?sid=1b5a8c98-a4d7-4d35-b77b-895855e0ac9b',
+            videoSrc: '/2025-02-05-Lingroks_Demo_Audio.mp4',
             text: 'Audio',
             icon: '/audio.svg'
         },
         {
             index: 2,
-            videoSrc: 'https://www.loom.com/embed/a059c43e769e4b92bd2a302577323ae4?sid=6f8f51fd-bda9-4064-95e4-40f9b40758ea',
+            videoSrc: '/2025-02-05-Summarize_content_easily.mp4',
             text: 'Summary',
             icon: '/summary.svg'
         },
         {
             index: 3,
-            videoSrc: 'https://www.loom.com/embed/a46e9d27849e483db7a83d80354b94f5?sid=34822708-1d66-4c5e-bc2a-bc173f3afbb4',
+            videoSrc: '/2025-02-05-Lingroks_Insight.mp4',
             text: 'Insights',
             icon: '/insight.svg'
         }
@@ -37,7 +35,13 @@ const FeaturesTabbedPanel: React.FC = () => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const displayVideo = (index: number) => {
         setCurrentIndex(index);
+        const videoElement = document.getElementById("featureVideo") as HTMLVideoElement;
+        if (videoElement) {
+            videoElement.src = FeaturesAssets[index].videoSrc; // Update source
+            videoElement.load(); // Ensure the new video plays
+        }
     }
+    
     return (
         <div className='w-full border-[#d8d8d8] border border-solid rounded-2xl h-[420px]'>
             <div className={style.featured__tab_wrapper}>
@@ -62,10 +66,9 @@ const FeaturesTabbedPanel: React.FC = () => {
                 </div>
                 <div className='flex-1 w-full h-full'>
                     <div className='w-full h-full'>
-                        <VideoEmbed 
-                        src={FeaturesAssets[currentIndex].videoSrc}
-                        title='video'
-                        />
+                        <video muted autoPlay loop controls className='w-full h-full' id="featureVideo">
+                            <source src={FeaturesAssets[currentIndex].videoSrc} type="video/mp4" />
+                        </video>
                     </div>
                 </div>
             </div>

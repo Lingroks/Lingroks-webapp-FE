@@ -4,6 +4,8 @@ import '../app/globals.css';
 import '../assets/scss/main.scss';
 // import { Inter } from 'next/font/google';
 import { UserProvider } from '../context/UserContext';
+import AmplitudeTracker from '../components/amplitudetracker/index';
+
 
 // Configure the Inter font
 // const inter = Inter({
@@ -83,17 +85,12 @@ export default function RootLayout({
           src="https://cdn.amplitude.com/script/911d66f270261720f85ea7a0b6f7780b.js"
           strategy="afterInteractive"
         />
-        <Script id="amplitude-init" strategy="afterInteractive">
-          {`
-            window.amplitude.init('911d66f270261720f85ea7a0b6f7780b', {
-              fetchRemoteConfig: true,
-              autocapture: true
-            });
-          `}
-        </Script>
       </head>
       <body>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <AmplitudeTracker />
+          {children}
+        </UserProvider>
       </body>
     </html>
   );
