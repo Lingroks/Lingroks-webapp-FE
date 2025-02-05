@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
   },
-  title: 'Lingroks - Your All-in-One Language Tool',
+  title: 'Your AI-Powered Companion for All Things Content',
   description:
-    'Lingroks is a language translator and learning platform that helps you learn and translate languages in a fun and interactive way.',
+    'Lingroks is an AI-powered communication platform that breaks language barriers effortlessly. With real-time translation, summarization, and text-to-speech, it enables seamless global communication for individuals, businesses, and professionals. Whether browsing the web, engaging with content, or collaborating across languages, Lingroks ensures smarter and more efficient interactions—powered by advanced AI to transform how people connect and access information worldwide.',
   keywords: [
     'AI translation tool',
     'AI text-to-speech converter',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     'AI-powered communication tool',
   ],
   openGraph: {
-    title: 'Lingroks - Your All-in-One Language Tool',
+    title: 'Your AI-Powered Companion for All Things Content',
     description:
-      'Lingroks is a language translator and learning platform that helps you learn and translate languages in a fun and interactive way.',
+      'Lingroks is an AI-powered communication platform that breaks language barriers effortlessly. With real-time translation, summarization, and text-to-speech, it enables seamless global communication for individuals, businesses, and professionals. Whether browsing the web, engaging with content, or collaborating across languages, Lingroks ensures smarter and more efficient interactions—powered by advanced AI to transform how people connect and access information worldwide.',
     url: 'https://lingroks.live',
     siteName: 'Lingroks - Your All-in-One Language Tool',
     images: [
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Lingroks - Your All-in-One Language Tool',
+    title: 'Your AI-Powered Companion for All Things Content',
     description:
-      'Lingroks is a language translator and learning platform that helps you learn and translate languages in a fun and interactive way.',
+      'Lingroks is an AI-powered communication platform that breaks language barriers effortlessly. With real-time translation, summarization, and text-to-speech, it enables seamless global communication for individuals, businesses, and professionals. Whether browsing the web, engaging with content, or collaborating across languages, Lingroks ensures smarter and more efficient interactions—powered by advanced AI to transform how people connect and access information worldwide.',
     images: ['https://lingroks.live/lingroks-dashboard.png'],
     site: '@lingroks',
   },
