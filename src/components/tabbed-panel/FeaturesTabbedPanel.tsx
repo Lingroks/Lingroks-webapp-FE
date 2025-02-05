@@ -2,8 +2,6 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './TabbedPanel.module.scss';
-// import ReactPlayer from 'react-player';
-import VideoEmbed from '@/components/demovideo/page';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
@@ -28,7 +26,7 @@ const FeaturesTabbedPanel: React.FC = () => {
         },
         {
             index: 3,
-            videoSrc: '/public/2025-02-05-Lingroks_Insight.mp4',
+            videoSrc: '/2025-02-05-Lingroks_Insight.mp4',
             text: 'Insights',
             icon: '/insight.svg'
         }
@@ -37,7 +35,13 @@ const FeaturesTabbedPanel: React.FC = () => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const displayVideo = (index: number) => {
         setCurrentIndex(index);
+        const videoElement = document.getElementById("featureVideo") as HTMLVideoElement;
+        if (videoElement) {
+            videoElement.src = FeaturesAssets[index].videoSrc; // Update source
+            videoElement.load(); // Ensure the new video plays
+        }
     }
+    
     return (
         <div className='w-full border-[#d8d8d8] border border-solid rounded-2xl h-[420px]'>
             <div className={style.featured__tab_wrapper}>
@@ -62,7 +66,7 @@ const FeaturesTabbedPanel: React.FC = () => {
                 </div>
                 <div className='flex-1 w-full h-full'>
                     <div className='w-full h-full'>
-                        <video muted autoPlay loop className='w-full h-full'>
+                        <video muted autoPlay loop controls className='w-full h-full' id="featureVideo">
                             <source src={FeaturesAssets[currentIndex].videoSrc} type="video/mp4" />
                         </video>
                     </div>
