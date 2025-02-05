@@ -11,17 +11,25 @@ export const metadata: Metadata = {
     title: 'Dashboard',
     description: 'Access your personal dashboard on Your App.',
     url: 'https://lingroks.live/dashboard',
-    siteName: 'Your App',
+    siteName: 'Lingroks',
     images: [
       {
-        url: 'https://lingroks.live/lingroks-dashboard.png',
+        url: 'https://lingroks.live/hero-main.png',
         width: 1200,
         height: 630,
-        alt: 'Dashboard Preview',
+        alt: 'Home Preview',
       },
     ],
     locale: 'en_US',
     type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dashboard',
+    description:
+    'Access your personal dashboard on Your App. Manage your settings, view analytics, and stay updated.',
+    images: ['https://lingroks.live/hero-main.png'],
   },
 
   // Robots & Canonical URL
@@ -36,7 +44,6 @@ export const metadata: Metadata = {
   // Icons (Favicon & App Icons)
   icons: {
     icon: '/favicon.ico', // Default favicon
-    apple: '/apple-touch-icon.png', // Apple Touch icon
   },
 
   // Theme & Viewport
