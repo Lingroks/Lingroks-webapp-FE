@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       'Lingroks is an AI-powered communication platform that breaks language barriers effortlessly. With real-time translation, summarization, and text-to-speech, it enables seamless global communication for individuals, businesses, and professionals. Whether browsing the web, engaging with content, or collaborating across languages, Lingroks ensures smarter and more efficient interactions—powered by advanced AI to transform how people connect and access information worldwide.',
     url: 'https://lingroks.live',
-    siteName: 'Lingroks',
+    siteName: 'Lingroks - Your All-in-One Language Tool',
     images: [
       {
         url: 'https://lingroks.live/hero-main.png',
