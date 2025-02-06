@@ -5,7 +5,13 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 // Register necessary components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DonutChart = ({ positive, neutral, negative }) => {
+interface DonutChartProps {
+    positive: number;
+    neutral: number;
+    negative: number;
+  }
+
+  const DonutChart: React.FC<DonutChartProps> = ({ positive, neutral, negative }) => {
   const data = {
     labels: ['Positive', 'Neutral', 'Negative'],
     datasets: [
