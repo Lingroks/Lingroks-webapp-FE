@@ -76,14 +76,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Amplitude Script */}
-        <Script
+        {/* <Script
           src="https://cdn.amplitude.com/script/911d66f270261720f85ea7a0b6f7780b.js"
           strategy="afterInteractive"
-        />
+        /> */}
       </head>
       <body>
         <UserProvider>
-          <AmplitudeTracker />
+          {/* <AmplitudeTracker /> */}
           {children}
         </UserProvider>
       </body>
