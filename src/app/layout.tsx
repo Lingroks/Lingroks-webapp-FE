@@ -63,13 +63,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lingroks.live/',
   },
-  themeColor: '#ffffff',
-  colorScheme: 'light dark',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-    maximumScale: 1.0,
-  },
+ 
+  
 };
 
 export default function RootLayout({
