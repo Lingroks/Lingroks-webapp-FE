@@ -63,12 +63,12 @@ export const UserProvider = ({ children }) => {
       setUser(parsedUser);
     }
   }, []);
-  
+
   useEffect(() => {
     if (user && user._id) {
       initializeAmplitude(user);
     }
-  }, [user]);;
+  }, [user]);
 
   // const initializeAmplitude = (userData) => {
   //   console.log('Initializing Amplitude with user:', userData);
@@ -87,29 +87,27 @@ export const UserProvider = ({ children }) => {
   //   amplitude.track('User Logged In', { email: userData.email });
   // };
 
-
   const initializeAmplitude = (userData) => {
     if (!userData || !userData._id) return; // Ensure valid user data
-  
+
     if (!amplitude.initialized) {
       console.log('Initializing Amplitude...');
       amplitude.init(process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY);
       amplitude.initialized = true; // Mark as initialized
     }
-  
+
     console.log('Setting Amplitude user:', userData);
-  
+
     amplitude.setUserId(userData._id);
-  
+
     const identifyEvent = new amplitude.Identify();
-    identifyEvent.set('firstName', userData.firstName);
-    identifyEvent.set('lastName', userData.lastName);
-    identifyEvent.set('email', userData.email);
-  
+    identifyEvent.set('firstName', String(userData.firstName || ''));
+    identifyEvent.set('lastName', String(userData.lastName || ''));
+    identifyEvent.set('email', String(userData.email || ''));
+
     amplitude.identify(identifyEvent);
     amplitude.track('User Logged In', { email: userData.email });
   };
-  
 
   const updateUser = (userData) => {
     setUser(userData);
