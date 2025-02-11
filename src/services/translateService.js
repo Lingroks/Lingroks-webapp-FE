@@ -1,35 +1,38 @@
 // services/translateService.js
 
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import detectLanguageService from './detectService';
+import axios from "axios";
+import { toast } from "react-toastify";
+import detectLanguageService from "./detectService";
+import checkProtectedRoute from "./protectedService"; 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
 const TRANSLATE_URL = `${BASE_URL}/translate`;
 
 // Fetch auth token from localStorage
 const getAuthToken = () => {
-  return localStorage.getItem('authToken');
+  return localStorage.getItem("authToken");
 };
 
 const translateService = {
   async generateTranslatedText(text, targetLanguage) {
     const token = getAuthToken();
     if (!token) {
-      toast.error('Authentication token is missing.');
-      throw new Error('Authentication token is missing.');
+      toast.error("Authentication token is missing.");
+      throw new Error("Authentication token is missing.");
     }
 
     try {
-      // Step 1: Detect language
+      // ✅ Step 1: Check protected route before proceeding
+      await checkProtectedRoute();
+
+      // Step 2: Detect language
       const detectedLanguage = await detectLanguageService.detectLanguage(text);
       if (!detectedLanguage || detectedLanguage.error) {
-        toast.error('Error in language detection. transss');
-        throw new Error('Language detection failed.');
+        toast.error("Error in language detection.");
+        throw new Error("Language detection failed.");
       }
 
-      // Step 2: Proceed to translation
+      // Step 3: Proceed to translation
       const response = await axios.post(
         `${TRANSLATE_URL}/`,
         { text, targetLanguage },
@@ -39,20 +42,23 @@ const translateService = {
           },
         }
       );
-      toast.success('Text translated successfully!');
+      toast.success("Text translated successfully!");
       console.log(response.data.response);
       return response.data.response[targetLanguage];
     } catch (error) {
-      toast.error('Error in translation.');
+      toast.error("Error in translation.");
       throw error;
     }
   },
 
   async translateUrlPageContent(url, targetLanguage) {
     const token = getAuthToken();
-    if (!token) throw new Error('Authentication token is missing.');
+    if (!token) throw new Error("Authentication token is missing.");
 
     try {
+      // ✅ Check protected route before proceeding
+      await checkProtectedRoute();
+
       const response = await axios.post(
         `${TRANSLATE_URL}/url`,
         { url, targetLanguage },
@@ -62,22 +68,26 @@ const translateService = {
           },
         }
       );
-      toast.success('Page translated successfully!');
+      toast.success("Page translated successfully!");
       console.log(response.data.response);
       return response.data.response;
     } catch (error) {
-      toast.error('Error in translation.');
+      toast.error("Error in translation.");
       throw error;
     }
   },
 
   async generateSpeech(text) {
     const token = getAuthToken();
-    if (!token) throw new Error('Authentication token is missing.');
     if (!token) {
-      toast.error('Authentication token is missing.');
+      toast.error("Authentication token is missing.");
+      throw new Error("Authentication token is missing.");
     }
+
     try {
+      // ✅ Check protected route before proceeding
+      await checkProtectedRoute();
+
       const response = await axios.post(
         `${TRANSLATE_URL}/speech`,
         { text },
@@ -85,14 +95,12 @@ const translateService = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          // withCredentials: true,
         }
       );
-      toast.success('Audio generated successfully!');
-
+      toast.success("Audio generated successfully!");
       return response.data.fileDownloadUrl;
     } catch (error) {
-      toast.error('Error in generating audio.');
+      toast.error("Error in generating audio.");
       throw error;
     }
   },
