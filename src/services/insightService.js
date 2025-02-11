@@ -1,5 +1,15 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
+// services/textInsightService.js
+
+import axios from "axios";
+import { toast } from "react-toastify";
+import checkProtectedRoute from "./protectedService";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const INSIGHT_URL = `${BASE_URL}/text-insight`;
+
+const getAuthToken = () => {
+  return localStorage.getItem("authToken");
+};
 
 /**
  * Service to generate text insights.
@@ -7,49 +17,44 @@ import { toast } from 'react-toastify';
  * @param {string} analysisType - The type of analysis to perform.
  * @returns {Promise<Object>} - The analyzed insight.
  */
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const INSIGHT_URL = `${BASE_URL}/text-insight`; // Removed extra `/` at the end
-
-const getAuthToken = () => {
-  return localStorage.getItem('authToken');
-};
-
 export const generateTextInsight = async (document, analysisType) => {
   if (!document || (Array.isArray(document) && document.length === 0)) {
-    throw new Error('Document is required for text insight');
+    throw new Error("Document is required for text insight");
   }
   if (!analysisType) {
-    throw new Error('Analysis type is required');
+    throw new Error("Analysis type is required");
   }
 
   const token = getAuthToken();
   if (!token) {
-    toast.error('Authentication token is missing.');
-    throw new Error('Authentication token is missing.');
+    toast.error("Authentication token is missing.");
+    throw new Error("Authentication token is missing.");
   }
 
   try {
+    // ✅ Step 1: Check protected route before proceeding
+    await checkProtectedRoute();
     const payload = {
       document: Array.isArray(document) ? document : [document], // Ensure array format
       analysisType,
     };
 
-    console.log('Sending payload:', JSON.stringify(payload, null, 2)); // Debugging
+    console.log("Sending payload:", JSON.stringify(payload, null, 2)); // Debugging
 
+    // Step 3: Call API
     const response = await axios.post(INSIGHT_URL, payload, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json', // Ensure JSON format
+        "Content-Type": "application/json", // Ensure JSON format
       },
     });
 
-    toast.success('Text insight generated successfully!');
+    toast.success("Text insight generated successfully!");
     return response.data;
   } catch (error) {
-    console.error('API Error:', error?.response?.data || error.message); // Debugging
+    console.error("API Error:", error?.response?.data || error.message); // Debugging
 
-    toast.error('Error in generating text insight.');
+    toast.error("Error in generating text insight.");
     throw error;
   }
 };
