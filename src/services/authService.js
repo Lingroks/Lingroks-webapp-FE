@@ -42,33 +42,10 @@ export const registerUser = async (
       password: password.trim(),
     };
 
-    // const response = await fetch(`${BASE_URL}/users`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     accept: 'application/json',
-    //   },
-    //   body: JSON.stringify(payload),
-    // });
-
     const response = await axiosInstance.post('/users', payload);
-
-    // const response = await axiosInstance.post('/users', payload);
-
-    
-
-    // if (!response.ok) {
-    //   const errorData = await response.json();
-    //   toast.error(errorData.message || 'Registration failed!');
-    //   return;
-    // }
-
-    // const data = await response.json();
     const data = response.data; 
     console.log('Response:', data);
     displayToast('success', 'User registered successfully!');
-    // navigate('/auth/login');
-    // navigate(`/auth/verify-email`, { state: { email } });
     navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
   } catch (error) {
     displayToast(
@@ -94,21 +71,7 @@ export const loginUser = async (email, password, navigate, updateUser) => {
       password: password.trim(),
     };
 
-    // const response = await fetch(`${BASE_URL}/users/tokens`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     accept: 'application/json',
-    //   },
-    //   body: JSON.stringify(payload),
-    // });
     const response = await axiosInstance.post('/users/tokens', payload);
-
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! Status: ${response.status}`);
-    // }
-
-    // const data = await response.json();
     const data = response.data; 
     console.log('Login successful:', data);
 
