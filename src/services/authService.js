@@ -81,7 +81,7 @@ export const registerUser = async (
 
 // Login User
 export const loginUser = async (email, password, navigate, updateUser) => {
-  console.log(BASE_URL)
+
 
   if (!email || !password) {
     toast.error('Please fill out all fields');
