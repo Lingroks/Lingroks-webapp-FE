@@ -4,34 +4,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const PROTECTED_URL = `${BASE_URL}/protected`;
+const PROTECTED_URL = `${BASE_URL}/users/protected`;
 
-// Fetch auth token from localStorage
-const getAuthToken = () => {
-  return localStorage.getItem("authToken");
-};
 
-// ✅ Check if the protected route is accessible before proceeding
 const checkProtectedRoute = async () => {
-  const token = getAuthToken();
-  if (!token) {
-    toast.error("Authentication token is missing.");
-    throw new Error("Authentication token is missing.");
-  }
-
   try {
-    await axios.post(
-      PROTECTED_URL,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    await axiosInstance.post(PROTECTED_URL, {}); // No need to manually set headers
     return true; // Proceed if successful
   } catch (error) {
-    toast.error("Access denied. Please check your subscription or login again.");
+    toast.error("Access denied. Please check your subscription or log in again.");
     throw new Error("Access denied.");
   }
 };
