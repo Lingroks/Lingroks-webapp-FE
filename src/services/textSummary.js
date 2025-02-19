@@ -1,32 +1,37 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
+// services/textSummaryService.js
+
+import axios from "axios";
+import { toast } from "react-toastify";
+import checkProtectedRoute from "./protectedService"; 
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const SUMMARY_URL = `${BASE_URL}/generate`;
+
+const getAuthToken = () => {
+  return localStorage.getItem("authToken");
+};
 
 /**
  * Service to generate text summary.
  * @param {string} text - The input text to summarize.
  * @returns {Promise<string>} - The summarized text.
  */
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
-const SUMMARY_URL = `${BASE_URL}/generate`;
-
-const getAuthToken = () => {
-  return localStorage.getItem('authToken');
-};
-
 export const generateTextSummary = async (text) => {
   if (!text) {
-    throw new Error('Text is required for summarization');
+    throw new Error("Text is required for summarization");
   }
 
   const token = getAuthToken();
-  if (!token) throw new Error('Authentication token is missing.');
   if (!token) {
-    toast.error('Authentication token is missing.');
+    toast.error("Authentication token is missing.");
+    throw new Error("Authentication token is missing.");
   }
 
   try {
+    // ✅ Step 1: Check protected route before proceeding
+    await checkProtectedRoute();
+
+    // Step 2: Proceed with summarization
     const response = await axios.post(
       `${SUMMARY_URL}/text-summary`,
       { text },
@@ -36,10 +41,10 @@ export const generateTextSummary = async (text) => {
         },
       }
     );
-    toast.success('Text translated successfully!');
+    toast.success("Text summarized successfully!");
     return response.data.response;
   } catch (error) {
-    toast.error('Error in generating summary.');
+    toast.error("Error in generating summary.");
     throw error;
   }
 };
