@@ -55,13 +55,8 @@ export const metadata: Metadata = {
   },
 
   // Theme & Viewport
-  themeColor: '#ffffff',
-  colorScheme: 'light dark',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-    maximumScale: 1.0,
-  },
+ 
+  
 };
 
 export default function DashboardLayout({

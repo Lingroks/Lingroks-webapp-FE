@@ -2,31 +2,32 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './TabbedPanel.module.scss';
+import VideoSrc from '../videosrc/VideoSrc';
 
 const FeaturesTabbedPanel: React.FC = () => {
 
     const FeaturesAssets = [
         {
             index: 0,
-            videoSrc: '/2025-02-05-Translate_text_to_any_language_easily.mp4',
+            videoSrc: 'https://app.supademo.com/embed/cm6scws7t059x5laqa4q1bx5w?embed_v=2',
             text: 'Text',
             icon: '/text.svg'
         },
         {
             index: 1,
-            videoSrc: '/2025-02-05-Lingroks_Demo_Audio.mp4',
+            videoSrc: 'https://app.supademo.com/embed/cm6sczrxe05ba5laqa2rnvm4p?embed_v=2',
             text: 'Audio',
             icon: '/audio.svg'
         },
         {
             index: 2,
-            videoSrc: '/2025-02-05-Summarize_content_easily.mp4',
+            videoSrc: 'https://app.supademo.com/embed/cm6sd5cb405hj5laq9mo9meum?embed_v=2',
             text: 'Summary',
             icon: '/summary.svg'
         },
         {
             index: 3,
-            videoSrc: '/2025-02-05-Lingroks_Insight.mp4',
+            videoSrc: 'https://app.supademo.com/embed/cm6sesr3c069v5laq6tzhi5pl?embed_v=2',
             text: 'Insights',
             icon: '/insight.svg'
         }
@@ -66,9 +67,10 @@ const FeaturesTabbedPanel: React.FC = () => {
                 </div>
                 <div className='flex-1 w-full h-full'>
                     <div className='w-full h-full'>
-                        <video muted autoPlay loop controls className='w-full h-full' id="featureVideo">
+                        {/* <video muted autoPlay loop controls className='w-full h-full' id="featureVideo">
                             <source src={FeaturesAssets[currentIndex].videoSrc} type="video/mp4" />
-                        </video>
+                        </video> */}
+                        <VideoSrc src={FeaturesAssets[currentIndex].videoSrc}/>
                     </div>
                 </div>
             </div>
