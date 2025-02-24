@@ -76,9 +76,6 @@ const Header = () => {
                 <Link href="/dashboard/personal-info">
                   <li className={styles.listitem}>Personal Info</li>
                 </Link>
-                {/* <Link href="/dashboard/security-changes">
-                  <li className={styles.listitem}>Security Changes</li>
-                </Link> */}
 
                 <li className={styles.listitem}>Payment</li>
                 <li className={styles.listitem}>Terms and Privacy</li>
