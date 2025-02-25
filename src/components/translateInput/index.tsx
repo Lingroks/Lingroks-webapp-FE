@@ -1,6 +1,6 @@
 // Example: Importing and using in Dashboard.tsx
 'use client';
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo,useEffect } from 'react';
 import style from './tsInput.module.scss';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
@@ -27,6 +27,11 @@ const TranslateInput = () => {
   const router = useRouter();
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const savedText = sessionStorage.getItem('savedTextInput');
+    if (savedText) setTextInput(savedText);
+  }, []);
 
   const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
     option1: 'Translate',
@@ -95,6 +100,7 @@ const button3Options = useMemo(() => [{ text: 'SentimentAnalysis' }], []);
 
     try {
       setIsLoading(true);
+      sessionStorage.setItem('savedTextInput', textInput);
       const { option1, option2, option3 } = selectedOptions;
       let result;
 
@@ -169,7 +175,10 @@ const button3Options = useMemo(() => [{ text: 'SentimentAnalysis' }], []);
         className={style.chat__textarea}
         placeholder="Enter your text or link here"
         value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
+        onChange={(e) => {
+          setTextInput(e.target.value);
+          sessionStorage.setItem('savedTextInput', e.target.value);
+        }}
       ></textarea>
 
       {/* Buttons */}

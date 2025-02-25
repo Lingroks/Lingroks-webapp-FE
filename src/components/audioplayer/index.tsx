@@ -61,7 +61,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
           });
 
           waveSurferRef.current.on('error', (error) => {
-            console.error('WaveSurfer error:', error.message);
+            // console.error('WaveSurfer error:', error.message);
             setIsLoaded(false);
             setLoadFailed(true);
             setErrorMessage(error.message || 'Failed to load audio file.');
@@ -74,13 +74,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
             setIsLoaded(true);
             setLoadFailed(false);
             const duration = waveSurferRef.current!.getDuration();
-            console.log('Total Duration:', duration); // Debug log
+            // console.log('Total Duration:', duration); // Debug log
             setTotalDuration(duration);
           });
 
           waveSurferRef.current.on('audioprocess', () => {
             const time = waveSurferRef.current!.getCurrentTime();
-            console.log('Current Time:', time); // Debug log
+            // console.log('Current Time:', time); // Debug log
             setCurrentTime(time);
             // setCurrentTime(waveSurferRef.current!.getCurrentTime());
           });
@@ -103,7 +103,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ track, openModal }) => {
         } else {
           // Type assertion to assume that error is an instance of Error
           if (error instanceof Error) {
-            console.error('Fetch error:', error.message);
+            // console.error('Fetch error:', error.message);
             setLoadFailed(true);
             setErrorMessage(error.message || 'Failed to fetch audio file.');
             toast.error(`Error: ${error.message} `);

@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
+import axios from "axios";
 import axiosInstance from '../utils/axoisInstance.js';
 
 // Register a new user
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // Create an Axios instance
 
@@ -15,6 +16,7 @@ const displayToast = (type, message) => {
   }
 };
 
+// Register User
 export const registerUser = async (
   firstName,
   lastName,
@@ -23,11 +25,11 @@ export const registerUser = async (
   navigate
 ) => {
   if (!firstName || !lastName || !email || !password) {
-    toast.error('Please fill out all fields');
+    toast.error("Please fill out all fields");
     return;
   }
 
-  console.log('Before validation:', {
+  console.log("Before validation:", {
     firstName,
     lastName,
     email,
@@ -42,26 +44,22 @@ export const registerUser = async (
       password: password.trim(),
     };
 
-    const response = await axiosInstance.post('/users', payload);
-    const data = response.data; 
-    console.log('Response:', data);
-    displayToast('success', 'User registered successfully!');
+    const response = await axios.post(`${BASE_URL}/users`, payload);
+    const data = response.data;
+    console.log("Response:", data);
+
+    toast.success("User registered successfully!");
     navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
   } catch (error) {
-    displayToast(
-      'error',
-      error.response?.data?.message || 'Registration failed!'
-    );
+    toast.error(error.response?.data?.message || "Registration failed!");
     throw error;
   }
 };
 
 // Login User
 export const loginUser = async (email, password, navigate, updateUser) => {
-
-
   if (!email || !password) {
-    toast.error('Please fill out all fields');
+    toast.error("Please fill out all fields");
     return;
   }
 
@@ -71,24 +69,96 @@ export const loginUser = async (email, password, navigate, updateUser) => {
       password: password.trim(),
     };
 
-    const response = await axiosInstance.post('/users/tokens', payload);
-    const data = response.data; 
-    console.log('Login successful:', data);
+    const response = await axios.post(`${BASE_URL}/users/tokens`, payload);
+    const data = response.data;
+    console.log("Login successful:", data);
 
-    // Save token or session (if needed)
-    localStorage.setItem('authToken', data.token);
+    // Save token
+    localStorage.setItem("authToken", data.token);
 
     const userProfile = await fetchUserProfile(data.token);
-    localStorage.setItem('userProfile', JSON.stringify(userProfile));
+    localStorage.setItem("userProfile", JSON.stringify(userProfile));
     updateUser(userProfile);
 
     // Navigate to dashboard after successful login
-    navigate('/dashboard');
+    navigate("/dashboard");
   } catch (error) {
-    toast.error(error.response?.data?.message || 'Login failed!');
+    toast.error(error.response?.data?.message || "Login failed!");
     throw error;
   }
 };
+// export const registerUser = async (
+//   firstName,
+//   lastName,
+//   email,
+//   password,
+//   navigate
+// ) => {
+//   if (!firstName || !lastName || !email || !password) {
+//     toast.error('Please fill out all fields');
+//     return;
+//   }
+
+//   console.log('Before validation:', {
+//     firstName,
+//     lastName,
+//     email,
+//     password,
+//   });
+
+//   try {
+//     const payload = {
+//       firstName,
+//       lastName,
+//       email,
+//       password: password.trim(),
+//     };
+
+//     const response = await axiosInstance.post('/users', payload);
+//     const data = response.data; 
+//     console.log('Response:', data);
+//     displayToast('success', 'User registered successfully!');
+//     navigate(`/auth/verify-email?email=${encodeURIComponent(email)}`);
+//   } catch (error) {
+//     displayToast(
+//       'error',
+//       error.response?.data?.message || 'Registration failed!'
+//     );
+//     throw error;
+//   }
+// };
+
+// Login User
+// export const loginUser = async (email, password, navigate, updateUser) => {
+//   if (!email || !password) {
+//     toast.error('Please fill out all fields');
+//     return;
+//   }
+
+//   try {
+//     const payload = {
+//       email,
+//       password: password.trim(),
+//     };
+
+//     const response = await axiosInstance.post('/users/tokens', payload);
+//     const data = response.data; 
+//     console.log('Login successful:', data);
+
+//     // Save token or session (if needed)
+//     localStorage.setItem('authToken', data.token);
+
+//     const userProfile = await fetchUserProfile(data.token);
+//     localStorage.setItem('userProfile', JSON.stringify(userProfile));
+//     updateUser(userProfile);
+
+//     // Navigate to dashboard after successful login
+//     navigate('/dashboard');
+//   } catch (error) {
+//     toast.error(error.response?.data?.message || 'Login failed!');
+//     throw error;
+//   }
+// };
 
 // Fetch User Profile
 export const fetchUserProfile = async (token) => {
