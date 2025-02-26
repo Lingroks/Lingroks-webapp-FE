@@ -12,7 +12,7 @@ const checkProtectedRoute = async () => {
   } catch (error) {
     console.error("Protected Route Error:", error?.response?.data?.message);
     const errorMessage =
-      error?.response?.data?.message || "Access denied. Please try again.";
+      error?.response?.data?.message || "Access denied. Log in again.";
     
     toast.error(errorMessage);
     throw new Error(errorMessage);
